@@ -149,37 +149,129 @@ body {
   transform: translateZ(35px);
 }
 
+/* ===== HYPER-REALISTIC 3D GLASS BUTTONS ===== */
 .buttons {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   justify-content: center;
-  transform: translateZ(60px);
+  transform: translateZ(80px); /* Pushes the button array way out into 3D space */
 }
 
 .btn {
   position: relative;
   text-decoration: none;
-  border-radius: 14px;
-  transform-style: preserve-3d;
+  border-radius: 16px;
+  width: 190px;
+  height: 56px;
   
-  /* Initialized variables directly in the fallback to stop linters from complaining */
+  /* Initialize 3D variables */
   --rx: 0deg;
   --ry: 0deg;
   --tz: 0px;
   
+  transform-style: preserve-3d;
   transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(var(--tz));
-  transition: 0.1s ease-out, box-shadow 0.3s;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-}
-
-.btn:hover { 
-  --tz: 10px;
+  transition: transform 0.1s ease-out, box-shadow 0.4s ease;
+  
+  /* Deep physical shadow cast by the bottom plate */
   box-shadow: 
-    0 20px 45px rgba(0,0,0,0.6),
-    0 0 30px var(--accent-glow);
+    0 20px 40px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
 }
 
-.btn:active { --tz: -5px; }
+/* LAYER 1: The Base Backing Plate (Deepest layer) */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(20, 10, 35, 0.7), rgba(5, 2, 12, 0.9));
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  transform: translateZ(-15px); /* Sunken backward */
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+  transition: border-color 0.3s;
+}
+
+/* LAYER 2: The Floating Neon Plasma Core (Middle layer) */
+.btn-bg {
+  position: absolute;
+  inset: 6px;
+  border-radius: 12px;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), var(--accent) 0%, transparent 70%);
+  opacity: 0.25;
+  filter: blur(4px);
+  transform: translateZ(-5px); /* Suspended between front and back */
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* LAYER 3: The Thick Frosted Top Face (Highest layer) */
+.btn-face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  
+  /* Highly realistic glossy glass reflection base */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  
+  transform: translateZ(15px); /* Popped way forward */
+  transition: border-color 0.3s, background 0.3s;
+}
+
+/* LAYER 4: Micro-Glint Light Glare (Overlays the front face) */
+.btn-face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  /* Simulates a sharp light beam hitting glass curvature */
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%), 
+    rgba(255, 255, 255, 0.35) 0%, 
+    rgba(255, 255, 255, 0.05) 40%, 
+    transparent 70%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* ===== HOVER STATE KINETICS ===== */
+.btn:hover {
+  --tz: 15px; /* Entire construct moves toward camera on hover */
+  box-shadow: 
+    0 35px 60px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(168, 85, 247, 0.4);
+}
+
+.btn:hover::before {
+  border-color: rgba(168, 85, 247, 0.6);
+}
+
+.btn:hover .btn-bg {
+  opacity: 0.6;
+  transform: translateZ(-2px); /* Core moves dynamically inside the glass housing */
+}
+
+.btn:hover .btn-face {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn:active {
+  --tz: -5px;
+  transition: transform 0.05s ease-out;
+}
 
 /* 3D Depth Layer */
 .btn::before {
