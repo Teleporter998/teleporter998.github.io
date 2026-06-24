@@ -25,17 +25,27 @@
   }
 
   // Per-button cursor-tilt for a real 3D "press" feel
-  document.querySelectorAll('.btn').forEach(function (btn) {
-    btn.addEventListener('pointermove', function (e) {
-      var r = btn.getBoundingClientRect();
-      var px = (e.clientX - r.left) / r.width - 0.5;
-      var py = (e.clientY - r.top) / r.height - 0.5;
-      btn.style.setProperty('--ry', (px * 16).toFixed(2) + 'deg');
-      btn.style.setProperty('--rx', (-py * 16).toFixed(2) + 'deg');
-    });
-    btn.addEventListener('pointerleave', function () {
-      btn.style.setProperty('--rx', '0deg');
-      btn.style.setProperty('--ry', '0deg');
-    });
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('pointermove', e => {
+    const r = btn.getBoundingClientRect();
+
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+
+    const rx = (py - 0.5) * -20;
+    const ry = (px - 0.5) * 20;
+
+    btn.style.setProperty('--rx', rx + 'deg');
+    btn.style.setProperty('--ry', ry + 'deg');
+
+    // lighting position
+    btn.style.setProperty('--mx', px * 100 + '%');
+    btn.style.setProperty('--my', py * 100 + '%');
   });
+
+  btn.addEventListener('pointerleave', () => {
+    btn.style.setProperty('--rx', '0deg');
+    btn.style.setProperty('--ry', '0deg');
+  });
+});
 })();
