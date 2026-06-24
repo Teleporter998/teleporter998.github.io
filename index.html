@@ -2,21 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teleporter998 — Portfolio</title>
+  <meta name="description" content="Portfolio of Teleporter998 — coming soon.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <div class="container">
-    <h1>Hello, I'm <span>Teleporter998</span></h1>
-    <p class="subtitle">Coming soon...</p>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="grid-floor" aria-hidden="true"></div>
+  <div class="glow glow-a" aria-hidden="true"></div>
+  <div class="glow glow-b" aria-hidden="true"></div>
+
+  <main class="container">
+
+    <div class="eyebrow">
+      <span class="status-dot"></span>
+      <span>System online</span>
+    </div>
+
+    <h1 class="name">Hello, I'm <span>Teleporter998</span></h1>
+
+    <p class="subtitle">
+      <span class="type-text">Coming soon...</span><span class="cursor" aria-hidden="true"></span>
+    </p>
 
     <div class="buttons">
-      <a href="#" class="btn">View Projects</a>
-      <a href="#" class="btn outline">Contact Me</a>
+      <a href="#" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>
+        </svg>
+        View Projects
+      </a>
+      <a href="#" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 6h16v12H4V6Z"/>
+          <path d="m4 7 8 6 8-6"/>
+        </svg>
+        Contact Me
+      </a>
     </div>
-  </div>
+
+  </main>
 
 </body>
 </html>
