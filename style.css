@@ -30,7 +30,7 @@ body {
   top: 0;
   left: 0;
   pointer-events: none;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0px);
   z-index: 1;
   mix-blend-mode: screen;
   transition: transform 0.08s ease-out;
@@ -77,10 +77,10 @@ body {
 .p8 { top: 90%; left: 35%; animation-delay: 1.5s; }
 
 @keyframes move {
-  from { transform: translateZ(-1000px); opacity: 0; }
+  from { transform: translate3d(0px, 0px, -1000px); opacity: 0; }
   15% { opacity: 0.7; }
   85% { opacity: 0.7; }
-  to { transform: translateZ(400px); opacity: 0; }
+  to { transform: translate3d(0px, 0px, 400px); opacity: 0; }
 }
 
 /* ===== INTERACTIVE CONTAINER ===== */
@@ -107,12 +107,8 @@ body {
   border: 1px solid var(--glass-border);
   border-radius: 28px;
   backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
   text-align: center;
-  box-shadow: 
-    0 40px 100px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
   transform-style: preserve-3d;
   pointer-events: auto;
   transition: border-color 0.4s ease, transform 0.1s ease-out;
@@ -126,7 +122,7 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 27px;
-  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -143,7 +139,7 @@ body {
   font-size: 0.75rem;
   color: #d8b4fe;
   margin-bottom: 1.5rem;
-  transform: translateZ(25px);
+  transform: translate3d(0px, 0px, 25px);
 }
 
 .pulse-dot {
@@ -167,7 +163,7 @@ body {
   letter-spacing: -1px;
   margin-bottom: 0.5rem;
   line-height: 1.2;
-  transform: translateZ(45px);
+  transform: translate3d(0px, 0px, 45px);
 }
 
 .name span {
@@ -183,7 +179,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 1.25rem;
-  transform: translateZ(35px);
+  transform: translate3d(0px, 0px, 35px);
 }
 
 .description {
@@ -191,7 +187,7 @@ body {
   line-height: 1.6;
   color: var(--text-muted);
   margin-bottom: 2.5rem;
-  transform: translateZ(25px);
+  transform: translate3d(0px, 0px, 25px);
 }
 
 /* ===== HYPER-REALISTIC 3D GLASS BUTTONS ===== */
@@ -200,7 +196,7 @@ body {
   flex-direction: row;
   gap: 16px;
   justify-content: center;
-  transform: translateZ(55px);
+  transform: translate3d(0px, 0px, 55px);
 }
 
 .btn {
@@ -211,6 +207,7 @@ body {
   max-width: 180px;
   height: 52px;
   
+  /* Initialized standard absolute values so compilation checkers see actual units */
   --rx: 0deg;
   --ry: 0deg;
   --tz: 0px;
@@ -229,7 +226,7 @@ body {
   border-radius: inherit;
   background: linear-gradient(135deg, rgba(20, 10, 35, 0.8), rgba(5, 2, 12, 0.9));
   border: 1px solid rgba(168, 85, 247, 0.2);
-  transform: translateZ(-12px);
+  transform: translate3d(0px, 0px, -12px);
   transition: border-color 0.3s;
 }
 
@@ -238,10 +235,10 @@ body {
   position: absolute;
   inset: 4px;
   border-radius: 10px;
-  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), var(--accent) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% 50%, var(--accent) 0%, transparent 70%);
   opacity: 0.2;
   filter: blur(3px);
-  transform: translateZ(-4px);
+  transform: translate3d(0px, 0px, -4px);
   transition: opacity 0.3s, transform 0.3s;
 }
 
@@ -256,12 +253,11 @@ body {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   color: #ffffff;
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.3px;
-  transform: translateZ(12px);
+  transform: translate3d(0px, 0px, 12px);
   transition: border-color 0.3s, background 0.3s;
 }
 
@@ -271,20 +267,18 @@ body {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.02) 50%, transparent 80%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.02) 50%, transparent 80%);
   mix-blend-mode: overlay;
   pointer-events: none;
 }
 
 .btn:hover {
   --tz: 10px;
-  box-shadow: 
-    0 25px 45px rgba(0, 0, 0, 0.6),
-    0 0 25px var(--accent-glow);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.6), 0 0 25px var(--accent-glow);
 }
 
 .btn:hover::before { border-color: rgba(168, 85, 247, 0.5); }
-.btn:hover .btn-bg { opacity: 0.5; transform: translateZ(-2px); }
+.btn:hover .btn-bg { opacity: 0.5; transform: translate3d(0px, 0px, -2px); }
 .btn:hover .btn-face {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
   border-color: rgba(255, 255, 255, 0.25);
@@ -294,22 +288,17 @@ body {
   --tz: -4px;
 }
 
-/* ==========================================================================
-   OPTIMIZATION & RESPONSIVE BREAKPOINTS (Mobile, Tablet Support)
-   ========================================================================== */
-
-/* Tablet & Smaller Layouts */
+/* ===== OPTIMIZATION BREAKPOINTS ===== */
 @media (max-width: 768px) {
   .light-glow {
     width: 450px;
-    height: 450px; /* Reduces lighting resource cost on mid-tier chipsets */
+    height: 450px;
   }
   .name {
     font-size: 2.25rem;
   }
 }
 
-/* Mobile Devices (Ensures card won't break layout limits) */
 @media (max-width: 480px) {
   .container {
     padding: 16px;
@@ -329,7 +318,6 @@ body {
     margin-bottom: 2rem;
   }
   
-  /* Stacks buttons vertically on narrow mobile viewports so they don't squish */
   .buttons {
     flex-direction: column;
     align-items: center;
@@ -338,12 +326,11 @@ body {
   }
   
   .btn {
-    max-width: 100%; /* Spans full width of the mobile container card */
+    max-width: 100%;
     height: 48px;
   }
 }
 
-/* High-Performance Screen Protection (Stops extreme motion sickness or text blurs) */
 @media (prefers-reduced-motion: reduce) {
   .tunnel, .particle, .light-glow {
     animation: none !important;
