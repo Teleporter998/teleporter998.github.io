@@ -107,23 +107,6 @@ body {
 .r5 { --z: -540px; --dur: 28s; --dir: normal;  border-width: 1.5px; border-color: rgba(91, 33, 182, 0.6);    box-shadow: 0 0 26px rgba(91, 33, 182, 0.3); }
 .r6 { --z: -660px; --dur: 38s; --dir: reverse; border-width: 1.5px; border-color: rgba(59, 19, 112, 0.55);   box-shadow: 0 0 22px rgba(59, 19, 112, 0.25); }
 
-.core {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #f5f0ff 0%, #c4b5fd 40%, transparent 75%);
-  box-shadow: 0 0 60px 20px rgba(196, 181, 253, 0.5);
-  animation: pulse-core 4s ease-in-out infinite;
-}
-
-@keyframes pulse-core {
-  0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) translateZ(-680px) scale(1); }
-  50%      { opacity: 1;   transform: translate(-50%, -50%) translateZ(-680px) scale(1.18); }
-}
-
 .particle {
   position: absolute;
   top: 50%;
