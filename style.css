@@ -149,7 +149,6 @@ body {
   transform: translateZ(35px);
 }
 
-/* ===== GUNS.LOL INSPIRED 3D BUTTONS ===== */
 .buttons {
   display: flex;
   gap: 20px;
@@ -162,7 +161,13 @@ body {
   text-decoration: none;
   border-radius: 14px;
   transform-style: preserve-3d;
-  transform: rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, 0));
+  
+  /* Initialized variables directly in the fallback to stop linters from complaining */
+  --rx: 0deg;
+  --ry: 0deg;
+  --tz: 0px;
+  
+  transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(var(--tz));
   transition: 0.1s ease-out, box-shadow 0.3s;
   box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
