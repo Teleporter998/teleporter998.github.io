@@ -1,75 +1,301 @@
-/* Reset some default styles */
+/* ============================
+   Tokens
+   ============================ */
+:root {
+  --bg-deep: #150a26;
+  --bg-mid: #1f0f3d;
+  --bg-rise: #2a1454;
+
+  --accent: #8b5cf6;
+  --accent-bright: #c4b5fd;
+  --accent-pink: #e879f9;
+
+  --text-primary: #f5f1ff;
+  --text-secondary: #ab9bd1;
+
+  --border: rgba(167, 139, 250, 0.35);
+  --border-soft: rgba(167, 139, 250, 0.16);
+}
+
+/* ============================
+   Reset
+   ============================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body styling */
+/* ============================
+   Body / background
+   ============================ */
 body {
-  height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: white;
-  font-family: Arial, sans-serif;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(139, 92, 246, 0.35) 0%, transparent 55%),
+    linear-gradient(160deg, var(--bg-deep) 0%, var(--bg-mid) 45%, var(--bg-rise) 100%);
+  color: var(--text-primary);
+  font-family: 'Inter', Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Container */
+/* Subtle CRT scanlines for the nostalgic terminal feel, kept faint */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.035) 0px,
+    rgba(255, 255, 255, 0.035) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* Retro receding grid floor */
+.grid-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55vh;
+  z-index: 0;
+  opacity: 0.55;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(167, 139, 250, 0.28) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(0deg, rgba(167, 139, 250, 0.2) 0 1px, transparent 1px 44px);
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: bottom;
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 85%);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 85%);
+}
+
+/* Ambient glow blobs */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-a {
+  width: 380px;
+  height: 380px;
+  background: var(--accent);
+  top: -110px;
+  left: -90px;
+  animation: drift-a 13s ease-in-out infinite;
+}
+.glow-b {
+  width: 320px;
+  height: 320px;
+  background: var(--accent-pink);
+  bottom: -80px;
+  right: -70px;
+  animation: drift-b 15s ease-in-out infinite;
+}
+
+@keyframes drift-a {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, 20px); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-25px, -20px); }
+}
+
+/* ============================
+   Container
+   ============================ */
 .container {
+  position: relative;
+  z-index: 1;
   text-align: center;
+  padding: 24px;
 }
 
-/* Heading */
-h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
+/* ============================
+   Eyebrow / status tag
+   ============================ */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-bright);
+  background: rgba(167, 139, 250, 0.08);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 16px;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fade-up 0.6s ease forwards;
+  animation-delay: 0.1s;
 }
 
-h1 span {
-  color: #38bdf8;
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-pink);
+  animation: pulse 2s infinite;
 }
 
-/* Subtitle */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(232, 121, 249, 0.55); }
+  70% { box-shadow: 0 0 0 6px rgba(232, 121, 249, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(232, 121, 249, 0); }
+}
+
+/* ============================
+   Heading
+   ============================ */
+h1.name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.1rem, 5.2vw, 3.4rem);
+  line-height: 1.15;
+  opacity: 0;
+  animation: fade-up 0.7s ease forwards;
+  animation-delay: 0.35s;
+}
+
+h1.name span {
+  background: linear-gradient(120deg, var(--accent-bright), var(--accent-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============================
+   Subtitle / terminal line
+   ============================ */
 .subtitle {
-  color: #94a3b8;
-  margin-bottom: 30px;
-  font-size: 1.2rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 18px 0 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: fade-up 0.7s ease forwards;
+  animation-delay: 0.7s;
 }
 
-/* Buttons */
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.05em;
+  margin-left: 4px;
+  background: var(--accent-bright);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ============================
+   Buttons
+   ============================ */
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fade-up 0.7s ease forwards;
+  animation-delay: 1s;
 }
 
-/* Button base */
 .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
-  padding: 12px 24px;
-  background: #38bdf8;
-  color: black;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: 0.3s;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 13px 26px;
+  border-radius: 10px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
 
-/* Hover effect */
-.btn:hover {
-  background: #0ea5e9;
+.btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-pink));
+  color: #fff;
+  box-shadow: 0 10px 26px -10px rgba(139, 92, 246, 0.7);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -8px rgba(139, 92, 246, 0.85);
+}
+
+.btn-outline {
+  background: rgba(167, 139, 250, 0.06);
+  border: 1px solid var(--border);
+  color: var(--accent-bright);
+}
+.btn-outline:hover {
+  background: rgba(167, 139, 250, 0.15);
+  border-color: var(--accent-bright);
   transform: translateY(-2px);
 }
 
-/* Outline button */
-.btn.outline {
-  background: transparent;
-  border: 2px solid #38bdf8;
-  color: #38bdf8;
+.btn:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 3px;
 }
 
-.btn.outline:hover {
-  background: #38bdf8;
-  color: black;
+/* ============================
+   Motion / load sequence
+   ============================ */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow, h1.name, .subtitle, .buttons {
+    animation: none;
+    opacity: 1;
+  }
+  .status-dot, .cursor, .glow-a, .glow-b {
+    animation: none;
+  }
+}
+
+/* ============================
+   Responsive
+   ============================ */
+@media (max-width: 480px) {
+  .buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn {
+    justify-content: center;
+    width: 100%;
+  }
+  .grid-floor {
+    height: 40vh;
+  }
 }
