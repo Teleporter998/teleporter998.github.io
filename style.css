@@ -1,9 +1,10 @@
 :root {
   --accent: #a855f7;
-  --accent-glow: rgba(168, 85, 247, 0.6);
-  --glass-bg: rgba(10, 6, 22, 0.4);
+  --accent-glow: rgba(168, 85, 247, 0.4);
+  --glass-bg: rgba(10, 6, 22, 0.5);
   --glass-border: rgba(255, 255, 255, 0.08);
   --text: #f5f1ff;
+  --text-muted: #94a3b8;
 }
 
 * {
@@ -13,33 +14,33 @@
 }
 
 body {
-  background: #05030a;
+  background: #030207;
   color: var(--text);
-  font-family: 'Space Grotesk', sans-serif;
-  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
   height: 100vh;
 }
 
-/* ===== ADVANCED LIGHTING EFFECT ===== */
+/* ===== ADVANCED GLOBAL SPOTLIGHT ===== */
 .light-glow {
   position: fixed;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
   top: 0;
   left: 0;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 1;
   mix-blend-mode: screen;
-  transition: transform 0.1s ease-out;
+  transition: transform 0.08s ease-out;
 }
 
 /* ===== 3D VIEWPORT MATRIX ===== */
 .viewport {
   position: fixed;
   inset: 0;
-  perspective: 1200px; /* Reduced for a stronger, punchier 3D effect */
+  perspective: 1200px;
   z-index: 0;
 }
 
@@ -58,11 +59,11 @@ body {
 /* Cyber Particles */
 .particle {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   background: var(--accent);
   border-radius: 50%;
-  box-shadow: 0 0 15px var(--accent);
+  box-shadow: 0 0 12px var(--accent);
   animation: move 8s linear infinite;
 }
 
@@ -77,8 +78,8 @@ body {
 
 @keyframes move {
   from { transform: translateZ(-1000px); opacity: 0; }
-  15% { opacity: 0.8; }
-  85% { opacity: 0.8; }
+  15% { opacity: 0.7; }
+  85% { opacity: 0.7; }
   to { transform: translateZ(400px); opacity: 0; }
 }
 
@@ -86,7 +87,9 @@ body {
 .container {
   position: relative;
   z-index: 2;
-  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,77 +97,120 @@ body {
   pointer-events: none;
 }
 
-/* ===== PREMIUM GLASSMORPHISM CARD ===== */
+/* ===== PROFESSIONAL GLASSMORPHISM CARD ===== */
 .glass-card {
   position: relative;
-  padding: 3.5rem 4rem;
+  width: 100%;
+  max-width: 540px;
+  padding: 3rem 2.5rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  backdrop-filter: blur(20px); /* The frosted glass look */
-  -webkit-backdrop-filter: blur(20px);
+  border-radius: 28px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   text-align: center;
   box-shadow: 
-    0 40px 100px rgba(0, 0, 0, 0.8),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 40px 100px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   
   transform-style: preserve-3d;
   pointer-events: auto;
-  transition: border-color 0.3s;
+  transition: border-color 0.4s ease, transform 0.1s ease-out;
 }
 
 .glass-card:hover {
-  border-color: rgba(168, 85, 247, 0.3);
+  border-color: rgba(168, 85, 247, 0.25);
 }
 
-/* Dynamic internal card sheen */
 .card-glow {
   position: absolute;
   inset: 0;
-  border-radius: 23px;
-  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+  border-radius: 27px;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.06) 0%, transparent 60%);
   pointer-events: none;
 }
 
+/* Live Badge Detail */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #d8b4fe;
+  margin-bottom: 1.5rem;
+  transform: translateZ(25px);
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
 .name {
-  font-size: 3.5rem;
+  font-size: 2.75rem;
   font-weight: 700;
   letter-spacing: -1px;
   margin-bottom: 0.5rem;
-  transform: translateZ(50px); /* Pushes typography forward */
-  text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  line-height: 1.2;
+  transform: translateZ(45px);
 }
 
 .name span {
-  background: linear-gradient(135deg, #fff 30%, var(--accent));
+  background: linear-gradient(135deg, #ffffff 40%, var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 1rem;
-  color: #a19bb2;
-  margin-bottom: 2.5rem;
+  font-size: 0.9rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.25rem;
   transform: translateZ(35px);
+}
+
+.description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  transform: translateZ(25px);
 }
 
 /* ===== HYPER-REALISTIC 3D GLASS BUTTONS ===== */
 .buttons {
   display: flex;
-  gap: 24px;
+  flex-direction: row;
+  gap: 16px;
   justify-content: center;
-  transform: translateZ(80px); /* Pushes the button array way out into 3D space */
+  transform: translateZ(55px);
 }
 
 .btn {
   position: relative;
   text-decoration: none;
-  border-radius: 16px;
-  width: 190px;
-  height: 56px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 180px;
+  height: 52px;
   
-  /* Initialize 3D variables */
   --rx: 0deg;
   --ry: 0deg;
   --tz: 0px;
@@ -172,39 +218,34 @@ body {
   transform-style: preserve-3d;
   transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(var(--tz));
   transition: transform 0.1s ease-out, box-shadow 0.4s ease;
-  
-  /* Deep physical shadow cast by the bottom plate */
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(255, 255, 255, 0.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* LAYER 1: The Base Backing Plate (Deepest layer) */
+/* Layer 1: Backing Plate */
 .btn::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(20, 10, 35, 0.7), rgba(5, 2, 12, 0.9));
+  background: linear-gradient(135deg, rgba(20, 10, 35, 0.8), rgba(5, 2, 12, 0.9));
   border: 1px solid rgba(168, 85, 247, 0.2);
-  transform: translateZ(-15px); /* Sunken backward */
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+  transform: translateZ(-12px);
   transition: border-color 0.3s;
 }
 
-/* LAYER 2: The Floating Neon Plasma Core (Middle layer) */
+/* Layer 2: Plasma Core */
 .btn-bg {
   position: absolute;
-  inset: 6px;
-  border-radius: 12px;
+  inset: 4px;
+  border-radius: 10px;
   background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), var(--accent) 0%, transparent 70%);
-  opacity: 0.25;
-  filter: blur(4px);
-  transform: translateZ(-5px); /* Suspended between front and back */
+  opacity: 0.2;
+  filter: blur(3px);
+  transform: translateZ(-4px);
   transition: opacity 0.3s, transform 0.3s;
 }
 
-/* LAYER 3: The Thick Frosted Top Face (Highest layer) */
+/* Layer 3: Glass Top Face */
 .btn-face {
   display: flex;
   align-items: center;
@@ -212,104 +253,102 @@ body {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  
-  /* Highly realistic glossy glass reflection base */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: #ffffff;
   font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  
-  transform: translateZ(15px); /* Popped way forward */
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  transform: translateZ(12px);
   transition: border-color 0.3s, background 0.3s;
 }
 
-/* LAYER 4: Micro-Glint Light Glare (Overlays the front face) */
+/* Layer 4: Micro-Glint */
 .btn-face::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  /* Simulates a sharp light beam hitting glass curvature */
-  background: radial-gradient(
-    circle at var(--mx, 50%) var(--my, 50%), 
-    rgba(255, 255, 255, 0.35) 0%, 
-    rgba(255, 255, 255, 0.05) 40%, 
-    transparent 70%
-  );
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.02) 50%, transparent 80%);
   mix-blend-mode: overlay;
   pointer-events: none;
 }
 
-/* ===== HOVER STATE KINETICS ===== */
 .btn:hover {
-  --tz: 15px; /* Entire construct moves toward camera on hover */
+  --tz: 10px;
   box-shadow: 
-    0 35px 60px rgba(0, 0, 0, 0.8),
-    0 0 30px rgba(168, 85, 247, 0.4);
+    0 25px 45px rgba(0, 0, 0, 0.6),
+    0 0 25px var(--accent-glow);
 }
 
-.btn:hover::before {
-  border-color: rgba(168, 85, 247, 0.6);
-}
-
-.btn:hover .btn-bg {
-  opacity: 0.6;
-  transform: translateZ(-2px); /* Core moves dynamically inside the glass housing */
-}
-
+.btn:hover::before { border-color: rgba(168, 85, 247, 0.5); }
+.btn:hover .btn-bg { opacity: 0.5; transform: translateZ(-2px); }
 .btn:hover .btn-face {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .btn:active {
-  --tz: -5px;
-  transition: transform 0.05s ease-out;
+  --tz: -4px;
 }
 
-/* 3D Depth Layer */
-.btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  transform: translateZ(-12px);
-  background: #120626;
-  border: 1px solid rgba(168, 85, 247, 0.4);
+/* ==========================================================================
+   OPTIMIZATION & RESPONSIVE BREAKPOINTS (Mobile, Tablet Support)
+   ========================================================================== */
+
+/* Tablet & Smaller Layouts */
+@media (max-width: 768px) {
+  .light-glow {
+    width: 450px;
+    height: 450px; /* Reduces lighting resource cost on mid-tier chipsets */
+  }
+  .name {
+    font-size: 2.25rem;
+  }
 }
 
-/* Front Glass Face of Button */
-.btn-face {
-  display: block;
-  position: relative;
-  transform: translateZ(10px);
-  padding: 16px 32px;
-  border-radius: inherit;
-  background: rgba(168, 85, 247, 0.15);
-  border: 1px solid rgba(168, 85, 247, 0.4);
-  backdrop-filter: blur(10px);
-  color: white;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: background 0.3s;
+/* Mobile Devices (Ensures card won't break layout limits) */
+@media (max-width: 480px) {
+  .container {
+    padding: 16px;
+  }
+  
+  .glass-card {
+    padding: 2.5rem 1.5rem;
+    border-radius: 24px;
+  }
+  
+  .name {
+    font-size: 2rem;
+  }
+  
+  .description {
+    font-size: 0.88rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Stacks buttons vertically on narrow mobile viewports so they don't squish */
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+  }
+  
+  .btn {
+    max-width: 100%; /* Spans full width of the mobile container card */
+    height: 48px;
+  }
 }
 
-.btn:hover .btn-face {
-  background: rgba(168, 85, 247, 0.3);
-}
-
-/* Precise mouse light glare inside button */
-.btn-face::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.3) 0%, transparent 60%);
-  mix-blend-mode: overlay;
+/* High-Performance Screen Protection (Stops extreme motion sickness or text blurs) */
+@media (prefers-reduced-motion: reduce) {
+  .tunnel, .particle, .light-glow {
+    animation: none !important;
+  }
+  .scene, .container, .btn {
+    transform: none !important;
+  }
 }
