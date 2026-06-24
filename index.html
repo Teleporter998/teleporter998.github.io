@@ -4,16 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teleporter998 — Portfolio</title>
-  <meta name="description" content="Portfolio of Teleporter998 — coming soon.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- 3D scene: a perspective tunnel the "camera" dollies through and tilts with the cursor -->
-  <div class="viewport" aria-hidden="true">
+  <!-- 3D background -->
+  <div class="viewport">
     <div class="scene" id="scene">
       <div class="tunnel">
         <div class="ring r1"></div>
@@ -22,6 +20,8 @@
         <div class="ring r4"></div>
         <div class="ring r5"></div>
         <div class="ring r6"></div>
+
+        <!-- particles -->
         <div class="particle p1"></div>
         <div class="particle p2"></div>
         <div class="particle p3"></div>
@@ -34,30 +34,21 @@
     </div>
   </div>
 
+  <!-- content -->
   <main class="container" id="container">
     <h1 class="name">Hello, I'm <span>Teleporter998</span></h1>
 
     <p class="subtitle">
-      <span class="type-text">Coming soon...</span><span class="cursor" aria-hidden="true"></span>
+      Coming soon...
     </p>
 
     <div class="buttons">
-      <a href="#" class="btn btn-primary">
-        <span class="btn-face">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>
-          </svg>
-          View Projects
-        </span>
+      <a href="#" class="btn">
+        <span class="btn-face">View Projects</span>
       </a>
-      <a href="#" class="btn btn-outline">
-        <span class="btn-face">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M4 6h16v12H4V6Z"/>
-            <path d="m4 7 8 6 8-6"/>
-          </svg>
-          Contact Me
-        </span>
+
+      <a href="#" class="btn">
+        <span class="btn-face">Contact Me</span>
       </a>
     </div>
   </main>
