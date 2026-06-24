@@ -1,6 +1,8 @@
 :root {
-  --accent: #7c3aed;
-  --accent-dark: #2a145a;
+  --accent: #a855f7;
+  --accent-glow: rgba(168, 85, 247, 0.6);
+  --glass-bg: rgba(10, 6, 22, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
   --text: #f5f1ff;
 }
 
@@ -11,169 +13,206 @@
 }
 
 body {
-  background: #0b0718; /* Replaced the hole/ball effect with a solid sleek dark tone */
+  background: #05030a;
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   overflow: hidden;
+  height: 100vh;
 }
 
-/* ===== 3D SCENE ===== */
+/* ===== ADVANCED LIGHTING EFFECT ===== */
+.light-glow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  mix-blend-mode: screen;
+  transition: transform 0.1s ease-out;
+}
+
+/* ===== 3D VIEWPORT MATRIX ===== */
 .viewport {
   position: fixed;
   inset: 0;
-  perspective: 1600px;
+  perspective: 1200px; /* Reduced for a stronger, punchier 3D effect */
+  z-index: 0;
 }
 
 .scene {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: 0.4s;
 }
 
 .tunnel {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
-  animation: dolly 10s infinite ease-in-out;
 }
 
-@keyframes dolly {
-  50% { transform: translateZ(200px); }
-}
-
-/* Rings completely deleted from here */
-
-/* particles */
+/* Cyber Particles */
 .particle {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: #c4b5fd;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
   border-radius: 50%;
-  animation: move 6s linear infinite;
+  box-shadow: 0 0 15px var(--accent);
+  animation: move 8s linear infinite;
 }
 
-/* Randomizing particle placement so they float around beautifully */
-.p1 { top: 20%; left: 30%; animation-delay: 0s; }
-.p2 { top: 40%; left: 70%; animation-delay: 1s; }
-.p3 { top: 70%; left: 20%; animation-delay: 2s; }
-.p4 { top: 80%; left: 80%; animation-delay: 3s; }
-.p5 { top: 15%; left: 75%; animation-delay: 1.5s; }
-.p6 { top: 60%; left: 50%; animation-delay: 2.5s; }
-.p7 { top: 30%; left: 15%; animation-delay: 0.5s; }
-.p8 { top: 85%; left: 40%; animation-delay: 3.5s; }
+.p1 { top: 15%; left: 20%; animation-delay: 0s; }
+.p2 { top: 35%; left: 80%; animation-delay: 2s; }
+.p3 { top: 75%; left: 15%; animation-delay: 4s; }
+.p4 { top: 80%; left: 85%; animation-delay: 1s; }
+.p5 { top: 10%; left: 70%; animation-delay: 5s; }
+.p6 { top: 65%; left: 50%; animation-delay: 3s; }
+.p7 { top: 45%; left: 25%; animation-delay: 6s; }
+.p8 { top: 90%; left: 35%; animation-delay: 1.5s; }
 
 @keyframes move {
-  from { transform: translateZ(-600px); opacity: 0; }
-  50% { opacity: 1; }
-  to { transform: translateZ(200px); opacity: 0; }
+  from { transform: translateZ(-1000px); opacity: 0; }
+  15% { opacity: 0.8; }
+  85% { opacity: 0.8; }
+  to { transform: translateZ(400px); opacity: 0; }
 }
 
-/* ===== CONTENT ===== */
+/* ===== INTERACTIVE CONTAINER ===== */
 .container {
   position: relative;
   z-index: 2;
   height: 100vh;
-
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-
   transform-style: preserve-3d;
-  pointer-events: none; /* Allows pointer events to pass through background container */
+  pointer-events: none;
 }
 
-h1 {
-  font-size: 3rem;
-  transform: translateZ(40px);
+/* ===== PREMIUM GLASSMORPHISM CARD ===== */
+.glass-card {
+  position: relative;
+  padding: 3.5rem 4rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  backdrop-filter: blur(20px); /* The frosted glass look */
+  -webkit-backdrop-filter: blur(20px);
+  text-align: center;
+  box-shadow: 
+    0 40px 100px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
+  transform-style: preserve-3d;
+  pointer-events: auto;
+  transition: border-color 0.3s;
 }
 
-h1 span {
-  color: var(--accent);
+.glass-card:hover {
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+/* Dynamic internal card sheen */
+.card-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 23px;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.name {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 0.5rem;
+  transform: translateZ(50px); /* Pushes typography forward */
+  text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.name span {
+  background: linear-gradient(135deg, #fff 30%, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
-  margin: 20px;
-  transform: translateZ(30px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  color: #a19bb2;
+  margin-bottom: 2.5rem;
+  transform: translateZ(35px);
 }
 
-/* ===== 3D BUTTONS ===== */
+/* ===== GUNS.LOL INSPIRED 3D BUTTONS ===== */
 .buttons {
   display: flex;
   gap: 20px;
+  justify-content: center;
   transform: translateZ(60px);
-  pointer-events: auto; /* Restores mouse interaction explicitly for the buttons */
 }
 
 .btn {
   position: relative;
-  border-radius: 12px;
   text-decoration: none;
-
-  display: inline-block;
+  border-radius: 14px;
   transform-style: preserve-3d;
-  transform:
-    rotateX(var(--rx, 0))
-    rotateY(var(--ry, 0))
-    translateZ(var(--tz, 0));
-
-  transition: 0.15s;
-
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.6),
-    0 10px 20px rgba(124,58,237,0.5);
+  transform: rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, 0));
+  transition: 0.1s ease-out, box-shadow 0.3s;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
 
-.btn:hover { --tz: 18px; }
-.btn:active { --tz: -10px; }
+.btn:hover { 
+  --tz: 10px;
+  box-shadow: 
+    0 20px 45px rgba(0,0,0,0.6),
+    0 0 30px var(--accent-glow);
+}
 
-/* depth layers */
+.btn:active { --tz: -5px; }
+
+/* 3D Depth Layer */
 .btn::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  transform: translateZ(-20px);
-  background: linear-gradient(180deg, #2a145a, #0d0620);
+  transform: translateZ(-12px);
+  background: #120626;
+  border: 1px solid rgba(168, 85, 247, 0.4);
 }
 
-.btn::after {
-  content: "";
-  position: absolute;
-  inset: 3px;
-  border-radius: inherit;
-  transform: translateZ(-10px);
-  background: rgba(124,58,237,0.25);
-}
-
-/* front face */
+/* Front Glass Face of Button */
 .btn-face {
   display: block;
   position: relative;
-  transform: translateZ(15px);
-
-  padding: 14px 24px;
+  transform: translateZ(10px);
+  padding: 16px 32px;
   border-radius: inherit;
-
-  background: linear-gradient(135deg, #7c3aed, #4c1d95);
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  backdrop-filter: blur(10px);
   color: white;
   font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background 0.3s;
 }
 
-/* LIGHT EFFECT */
+.btn:hover .btn-face {
+  background: rgba(168, 85, 247, 0.3);
+}
+
+/* Precise mouse light glare inside button */
 .btn-face::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-
-  background: radial-gradient(
-    circle at var(--mx, 50%) var(--my, 50%),
-    rgba(255,255,255,0.4),
-    transparent 60%
-  );
-
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.3) 0%, transparent 60%);
   mix-blend-mode: overlay;
 }
