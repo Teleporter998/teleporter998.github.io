@@ -11,7 +11,7 @@
 }
 
 body {
-  background: radial-gradient(circle, #120a24, #050310);
+  background: #0b0718; /* Replaced the hole/ball effect with a solid sleek dark tone */
   color: var(--text);
   font-family: 'Inter', sans-serif;
   overflow: hidden;
@@ -42,28 +42,7 @@ body {
   50% { transform: translateZ(200px); }
 }
 
-.ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
-  border: 2px dashed rgba(200,180,255,0.6);
-  transform: translate(-50%, -50%) translateZ(var(--z));
-  animation: spin 20s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: translate(-50%, -50%) translateZ(var(--z)) rotate(360deg); }
-}
-
-.r1 { --z: -50px; }
-.r2 { --z: -150px; }
-.r3 { --z: -250px; }
-.r4 { --z: -350px; }
-.r5 { --z: -450px; }
-.r6 { --z: -550px; }
+/* Rings completely deleted from here */
 
 /* particles */
 .particle {
@@ -75,9 +54,20 @@ body {
   animation: move 6s linear infinite;
 }
 
+/* Randomizing particle placement so they float around beautifully */
+.p1 { top: 20%; left: 30%; animation-delay: 0s; }
+.p2 { top: 40%; left: 70%; animation-delay: 1s; }
+.p3 { top: 70%; left: 20%; animation-delay: 2s; }
+.p4 { top: 80%; left: 80%; animation-delay: 3s; }
+.p5 { top: 15%; left: 75%; animation-delay: 1.5s; }
+.p6 { top: 60%; left: 50%; animation-delay: 2.5s; }
+.p7 { top: 30%; left: 15%; animation-delay: 0.5s; }
+.p8 { top: 85%; left: 40%; animation-delay: 3.5s; }
+
 @keyframes move {
   from { transform: translateZ(-600px); opacity: 0; }
-  to { transform: translateZ(200px); opacity: 1; }
+  50% { opacity: 1; }
+  to { transform: translateZ(200px); opacity: 0; }
 }
 
 /* ===== CONTENT ===== */
@@ -92,11 +82,16 @@ body {
   align-items: center;
 
   transform-style: preserve-3d;
+  pointer-events: none; /* Allows pointer events to pass through background container */
 }
 
 h1 {
   font-size: 3rem;
   transform: translateZ(40px);
+}
+
+h1 span {
+  color: var(--accent);
 }
 
 .subtitle {
@@ -109,12 +104,15 @@ h1 {
   display: flex;
   gap: 20px;
   transform: translateZ(60px);
+  pointer-events: auto; /* Restores mouse interaction explicitly for the buttons */
 }
 
 .btn {
   position: relative;
   border-radius: 12px;
+  text-decoration: none;
 
+  display: inline-block;
   transform-style: preserve-3d;
   transform:
     rotateX(var(--rx, 0))
@@ -152,6 +150,7 @@ h1 {
 
 /* front face */
 .btn-face {
+  display: block;
   position: relative;
   transform: translateZ(15px);
 
@@ -168,6 +167,7 @@ h1 {
   content: "";
   position: absolute;
   inset: 0;
+  border-radius: inherit;
 
   background: radial-gradient(
     circle at var(--mx, 50%) var(--my, 50%),
