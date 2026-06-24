@@ -12,18 +12,30 @@
 </head>
 <body>
 
-  <div class="scanlines" aria-hidden="true"></div>
-  <div class="grid-floor" aria-hidden="true"></div>
-  <div class="glow glow-a" aria-hidden="true"></div>
-  <div class="glow glow-b" aria-hidden="true"></div>
-
-  <main class="container">
-
-    <div class="eyebrow">
-      <span class="status-dot"></span>
-      <span>System online</span>
+  <!-- 3D scene: a perspective tunnel the "camera" dollies through and tilts with the cursor -->
+  <div class="viewport" aria-hidden="true">
+    <div class="scene" id="scene">
+      <div class="tunnel">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+        <div class="ring r4"></div>
+        <div class="ring r5"></div>
+        <div class="ring r6"></div>
+        <div class="core"></div>
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+        <div class="particle p3"></div>
+        <div class="particle p4"></div>
+        <div class="particle p5"></div>
+        <div class="particle p6"></div>
+        <div class="particle p7"></div>
+        <div class="particle p8"></div>
+      </div>
     </div>
+  </div>
 
+  <main class="container" id="container">
     <h1 class="name">Hello, I'm <span>Teleporter998</span></h1>
 
     <p class="subtitle">
@@ -32,21 +44,25 @@
 
     <div class="buttons">
       <a href="#" class="btn btn-primary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>
-        </svg>
-        View Projects
+        <span class="btn-face">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>
+          </svg>
+          View Projects
+        </span>
       </a>
       <a href="#" class="btn btn-outline">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 6h16v12H4V6Z"/>
-          <path d="m4 7 8 6 8-6"/>
-        </svg>
-        Contact Me
+        <span class="btn-face">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 6h16v12H4V6Z"/>
+            <path d="m4 7 8 6 8-6"/>
+          </svg>
+          Contact Me
+        </span>
       </a>
     </div>
-
   </main>
 
+  <script src="script.js"></script>
 </body>
 </html>
