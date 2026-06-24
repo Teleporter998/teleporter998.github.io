@@ -2,10 +2,6 @@
    Tokens
    ============================ */
 :root {
-  --bg-deep: #120a20;
-  --bg-mid: #1d1042;
-  --bg-rise: #2f1768;
-
   --accent: #7c3aed;
   --accent-deep: #4c1d95;
   --accent-bright: #c4b5fd;
@@ -15,7 +11,12 @@
   --text-secondary: #ab9bd1;
 
   --border: rgba(167, 139, 250, 0.35);
-  --border-soft: rgba(167, 139, 250, 0.16);
+
+  --ring-size: 380px;
+}
+
+@media (max-width: 600px) {
+  :root { --ring-size: 220px; }
 }
 
 /* ============================
@@ -27,170 +28,159 @@
   box-sizing: border-box;
 }
 
-/* ============================
-   Body / background
-   ============================ */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   position: relative;
-  min-height: 100vh;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 50% -10%, rgba(124, 58, 237, 0.5) 0%, transparent 55%),
-    linear-gradient(160deg, var(--bg-deep) 0%, var(--bg-mid) 45%, var(--bg-rise) 100%);
   color: var(--text-primary);
   font-family: 'Inter', Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Vignette: darkens the edges so the center reads as nearer, the corners as receding */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: radial-gradient(circle at 50% 45%, transparent 38%, rgba(5, 2, 14, 0.6) 100%);
-}
-
-/* Subtle CRT scanlines for the nostalgic terminal feel, kept faint */
-.scanlines {
-  position: fixed;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.035) 0px,
-    rgba(255, 255, 255, 0.035) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  mix-blend-mode: overlay;
-}
-
-/* Retro receding grid floor */
-.grid-floor {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 55vh;
-  z-index: 0;
-  opacity: 0.55;
-  background-image:
-    repeating-linear-gradient(90deg, rgba(167, 139, 250, 0.28) 0 1px, transparent 1px 64px),
-    repeating-linear-gradient(0deg, rgba(167, 139, 250, 0.2) 0 1px, transparent 1px 44px);
-  transform: perspective(500px) rotateX(60deg);
-  transform-origin: bottom;
-  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 85%);
-  mask-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 85%);
-}
-
-/* Ambient glow blobs */
-.glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.5;
-  pointer-events: none;
-  z-index: 0;
-}
-.glow-a {
-  width: 380px;
-  height: 380px;
-  background: var(--accent);
-  top: -110px;
-  left: -90px;
-  animation: drift-a 13s ease-in-out infinite;
-}
-.glow-b {
-  width: 320px;
-  height: 320px;
-  background: var(--accent-violet);
-  bottom: -80px;
-  right: -70px;
-  animation: drift-b 15s ease-in-out infinite;
-}
-
-@keyframes drift-a {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(30px, 20px); }
-}
-@keyframes drift-b {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-25px, -20px); }
 }
 
 /* ============================
-   Container
+   3D scene
+   ============================ */
+.viewport {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  perspective: 1100px;
+  perspective-origin: 50% 45%;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 45%, #1a0f33 0%, #0a0617 65%, #050310 100%);
+}
+
+/* Darkens the rim so the tunnel reads as receding, and keeps text legible */
+.viewport::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, transparent 28%, rgba(4, 2, 10, 0.7) 100%);
+}
+
+/* Camera: rotated by JS on mousemove for an interactive tilt */
+.scene {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease-out;
+  will-change: transform;
+}
+
+/* Dolly: the camera drifts forward and back through the tunnel, continuously, no JS needed */
+.tunnel {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: dolly 9s ease-in-out infinite;
+}
+
+@keyframes dolly {
+  0%, 100% { transform: translateZ(0); }
+  50% { transform: translateZ(160px); }
+}
+
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--ring-size);
+  height: var(--ring-size);
+  border-radius: 50%;
+  border-style: dashed;
+  animation: spin var(--dur) linear infinite;
+  animation-direction: var(--dir, normal);
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) translateZ(var(--z)) rotateZ(0deg); }
+  to   { transform: translate(-50%, -50%) translateZ(var(--z)) rotateZ(360deg); }
+}
+
+.r1 { --z: -60px;  --dur: 24s; --dir: normal;  border-width: 3px;   border-color: rgba(216, 200, 255, 0.9);  box-shadow: 0 0 40px rgba(216, 200, 255, 0.55); }
+.r2 { --z: -180px; --dur: 30s; --dir: reverse; border-width: 2.5px; border-color: rgba(183, 148, 246, 0.85); box-shadow: 0 0 38px rgba(183, 148, 246, 0.45); }
+.r3 { --z: -300px; --dur: 26s; --dir: normal;  border-width: 2px;   border-color: rgba(147, 51, 234, 0.8);   box-shadow: 0 0 34px rgba(147, 51, 234, 0.4); }
+.r4 { --z: -420px; --dur: 34s; --dir: reverse; border-width: 2px;   border-color: rgba(124, 58, 237, 0.7);   box-shadow: 0 0 30px rgba(124, 58, 237, 0.35); }
+.r5 { --z: -540px; --dur: 28s; --dir: normal;  border-width: 1.5px; border-color: rgba(91, 33, 182, 0.6);    box-shadow: 0 0 26px rgba(91, 33, 182, 0.3); }
+.r6 { --z: -660px; --dur: 38s; --dir: reverse; border-width: 1.5px; border-color: rgba(59, 19, 112, 0.55);   box-shadow: 0 0 22px rgba(59, 19, 112, 0.25); }
+
+.core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f5f0ff 0%, #c4b5fd 40%, transparent 75%);
+  box-shadow: 0 0 60px 20px rgba(196, 181, 253, 0.5);
+  animation: pulse-core 4s ease-in-out infinite;
+}
+
+@keyframes pulse-core {
+  0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) translateZ(-680px) scale(1); }
+  50%      { opacity: 1;   transform: translate(-50%, -50%) translateZ(-680px) scale(1.18); }
+}
+
+.particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-bright);
+  box-shadow: 0 0 8px 2px rgba(196, 181, 253, 0.8);
+  animation: warp var(--dur, 6s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes warp {
+  0%   { transform: translate(-50%, -50%) translateZ(-680px) scale(0.3); opacity: 0; }
+  12%  { opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) translateZ(160px) scale(1.6); opacity: 0; }
+}
+
+.p1 { --dur: 6s;   --delay: 0s;    margin-left: -40px; margin-top: -20px; }
+.p2 { --dur: 7s;   --delay: -1s;   margin-left: 30px;  margin-top: 10px; }
+.p3 { --dur: 5.5s; --delay: -2.4s; margin-left: -15px; margin-top: 35px; }
+.p4 { --dur: 6.8s; --delay: -3.6s; margin-left: 50px;  margin-top: -30px; }
+.p5 { --dur: 7.4s; --delay: -0.8s; margin-left: -55px; margin-top: 5px; }
+.p6 { --dur: 6.2s; --delay: -4.2s; margin-left: 10px;  margin-top: -45px; }
+.p7 { --dur: 5.8s; --delay: -2s;   margin-left: -30px; margin-top: -10px; }
+.p8 { --dur: 7.1s; --delay: -5s;   margin-left: 20px;  margin-top: 40px; }
+
+/* ============================
+   Foreground content
    ============================ */
 .container {
   position: relative;
-  z-index: 1;
-  text-align: center;
-  max-width: 560px;
-  margin: 24px;
-  padding: 52px 48px;
-  border-radius: 22px;
-  background: linear-gradient(160deg, rgba(124, 58, 237, 0.14), rgba(76, 29, 149, 0.05));
-  border: 1px solid rgba(167, 139, 250, 0.2);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow:
-    0 30px 70px -20px rgba(6, 2, 16, 0.7),
-    0 10px 30px -10px rgba(124, 58, 237, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.07);
-}
-
-/* ============================
-   Eyebrow / status tag
-   ============================ */
-.eyebrow {
-  display: inline-flex;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 9px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.74rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent-bright);
-  background: rgba(167, 139, 250, 0.08);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 7px 16px;
-  margin-bottom: 28px;
-  opacity: 0;
-  animation: fade-up 0.6s ease forwards;
-  animation-delay: 0.1s;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  transition: transform 0.4s ease-out;
+  will-change: transform;
 }
 
-.status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent-violet);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(147, 51, 234, 0.55); }
-  70% { box-shadow: 0 0 0 6px rgba(147, 51, 234, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(147, 51, 234, 0); }
-}
-
-/* ============================
-   Heading
-   ============================ */
 h1.name {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
   font-size: clamp(2.1rem, 5.2vw, 3.4rem);
   line-height: 1.15;
-  opacity: 0;
-  animation: fade-up 0.7s ease forwards;
-  animation-delay: 0.35s;
+  animation: float-y 6s ease-in-out infinite;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
 }
 
 h1.name span {
@@ -198,23 +188,17 @@ h1.name span {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 22px rgba(124, 58, 237, 0.45));
+  filter: drop-shadow(0 0 24px rgba(124, 58, 237, 0.55));
 }
 
-/* ============================
-   Subtitle / terminal line
-   ============================ */
 .subtitle {
   font-family: 'JetBrains Mono', monospace;
   color: var(--text-secondary);
   font-size: 1rem;
-  margin: 18px 0 38px;
+  margin: 16px 0 38px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  animation: fade-up 0.7s ease forwards;
-  animation-delay: 0.7s;
 }
 
 .cursor {
@@ -231,69 +215,75 @@ h1.name span {
 }
 
 /* ============================
-   Buttons
+   3D buttons
    ============================ */
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
-  opacity: 0;
-  animation: fade-up 0.7s ease forwards;
-  animation-delay: 1s;
 }
 
 .btn {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 9px;
+  transform-style: preserve-3d;
+  transform: perspective(600px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateZ(var(--tz, 0px));
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+  box-shadow: 0 14px 26px -12px rgba(76, 29, 149, 0.7);
+}
+
+.btn:hover { --tz: 8px; }
+.btn:active { --tz: -6px; transition-duration: 0.08s; }
+
+/* The depth slab behind the face — only visible once the button is tilted */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform: translateZ(-10px);
+  z-index: -1;
+}
+
+.btn-primary::before { background: var(--accent-deep); filter: brightness(0.55); }
+.btn-outline::before { background: rgba(124, 58, 237, 0.3); }
+
+.btn-face {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: inherit;
+  transform: translateZ(2px);
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 0.85rem;
-  padding: 10px 18px;
-  border-radius: 9px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
 
-.btn svg {
+.btn-face svg {
   width: 15px;
   height: 15px;
   flex-shrink: 0;
 }
 
-.btn-primary {
+.btn-primary .btn-face {
   background: linear-gradient(135deg, var(--accent), var(--accent-deep));
   color: #fff;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 4px 10px -4px rgba(0, 0, 0, 0.45),
-    0 12px 26px -12px rgba(76, 29, 149, 0.8);
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 6px 14px -4px rgba(0, 0, 0, 0.5),
-    0 16px 32px -10px rgba(76, 29, 149, 0.9);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.btn-outline {
-  background: rgba(124, 58, 237, 0.08);
+.btn-outline .btn-face {
+  background: rgba(124, 58, 237, 0.1);
   border: 1px solid var(--border);
   color: var(--accent-bright);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 6px 16px -10px rgba(76, 29, 149, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
-.btn-outline:hover {
-  background: rgba(124, 58, 237, 0.18);
-  border-color: var(--accent-bright);
-  transform: translateY(-2px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 8px 20px -10px rgba(76, 29, 149, 0.6);
-}
+
+.btn:hover { box-shadow: 0 20px 34px -10px rgba(76, 29, 149, 0.85); }
 
 .btn:focus-visible {
   outline: 2px solid var(--accent-bright);
@@ -301,20 +291,14 @@ h1.name span {
 }
 
 /* ============================
-   Motion / load sequence
+   Motion preferences
    ============================ */
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .eyebrow, h1.name, .subtitle, .buttons {
-    animation: none;
-    opacity: 1;
+  .tunnel, .ring, .core, .particle, h1.name {
+    animation: none !important;
   }
-  .status-dot, .cursor, .glow-a, .glow-b {
-    animation: none;
+  .scene, .container, .btn {
+    transition: none !important;
   }
 }
 
@@ -322,19 +306,12 @@ h1.name span {
    Responsive
    ============================ */
 @media (max-width: 480px) {
-  .container {
-    padding: 36px 24px;
-    border-radius: 18px;
-  }
   .buttons {
     flex-direction: column;
     width: 100%;
+    max-width: 280px;
   }
-  .btn {
+  .btn-face {
     justify-content: center;
-    width: 100%;
-  }
-  .grid-floor {
-    height: 40vh;
   }
 }
