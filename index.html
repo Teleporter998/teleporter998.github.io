@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roman — Portfolio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="container">
-        <video id="bg-video" autoplay loop muted playsinline>
-            <source src="C:\Users\Roman\OneDrive\Документы\MyPortfolio\AnimePurpleEveningSky.mp4" type="video/mp4">
-        </video>
-        
-        <canvas id="shader-canvas"></canvas>
+
+  <canvas id="shader-canvas"></canvas>
+
+  <main class="container">
+    <div class="profile-card">
+      <h1 class="name">Hello, I'm <span>Roman</span></h1>
+      <p class="subtitle">Game Developer &amp; Music Producer</p>
+
+      <div class="buttons">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+      </div>
     </div>
-    <script src="script.js"></script>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
