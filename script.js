@@ -1,13 +1,13 @@
 const canvas = document.getElementById('shader-canvas');
 
 if (!canvas) {
-  console.error("CRITICAL ERROR: Canvas element not found!");
+  console.error("CRITICAL ERROR: Canvas element not found! Make sure your index.html has <canvas id='shader-canvas'></canvas>");
 }
 
 const gl = canvas.getContext('webgl');
 
 if (!gl) {
-  console.error("CRITICAL ERROR: WebGL is not supported.");
+  console.error("CRITICAL ERROR: WebGL is not supported or is disabled in this browser.");
 }
 
 const vertexShaderSource = `
@@ -17,63 +17,95 @@ const vertexShaderSource = `
   }
 `;
 
-// NEW FRAGMENT SHADER: Digital Glitch Effect
+// NEW FRAGMENT SHADER: High-Detail Horror Glitch
 const fragmentShaderSource = `
   precision highp float;
   uniform vec2 u_resolution;
   uniform float u_time;
 
-  // Pseudo-random number generator
+  // Pseudo-random noise
   float rand(vec2 n) { 
       return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
+  }
+
+  // 1D Noise for organic flickering
+  float noise(float p) {
+      float fl = floor(p);
+      float fc = fract(p);
+      return mix(rand(vec2(fl, fl)), rand(vec2(fl + 1.0, fl + 1.0)), fc);
   }
 
   void main() {
       vec2 uv = gl_FragCoord.xy / u_resolution.xy;
       
-      // Create a snappy timeline that "jumps" instead of flowing smoothly
-      // The multiplier (12.0) controls the framerate of the glitch
-      float time = floor(u_time * 12.0);
-
-      // Split the screen into horizontal rows
-      float row = floor(uv.y * 90.0);
+      // HORROR MECHANIC 1: Uneasy, irregular time pacing
+      // Mixes sharp digital ticks with organic, dying-light flickering
+      float digitalTime = floor(u_time * 18.0); 
+      float organicFlicker = noise(u_time * 6.0);
       
-      // Determine if this specific row is "glitching" right now
-      float isGlitchRow = step(0.92, rand(vec2(row, time)));
-      
-      // Calculate how much to shift the row horizontally to simulate a tear
-      float shift = (rand(vec2(row, time + 1.0)) - 0.5) * 0.3;
-      
-      // Apply the shift only to the active glitching rows
+      // Screen shake hazard (triggers violently on high noise peaks)
+      float shake = step(0.96, rand(vec2(u_time, u_time))) * 0.03;
       vec2 distortedUv = uv;
-      distortedUv.x += shift * isGlitchRow;
+      distortedUv.x += (rand(vec2(digitalTime, 0.0)) - 0.5) * shake;
 
-      // Create digital "blocks" along the X axis
-      // Stretching them out so they look like horizontal data streaks
-      float block = floor(distortedUv.x * 12.0);
+      // HORROR MECHANIC 2: Tearing the screen into macro (chunky) and micro (fine) damage
+      float macroRow = floor(distortedUv.y * 15.0);
+      float microRow = floor(distortedUv.y * 200.0);
       
-      // Generate noise to decide which blocks get colored
-      float noise = rand(vec2(block, row + time));
+      float isMacroGlitch = step(0.92, rand(vec2(macroRow, digitalTime * 0.5)));
+      float isMicroGlitch = step(0.82, rand(vec2(microRow, digitalTime)));
 
-      // Color Palette
-      vec3 black = vec3(0.03, 0.02, 0.04);       // Deep background void
-      vec3 purpleBright = vec3(0.66, 0.33, 0.97); // Main accent
-      vec3 purpleDark = vec3(0.25, 0.05, 0.4);    // Faded digital artifact
+      // Apply horizontal tearing
+      float shift = 0.0;
+      if (isMacroGlitch > 0.0) shift += (rand(vec2(macroRow, digitalTime + 1.0)) - 0.5) * 0.4;
+      if (isMicroGlitch > 0.0) shift += (rand(vec2(microRow, digitalTime + 2.0)) - 0.5) * 0.08;
+      
+      distortedUv.x += shift;
 
-      // Start with a black canvas
-      vec3 finalColor = black;
+      // DETAIL: Extremely dense mathematical grid for static artifacts
+      float blockX = floor(distortedUv.x * 250.0);
+      float blockY = floor(distortedUv.y * 250.0);
+      float detailNoise = rand(vec2(blockX, blockY + digitalTime));
 
-      // If this row is glitching, scatter some colored blocks across it
-      if (isGlitchRow > 0.0) {
-          if (noise > 0.8) {
-              finalColor = purpleBright; // Sharp, bright streaks
-          } else if (noise > 0.5) {
-              finalColor = purpleDark;   // Muted, background streaks
-          }
+      // HORROR MECHANIC 3: "Bleeding" vertical pixels dragging down
+      float bleedNoise = rand(vec2(floor(distortedUv.x * 120.0), floor(distortedUv.y * 8.0 - u_time * 4.0)));
+      float bleed = step(0.96, bleedNoise) * step(0.5, rand(vec2(distortedUv.x, digitalTime)));
+
+      // MULTIPLE PURPLE COLORS: Deep void to corrupted neon
+      vec3 voidBlack   = vec3(0.02, 0.01, 0.03); // Suffocating dark
+      vec3 darkPlum    = vec3(0.12, 0.02, 0.18); // Bruised shadow
+      vec3 bloodViolet = vec3(0.40, 0.00, 0.35); // Sinister magenta-purple
+      vec3 neonPurple  = vec3(0.66, 0.15, 0.97); // Electric/toxic purple
+      vec3 ghostWhite  = vec3(0.90, 0.80, 1.00); // Piercing, dead monitor white
+
+      vec3 finalColor = voidBlack;
+
+      // Base volatile background static
+      if (rand(distortedUv + u_time) > 0.85) finalColor = darkPlum;
+
+      // Paint the digital destruction layers
+      if (isMacroGlitch > 0.0 || isMicroGlitch > 0.0) {
+          if (detailNoise > 0.96) finalColor = ghostWhite;
+          else if (detailNoise > 0.80) finalColor = neonPurple;
+          else if (detailNoise > 0.45) finalColor = bloodViolet;
+          else if (detailNoise > 0.15) finalColor = darkPlum;
       }
 
-      // Add a very subtle, static scanline overlay to sell the CRT monitor feel
-      finalColor -= abs(sin(uv.y * 1200.0)) * 0.015;
+      // Apply the bleeding anomaly
+      if (bleed > 0.0) {
+          finalColor = mix(finalColor, bloodViolet, 0.85);
+      }
+
+      // HORROR MECHANIC 4: Claustrophobic Vignette (crushes the edges)
+      float vig = uv.x * uv.y * (1.0 - uv.x) * (1.0 - uv.y);
+      vig = clamp(pow(vig * 25.0, 0.25), 0.0, 1.0);
+      finalColor *= vig;
+
+      // Dim the whole screen during organic flicker drops (simulated power failure)
+      finalColor *= mix(0.4, 1.0, organicFlicker);
+
+      // Heavy industrial scanlines
+      finalColor -= abs(sin(uv.y * 1200.0)) * 0.04;
 
       gl_FragColor = vec4(finalColor, 1.0);
   }
