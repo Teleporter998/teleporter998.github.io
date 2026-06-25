@@ -17,7 +17,7 @@ const vertexShaderSource = `
   }
 `;
 
-// NEW FRAGMENT SHADER: Organic Fluid Texture (No Scanlines)
+// NEW FRAGMENT SHADER: Organic Fluid, 10-Color, No Vertical Streaks
 const fragmentShaderSource = `
   precision highp float;
   uniform vec2 u_resolution;
@@ -80,11 +80,11 @@ const fragmentShaderSource = `
       vec2 uv = gl_FragCoord.xy / u_resolution.xy;
       float t = u_time * 0.4;
 
-      // Organic warping
+      // Organic warping - remains fluid and horizontal-dominant
       vec2 warp = vec2(fbm(uv * 2.5 + vec2(t * 0.1, 0.0)), fbm(uv * 2.5 + vec2(0.0, t * 0.1)));
       vec2 distortedUv = uv + (warp - 0.5) * 0.3;
 
-      // Damage calculation
+      // Damage calculation - pure fbm
       float damage = fbm(distortedUv * 3.0 - t * 0.3);
       damage += fbm(distortedUv * 8.0 + t * 0.5) * 0.15;
       
@@ -92,7 +92,7 @@ const fragmentShaderSource = `
       float colorInput = clamp(damage + hash(uv + t) * 0.05, 0.0, 1.0);
       vec3 finalColor = getPurplePalette(colorInput);
 
-      // Add animated grain
+      // Add animated grain - removed any vertical bleed logic
       float staticNoise = hash(uv * u_resolution + u_time * 30.0);
       finalColor = mix(finalColor, vec3(staticNoise * 0.4 + 0.1), 0.15 * (1.1 - colorInput));
 
@@ -101,13 +101,11 @@ const fragmentShaderSource = `
       vig = clamp(pow(vig * 15.0, 0.35), 0.0, 1.0);
       finalColor *= vig;
 
-      // SCANLINES REMOVED: Texture is now entirely fluid
-
       gl_FragColor = vec4(finalColor, 1.0);
   }
 `;
 
-// Helper functions and render loop remain identical...
+// Render loop and initialization...
 function createShader(gl, type, source) {
   const shader = gl.createShader(type);
   gl.shaderSource(shader, source);
