@@ -1,3 +1,4 @@
+/* Import fonts directly through CSS to avoid HTML validation errors */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 :root {
@@ -7,6 +8,10 @@
   --accent: #a855f7;
   --text-main: #ededed;
   --text-muted: #888888;
+  
+  /* Marble background colors */
+  --marble-dark: #050505;
+  --marble-light: #15101f; 
 }
 
 * {
@@ -32,47 +37,27 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== SVG HIDER ===== */
-/* Do not use display:none or Firefox will break the filter */
-.svg-filter {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
-/* ===== MARBLED TOPOGRAPHIC BACKGROUND ===== */
+/* ===== HIGH-PERFORMANCE MARBLE BACKGROUND ===== */
 .bg-texture {
   position: fixed;
-  /* Make it slightly larger than the screen so the warped edges don't show */
-  top: -100px; left: -100px; width: calc(100vw + 200px); height: calc(100vh + 200px);
+  inset: 0;
   z-index: 0;
-  pointer-events: none;
-  
-  /* Creates straight horizontal lines (Black to Subtle Purple) */
+  /* Hardware-accelerated repeating gradient */
   background: repeating-linear-gradient(
-    to bottom,
-    #050505 0px,
-    #050505 28px,
-    rgba(168, 85, 247, 0.25) 29px,
-    rgba(168, 85, 247, 0.25) 30px
+    135deg,
+    var(--marble-dark),
+    var(--marble-dark) 20px,
+    var(--marble-light) 20px,
+    var(--marble-light) 40px
   );
-  
-  /* Warps the straight lines into liquid topography */
-  filter: url(#topography);
-  
-  /* Moves the lines infinitely for a morphing liquid effect */
-  animation: flowTexture 15s linear infinite;
-  
-  /* Smooth entrance */
-  opacity: 0;
-  animation: flowTexture 15s linear infinite, fadeInUp 2s ease-out forwards;
+  opacity: 0.6;
+  animation: slide 20s linear infinite;
 }
 
-/* Moving the background exactly 30px (the height of one line cycle) creates a seamless infinite loop */
-@keyframes flowTexture {
-  0% { background-position: 0px 0px; }
-  100% { background-position: 0px 30px; }
+/* Fluid movement without lag */
+@keyframes slide {
+  0% { background-position: 0 0; }
+  100% { background-position: 400px 400px; }
 }
 
 /* ===== LAYOUT & CARD ===== */
@@ -93,7 +78,6 @@ body {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  /* Softened the shadow to blend better with the new moving background */
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.8);
   
   opacity: 0;
@@ -146,6 +130,7 @@ body {
   transform: scale(0.96) !important;
 }
 
+/* Primary Button */
 .btn-primary {
   background-color: #000000;
   color: var(--accent);
@@ -159,6 +144,7 @@ body {
   box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.25);
 }
 
+/* Secondary Button */
 .btn-secondary {
   background-color: #000000;
   color: var(--text-main);
@@ -175,8 +161,19 @@ body {
 
 /* ===== MOBILE RESPONSIVENESS ===== */
 @media (max-width: 480px) {
-  .profile-card { padding: 40px 24px; }
-  .name { font-size: 2rem; }
-  .buttons { flex-direction: column; }
-  .btn { width: 100%; }
+  .profile-card {
+    padding: 40px 24px;
+  }
+  
+  .name {
+    font-size: 2rem;
+  }
+  
+  .buttons {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
 }
