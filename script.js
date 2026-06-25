@@ -36,26 +36,26 @@ const fragmentShaderSource = `
       uv.x *= u_resolution.x / u_resolution.y;
       uv *= 2.5;
 
-      // Organic, omnidirectional movement
+      // -> SLOWER: Reduced time multipliers to 0.015 and 0.025
       vec2 movement = vec2(
-          noise(uv + u_time * 0.05),
-          noise(uv + vec2(4.2, 1.8) - u_time * 0.08)
+          noise(uv + u_time * 0.015),
+          noise(uv + vec2(4.2, 1.8) - u_time * 0.025)
       );
 
       // Distort space
       float n = noise(uv + movement * 2.0);
 
-      // Create contour lines (topography)
-      float lines = abs(sin(n * 45.0));
+      // -> LESS LINES: Reduced frequency down to 15.0
+      float lines = abs(sin(n * 15.0));
       
-      // -> Tightened the gap (0.98 to 0.99) for razor-sharp edges
-      lines = smoothstep(0.98, 0.99, lines);
+      // -> THINNER: Pushed bounds closer to 1.0 (0.99 to 0.995)
+      lines = smoothstep(0.99, 0.995, lines);
 
       // Colors: Dark background, purple accents
       vec3 bgColor = vec3(0.02, 0.02, 0.02);
       vec3 accentColor = vec3(0.66, 0.33, 0.97);
 
-      // Mix colors based on lines (opacity kept at 0.4 for subtlety)
+      // Mix colors based on lines
       vec3 finalColor = mix(bgColor, accentColor, lines * 0.4);
 
       gl_FragColor = vec4(finalColor, 1.0);
