@@ -1,15 +1,13 @@
 const canvas = document.getElementById('shader-canvas');
 
-// Diagnostic 1: Did the HTML load correctly?
 if (!canvas) {
-  console.error("CRITICAL ERROR: Canvas element not found! Make sure your index.html has <canvas id='shader-canvas'></canvas>");
+  console.error("CRITICAL ERROR: Canvas element not found!");
 }
 
 const gl = canvas.getContext('webgl');
 
-// Diagnostic 2: Is WebGL running?
 if (!gl) {
-  console.error("CRITICAL ERROR: WebGL is not supported or is disabled in this browser.");
+  console.error("CRITICAL ERROR: WebGL is not supported.");
 }
 
 const vertexShaderSource = `
@@ -19,50 +17,68 @@ const vertexShaderSource = `
   }
 `;
 
+// NEW FRAGMENT SHADER: Digital Glitch Effect
 const fragmentShaderSource = `
   precision highp float;
   uniform vec2 u_resolution;
   uniform float u_time;
 
-  vec2 hash(vec2 p) {
-      p = vec2(dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)));
-      return -1.0 + 2.0 * fract(sin(p)*43758.5453123);
-  }
-
-  float noise(vec2 p) {
-      vec2 i = floor(p);
-      vec2 f = fract(p);
-      vec2 u = f * f * (3.0 - 2.0 * f);
-      return mix(mix(dot(hash(i + vec2(0.0,0.0)), f - vec2(0.0,0.0)),
-                     dot(hash(i + vec2(1.0,0.0)), f - vec2(1.0,0.0)), u.x),
-                 mix(dot(hash(i + vec2(0.0,1.0)), f - vec2(0.0,1.0)),
-                     dot(hash(i + vec2(1.0,1.0)), f - vec2(1.0,1.0)), u.x), u.y);
+  // Pseudo-random number generator
+  float rand(vec2 n) { 
+      return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
   }
 
   void main() {
       vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-      uv.x *= u_resolution.x / u_resolution.y;
-      uv *= 2.5;
+      
+      // Create a snappy timeline that "jumps" instead of flowing smoothly
+      // The multiplier (12.0) controls the framerate of the glitch
+      float time = floor(u_time * 12.0);
 
-      vec2 movement = vec2(
-          noise(uv + u_time * 0.015),
-          noise(uv + vec2(4.2, 1.8) - u_time * 0.025)
-      );
+      // Split the screen into horizontal rows
+      float row = floor(uv.y * 90.0);
+      
+      // Determine if this specific row is "glitching" right now
+      float isGlitchRow = step(0.92, rand(vec2(row, time)));
+      
+      // Calculate how much to shift the row horizontally to simulate a tear
+      float shift = (rand(vec2(row, time + 1.0)) - 0.5) * 0.3;
+      
+      // Apply the shift only to the active glitching rows
+      vec2 distortedUv = uv;
+      distortedUv.x += shift * isGlitchRow;
 
-      float n = noise(uv + movement * 2.0);
-      float lines = abs(sin(n * 15.0));
-      lines = smoothstep(0.99, 0.995, lines);
+      // Create digital "blocks" along the X axis
+      // Stretching them out so they look like horizontal data streaks
+      float block = floor(distortedUv.x * 12.0);
+      
+      // Generate noise to decide which blocks get colored
+      float noise = rand(vec2(block, row + time));
 
-      vec3 bgColor = vec3(0.02, 0.02, 0.02);
-      vec3 accentColor = vec3(0.66, 0.33, 0.97);
+      // Color Palette
+      vec3 black = vec3(0.03, 0.02, 0.04);       // Deep background void
+      vec3 purpleBright = vec3(0.66, 0.33, 0.97); // Main accent
+      vec3 purpleDark = vec3(0.25, 0.05, 0.4);    // Faded digital artifact
 
-      vec3 finalColor = mix(bgColor, accentColor, lines * 0.4);
+      // Start with a black canvas
+      vec3 finalColor = black;
+
+      // If this row is glitching, scatter some colored blocks across it
+      if (isGlitchRow > 0.0) {
+          if (noise > 0.8) {
+              finalColor = purpleBright; // Sharp, bright streaks
+          } else if (noise > 0.5) {
+              finalColor = purpleDark;   // Muted, background streaks
+          }
+      }
+
+      // Add a very subtle, static scanline overlay to sell the CRT monitor feel
+      finalColor -= abs(sin(uv.y * 1200.0)) * 0.015;
 
       gl_FragColor = vec4(finalColor, 1.0);
   }
 `;
 
-// Diagnostic 3: Shader Compiler Checks
 function createShader(gl, type, source) {
   const shader = gl.createShader(type);
   gl.shaderSource(shader, source);
@@ -84,7 +100,6 @@ gl.attachShader(program, vertexShader);
 gl.attachShader(program, fragmentShader);
 gl.linkProgram(program);
 
-// Diagnostic 4: Program Linking Checks
 if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
   console.error("PROGRAM LINK ERROR:", gl.getProgramInfoLog(program));
 }
