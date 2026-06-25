@@ -5,7 +5,7 @@
   --bg-color: #050505;
   --card-bg: #0a0a0a;
   --border-color: #1a1a1a;
-  --accent: #a855f7; /* The core purple color */
+  --accent: #a855f7;
   --text-main: #ededed;
   --text-muted: #888888;
 }
@@ -27,12 +27,23 @@ body {
   overflow: hidden;
 }
 
+/* ===== ENTRANCE ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ===== SUBTLE PURPLE BACKGROUND GLOW ===== */
 .glow {
   position: absolute;
   width: 700px;
   height: 700px;
-  /* Switched the glow from white to a soft, professional purple */
   background: radial-gradient(circle, rgba(168, 85, 247, 0.06) 0%, transparent 60%);
   border-radius: 50%;
   top: 50%;
@@ -40,6 +51,8 @@ body {
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 0;
+  /* Smooth fade in for the background light */
+  animation: fadeInUp 1.5s ease-out forwards;
 }
 
 /* ===== LAYOUT & CARD ===== */
@@ -61,17 +74,23 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 20px;
   box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.6);
+  
+  /* Initial card entrance */
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* ===== TYPOGRAPHY ===== */
+/* ===== TYPOGRAPHY (Staggered Entrances) ===== */
 .name {
   font-size: 2.5rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   margin-bottom: 8px;
+  
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.2s forwards; /* 0.2s delay */
 }
 
-/* Highlights your name in the accent purple */
 .name span {
   color: var(--accent);
 }
@@ -81,13 +100,19 @@ body {
   font-weight: 500;
   color: var(--text-muted);
   margin-bottom: 40px;
+  
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.4s forwards; /* 0.4s delay */
 }
 
-/* ===== BUTTONS ===== */
+/* ===== BUTTONS (Staggered Entrance & Upgraded Kinetics) ===== */
 .buttons {
   display: flex;
   gap: 16px;
   justify-content: center;
+  
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.6s forwards; /* 0.6s delay */
 }
 
 .btn {
@@ -97,36 +122,42 @@ body {
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.2s ease;
+  /* Upgraded from linear transition to a custom snappy curve */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Primary Button: Black core with a sharp purple outline */
+/* Tactile click effect - shrinks slightly when pressed */
+.btn:active {
+  transform: scale(0.96) !important; /* Overrides hover lift */
+}
+
+/* Primary Button */
 .btn-primary {
   background-color: #000000;
   color: var(--accent);
   border: 1px solid var(--accent);
 }
 
-/* Inverts to solid purple with black text on hover */
 .btn-primary:hover {
   background-color: var(--accent);
   color: #000000;
-  transform: translateY(-2px);
-  box-shadow: 0px 6px 20px rgba(168, 85, 247, 0.2);
+  transform: translateY(-3px) scale(1.02); /* Lifts up and scales slightly */
+  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.25);
 }
 
-/* Secondary Button: Pure black with a subtle dark border */
+/* Secondary Button */
 .btn-secondary {
   background-color: #000000;
   color: var(--text-main);
   border: 1px solid var(--border-color);
 }
 
-/* Matches the purple theme slightly when hovered */
 .btn-secondary:hover {
   border-color: var(--accent);
-  color: var(--text-main);
-  transform: translateY(-2px);
+  color: var(--accent);
+  background-color: rgba(168, 85, 247, 0.05); /* Very subtle purple tint fill */
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.1);
 }
 
 /* ===== MOBILE RESPONSIVENESS ===== */
