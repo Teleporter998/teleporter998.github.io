@@ -46,17 +46,16 @@ const fragmentShaderSource = `
       float n = noise(uv + movement * 2.0);
 
       // Create contour lines (topography)
-      // -> Increased to 45.0 for MORE lines
       float lines = abs(sin(n * 45.0));
       
-      // -> Tightened to 0.95 for THINNER lines
-      lines = smoothstep(0.95, 0.98, lines);
+      // -> Tightened the gap (0.98 to 0.99) for razor-sharp edges
+      lines = smoothstep(0.98, 0.99, lines);
 
       // Colors: Dark background, purple accents
       vec3 bgColor = vec3(0.02, 0.02, 0.02);
       vec3 accentColor = vec3(0.66, 0.33, 0.97);
 
-      // Mix colors based on lines (with 0.4 opacity on lines to keep it subtle)
+      // Mix colors based on lines (opacity kept at 0.4 for subtlety)
       vec3 finalColor = mix(bgColor, accentColor, lines * 0.4);
 
       gl_FragColor = vec4(finalColor, 1.0);
