@@ -1,4 +1,3 @@
-/* Import fonts directly through CSS to avoid HTML validation errors */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 :root {
@@ -29,30 +28,51 @@ body {
 
 /* ===== ENTRANCE ANIMATIONS ===== */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== SUBTLE PURPLE BACKGROUND GLOW ===== */
-.glow {
+/* ===== SVG HIDER ===== */
+/* Do not use display:none or Firefox will break the filter */
+.svg-filter {
   position: absolute;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.06) 0%, transparent 60%);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* ===== MARBLED TOPOGRAPHIC BACKGROUND ===== */
+.bg-texture {
+  position: fixed;
+  /* Make it slightly larger than the screen so the warped edges don't show */
+  top: -100px; left: -100px; width: calc(100vw + 200px); height: calc(100vh + 200px);
   z-index: 0;
-  /* Smooth fade in for the background light */
-  animation: fadeInUp 1.5s ease-out forwards;
+  pointer-events: none;
+  
+  /* Creates straight horizontal lines (Black to Subtle Purple) */
+  background: repeating-linear-gradient(
+    to bottom,
+    #050505 0px,
+    #050505 28px,
+    rgba(168, 85, 247, 0.25) 29px,
+    rgba(168, 85, 247, 0.25) 30px
+  );
+  
+  /* Warps the straight lines into liquid topography */
+  filter: url(#topography);
+  
+  /* Moves the lines infinitely for a morphing liquid effect */
+  animation: flowTexture 15s linear infinite;
+  
+  /* Smooth entrance */
+  opacity: 0;
+  animation: flowTexture 15s linear infinite, fadeInUp 2s ease-out forwards;
+}
+
+/* Moving the background exactly 30px (the height of one line cycle) creates a seamless infinite loop */
+@keyframes flowTexture {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 0px 30px; }
 }
 
 /* ===== LAYOUT & CARD ===== */
@@ -73,22 +93,21 @@ body {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.6);
+  /* Softened the shadow to blend better with the new moving background */
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.8);
   
-  /* Initial card entrance */
   opacity: 0;
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* ===== TYPOGRAPHY (Staggered Entrances) ===== */
+/* ===== TYPOGRAPHY ===== */
 .name {
   font-size: 2.5rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   margin-bottom: 8px;
-  
   opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.2s forwards; /* 0.2s delay */
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
 
 .name span {
@@ -100,19 +119,17 @@ body {
   font-weight: 500;
   color: var(--text-muted);
   margin-bottom: 40px;
-  
   opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.4s forwards; /* 0.4s delay */
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
 }
 
-/* ===== BUTTONS (Staggered Entrance & Upgraded Kinetics) ===== */
+/* ===== BUTTONS ===== */
 .buttons {
   display: flex;
   gap: 16px;
   justify-content: center;
-  
   opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.6s forwards; /* 0.6s delay */
+  animation: fadeInUp 0.8s ease-out 0.6s forwards;
 }
 
 .btn {
@@ -122,16 +139,13 @@ body {
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  /* Upgraded from linear transition to a custom snappy curve */
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Tactile click effect - shrinks slightly when pressed */
 .btn:active {
-  transform: scale(0.96) !important; /* Overrides hover lift */
+  transform: scale(0.96) !important;
 }
 
-/* Primary Button */
 .btn-primary {
   background-color: #000000;
   color: var(--accent);
@@ -141,11 +155,10 @@ body {
 .btn-primary:hover {
   background-color: var(--accent);
   color: #000000;
-  transform: translateY(-3px) scale(1.02); /* Lifts up and scales slightly */
+  transform: translateY(-3px) scale(1.02);
   box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.25);
 }
 
-/* Secondary Button */
 .btn-secondary {
   background-color: #000000;
   color: var(--text-main);
@@ -155,26 +168,15 @@ body {
 .btn-secondary:hover {
   border-color: var(--accent);
   color: var(--accent);
-  background-color: rgba(168, 85, 247, 0.05); /* Very subtle purple tint fill */
+  background-color: rgba(168, 85, 247, 0.05);
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.1);
 }
 
 /* ===== MOBILE RESPONSIVENESS ===== */
 @media (max-width: 480px) {
-  .profile-card {
-    padding: 40px 24px;
-  }
-  
-  .name {
-    font-size: 2rem;
-  }
-  
-  .buttons {
-    flex-direction: column;
-  }
-  
-  .btn {
-    width: 100%;
-  }
+  .profile-card { padding: 40px 24px; }
+  .name { font-size: 2rem; }
+  .buttons { flex-direction: column; }
+  .btn { width: 100%; }
 }
