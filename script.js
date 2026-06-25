@@ -46,8 +46,11 @@ const fragmentShaderSource = `
       float n = noise(uv + movement * 2.0);
 
       // Create contour lines (topography)
-      float lines = abs(sin(n * 25.0));
-      lines = smoothstep(0.85, 0.98, lines);
+      // -> Increased to 45.0 for MORE lines
+      float lines = abs(sin(n * 45.0));
+      
+      // -> Tightened to 0.95 for THINNER lines
+      lines = smoothstep(0.95, 0.98, lines);
 
       // Colors: Dark background, purple accents
       vec3 bgColor = vec3(0.02, 0.02, 0.02);
