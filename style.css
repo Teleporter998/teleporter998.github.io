@@ -7,10 +7,10 @@
   --text-muted: #888888;
 }
 
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -24,13 +24,13 @@ body {
   overflow: hidden;
 }
 
-/* ===== ENTRANCE ANIMATIONS ===== */
+/* Entrance Animation */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== WEBGL CANVAS BACKGROUND ===== */
+/* Background Canvas */
 #shader-canvas {
   position: fixed;
   top: 0;
@@ -38,10 +38,10 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: 0;
-  pointer-events: none; /* Let clicks pass through to buttons */
+  pointer-events: none;
 }
 
-/* ===== LAYOUT & CARD ===== */
+/* Layout */
 .container {
   position: relative;
   z-index: 1;
@@ -64,7 +64,7 @@ body {
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* ===== TYPOGRAPHY ===== */
+/* Typography */
 .name {
   font-size: 2.5rem;
   font-weight: 700;
@@ -74,8 +74,8 @@ body {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
 
-.name span { 
-  color: var(--accent); 
+.name span {
+  color: var(--accent);
 }
 
 .subtitle {
@@ -87,7 +87,7 @@ body {
   animation: fadeInUp 0.8s ease-out 0.4s forwards;
 }
 
-/* ===== BUTTONS ===== */
+/* Buttons */
 .buttons {
   display: flex;
   gap: 16px;
@@ -106,38 +106,38 @@ body {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.btn:active { 
-  transform: scale(0.96) !important; 
+.btn:active {
+  transform: scale(0.96) !important;
 }
 
-.btn-primary { 
-  background-color: #000000; 
-  color: var(--accent); 
-  border: 1px solid var(--accent); 
+.btn-primary {
+  background-color: #000000;
+  color: var(--accent);
+  border: 1px solid var(--accent);
 }
 
-.btn-primary:hover { 
-  background-color: var(--accent); 
-  color: #000000; 
-  transform: translateY(-3px) scale(1.02); 
-  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.25); 
+.btn-primary:hover {
+  background-color: var(--accent);
+  color: #000000;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.25);
 }
 
-.btn-secondary { 
-  background-color: #000000; 
-  color: var(--text-main); 
-  border: 1px solid var(--border-color); 
+.btn-secondary {
+  background-color: #000000;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
 }
 
-.btn-secondary:hover { 
-  border-color: var(--accent); 
-  color: var(--accent); 
-  background-color: rgba(168, 85, 247, 0.05); 
-  transform: translateY(-3px) scale(1.02); 
-  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.1); 
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: rgba(168, 85, 247, 0.05);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.1);
 }
 
-/* ===== MOBILE RESPONSIVENESS ===== */
+/* Mobile */
 @media (max-width: 480px) {
   .profile-card { padding: 40px 24px; }
   .name { font-size: 2rem; }
