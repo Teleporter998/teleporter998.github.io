@@ -1,7 +1,17 @@
 const canvas = document.getElementById('shader-canvas');
+
+// Diagnostic 1: Did the HTML load correctly?
+if (!canvas) {
+  console.error("CRITICAL ERROR: Canvas element not found! Make sure your index.html has <canvas id='shader-canvas'></canvas>");
+}
+
 const gl = canvas.getContext('webgl');
 
-// Vertex Shader: Fills the screen area
+// Diagnostic 2: Is WebGL running?
+if (!gl) {
+  console.error("CRITICAL ERROR: WebGL is not supported or is disabled in this browser.");
+}
+
 const vertexShaderSource = `
   attribute vec2 position;
   void main() {
@@ -9,7 +19,6 @@ const vertexShaderSource = `
   }
 `;
 
-// Fragment Shader: Math driving the topography lines
 const fragmentShaderSource = `
   precision highp float;
   uniform vec2 u_resolution;
@@ -31,55 +40,57 @@ const fragmentShaderSource = `
   }
 
   void main() {
-      // Normalize and scale coordinates
       vec2 uv = gl_FragCoord.xy / u_resolution.xy;
       uv.x *= u_resolution.x / u_resolution.y;
       uv *= 2.5;
 
-      // -> SLOWER: Reduced time multipliers to 0.015 and 0.025
       vec2 movement = vec2(
           noise(uv + u_time * 0.015),
           noise(uv + vec2(4.2, 1.8) - u_time * 0.025)
       );
 
-      // Distort space
       float n = noise(uv + movement * 2.0);
-
-      // -> LESS LINES: Reduced frequency down to 15.0
       float lines = abs(sin(n * 15.0));
-      
-      // -> THINNER: Pushed bounds closer to 1.0 (0.99 to 0.995)
       lines = smoothstep(0.99, 0.995, lines);
 
-      // Colors: Dark background, purple accents
       vec3 bgColor = vec3(0.02, 0.02, 0.02);
       vec3 accentColor = vec3(0.66, 0.33, 0.97);
 
-      // Mix colors based on lines
       vec3 finalColor = mix(bgColor, accentColor, lines * 0.4);
 
       gl_FragColor = vec4(finalColor, 1.0);
   }
 `;
 
-// Compiler helper
+// Diagnostic 3: Shader Compiler Checks
 function createShader(gl, type, source) {
   const shader = gl.createShader(type);
   gl.shaderSource(shader, source);
   gl.compileShader(shader);
+  
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    console.error("SHADER COMPILE ERROR:", gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
+    return null;
+  }
   return shader;
 }
 
-// Build the program
 const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
 const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
 const program = gl.createProgram();
 gl.attachShader(program, vertexShader);
 gl.attachShader(program, fragmentShader);
 gl.linkProgram(program);
+
+// Diagnostic 4: Program Linking Checks
+if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+  console.error("PROGRAM LINK ERROR:", gl.getProgramInfoLog(program));
+}
+
 gl.useProgram(program);
 
-// Map the geometry to the screen
 const positionBuffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
@@ -91,11 +102,9 @@ const positionLocation = gl.getAttribLocation(program, "position");
 gl.enableVertexAttribArray(positionLocation);
 gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
-// Set up shader variables
 const timeLocation = gl.getUniformLocation(program, "u_time");
 const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
 
-// Main Render Loop
 function render(time) {
   time *= 0.001; 
   
@@ -112,5 +121,4 @@ function render(time) {
   requestAnimationFrame(render);
 }
 
-// Ignite
 requestAnimationFrame(render);
