@@ -10,24 +10,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Video Background -->
+  <!-- 🎬 Video Background -->
   <video autoplay muted loop playsinline id="bg-video">
     <source src="GlitchBackground.mp4" type="video/mp4">
   </video>
 
-  <!-- Overlay for readability -->
+  <!-- 🌑 Tint + darkening overlay -->
   <div class="overlay"></div>
 
-  <!-- Cinematic vignette -->
+  <!-- 🎥 Cinematic vignette -->
   <div class="vignette"></div>
 
   <main class="container">
-    <div class="profile-card">
-      <h1 class="name">Hello, I'm <span>Teleporter998</span></h1>
-      <p class="subtitle">Game Developer &amp; Music Producer</p>
-      <div class="buttons">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+    <div class="card-wrapper">
+      <div class="profile-card">
+        <h1 class="name">Hello, I'm <span>Teleporter998</span></h1>
+        <p class="subtitle">Game Developer &amp; Music Producer</p>
+        <div class="buttons">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-secondary">Contact Me</a>
+        </div>
       </div>
     </div>
   </main>
@@ -52,19 +54,42 @@
 
   <script>
     (function () {
-      const toggleBtn = document.getElementById('theme-toggle');
       const body = document.body;
-      const stored = localStorage.getItem('theme');
+      const bgVideo = document.getElementById('bg-video');
+      const toggleBtn = document.getElementById('theme-toggle');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      if (stored === 'light') {
-        body.classList.add('light-mode');
-      }
+      /* ---- Theme toggle ---- */
+      const stored = localStorage.getItem('theme');
+      if (stored === 'light') body.classList.add('light-mode');
 
       toggleBtn.addEventListener('click', function () {
         body.classList.toggle('light-mode');
-        const isLight = body.classList.contains('light-mode');
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
       });
+
+      /* ---- Slow the background video down a touch ---- */
+      bgVideo.addEventListener('loadedmetadata', () => {
+        bgVideo.playbackRate = 0.6;
+      });
+
+      /* ---- Subtle mouse parallax on the background ---- */
+      if (!reduceMotion) {
+        let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+        const maxShift = 14;
+
+        window.addEventListener('mousemove', (e) => {
+          targetX = ((e.clientX / window.innerWidth) - 0.5) * maxShift;
+          targetY = ((e.clientY / window.innerHeight) - 0.5) * maxShift;
+        });
+
+        (function animateParallax() {
+          currentX += (targetX - currentX) * 0.05;
+          currentY += (targetY - currentY) * 0.05;
+          bgVideo.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) scale(1.05)`;
+          requestAnimationFrame(animateParallax);
+        })();
+      }
     })();
   </script>
 </body>
