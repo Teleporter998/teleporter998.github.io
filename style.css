@@ -26,16 +26,15 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== CANVAS FLUID BACKGROUND ===== */
-#fluid-canvas {
+/* ===== WEBGL CANVAS BACKGROUND ===== */
+#shader-canvas {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   z-index: 0;
-  opacity: 0.35; /* Keeps the purple lines subtle so text remains readable */
-  pointer-events: none; /* Prevents the background from stealing mouse clicks */
+  pointer-events: none;
 }
 
 /* ===== LAYOUT & CARD ===== */
