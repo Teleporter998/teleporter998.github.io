@@ -1,146 +1,29 @@
-:root {
-  --bg-color: #050505;
-  --card-bg: #0a0a0a;
-  --border-color: #1a1a1a;
-  --accent: #a855f7;
-  --text-main: #ededed;
-  --text-muted: #888888;
+body, html { 
+    margin: 0; 
+    padding: 0; 
+    overflow: hidden; 
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+#container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
 }
 
-body {
-  background-color: var(--bg-color);
-  color: var(--text-main);
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+#bg-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video fills the screen completely */
+    z-index: 1;
 }
 
-/* Entrance Animation */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Background Canvas */
 #shader-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Layout */
-.container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  padding: 24px;
-  display: flex;
-  justify-content: center;
-}
-
-.profile-card {
-  text-align: center;
-  max-width: 560px;
-  width: 100%;
-  padding: 48px 40px;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.8);
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-/* Typography */
-.name {
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  margin-bottom: 8px;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.2s forwards;
-}
-
-.name span {
-  color: var(--accent);
-}
-
-.subtitle {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  margin-bottom: 40px;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.4s forwards;
-}
-
-/* Buttons */
-.buttons {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.6s forwards;
-}
-
-.btn {
-  display: inline-block;
-  padding: 14px 28px;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.btn:active {
-  transform: scale(0.96) !important;
-}
-
-.btn-primary {
-  background-color: #000000;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-}
-
-.btn-primary:hover {
-  background-color: var(--accent);
-  color: #000000;
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.25);
-}
-
-.btn-secondary {
-  background-color: #000000;
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background-color: rgba(168, 85, 247, 0.05);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.1);
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-  .profile-card { padding: 40px 24px; }
-  .name { font-size: 2rem; }
-  .buttons { flex-direction: column; }
-  .btn { width: 100%; }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Keeps the vignette layer on top */
+    pointer-events: none; /* Allows clicks to pass through to your site content */
 }
