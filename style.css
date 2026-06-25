@@ -1,4 +1,3 @@
-/* Import fonts directly through CSS to avoid HTML validation errors */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 :root {
@@ -8,17 +7,9 @@
   --accent: #a855f7;
   --text-main: #ededed;
   --text-muted: #888888;
-  
-  /* Marble background colors */
-  --marble-dark: #050505;
-  --marble-light: #15101f; 
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   background-color: var(--bg-color);
@@ -37,27 +28,16 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== HIGH-PERFORMANCE MARBLE BACKGROUND ===== */
-.bg-texture {
+/* ===== CANVAS FLUID BACKGROUND ===== */
+#fluid-canvas {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 0;
-  /* Hardware-accelerated repeating gradient */
-  background: repeating-linear-gradient(
-    135deg,
-    var(--marble-dark),
-    var(--marble-dark) 20px,
-    var(--marble-light) 20px,
-    var(--marble-light) 40px
-  );
-  opacity: 0.6;
-  animation: slide 20s linear infinite;
-}
-
-/* Fluid movement without lag */
-@keyframes slide {
-  0% { background-position: 0 0; }
-  100% { background-position: 400px 400px; }
+  opacity: 0.35; /* Keeps the purple lines subtle so text remains readable */
+  pointer-events: none; /* Prevents the background from stealing mouse clicks */
 }
 
 /* ===== LAYOUT & CARD ===== */
@@ -79,7 +59,6 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 20px;
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.8);
-  
   opacity: 0;
   animation: fadeInUp 0.8s ease-out forwards;
 }
@@ -94,9 +73,7 @@ body {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
 
-.name span {
-  color: var(--accent);
-}
+.name span { color: var(--accent); }
 
 .subtitle {
   font-size: 1.1rem;
@@ -126,54 +103,17 @@ body {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.btn:active {
-  transform: scale(0.96) !important;
-}
+.btn:active { transform: scale(0.96) !important; }
 
-/* Primary Button */
-.btn-primary {
-  background-color: #000000;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-}
+.btn-primary { background-color: #000000; color: var(--accent); border: 1px solid var(--accent); }
+.btn-primary:hover { background-color: var(--accent); color: #000000; transform: translateY(-3px) scale(1.02); box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.25); }
 
-.btn-primary:hover {
-  background-color: var(--accent);
-  color: #000000;
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.25);
-}
+.btn-secondary { background-color: #000000; color: var(--text-main); border: 1px solid var(--border-color); }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); background-color: rgba(168, 85, 247, 0.05); transform: translateY(-3px) scale(1.02); box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.1); }
 
-/* Secondary Button */
-.btn-secondary {
-  background-color: #000000;
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background-color: rgba(168, 85, 247, 0.05);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.1);
-}
-
-/* ===== MOBILE RESPONSIVENESS ===== */
 @media (max-width: 480px) {
-  .profile-card {
-    padding: 40px 24px;
-  }
-  
-  .name {
-    font-size: 2rem;
-  }
-  
-  .buttons {
-    flex-direction: column;
-  }
-  
-  .btn {
-    width: 100%;
-  }
+  .profile-card { padding: 40px 24px; }
+  .name { font-size: 2rem; }
+  .buttons { flex-direction: column; }
+  .btn { width: 100%; }
 }
