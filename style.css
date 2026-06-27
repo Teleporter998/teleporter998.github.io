@@ -8,6 +8,8 @@
   --card-shadow: 0px 10px 40px rgba(0, 0, 0, 0.8);
   --card-border-color: rgba(168, 85, 247, 0.45);
   --card-glow: 0 0 35px rgba(168, 85, 247, 0.15);
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --card-vignette: rgba(0, 0, 0, 0.45);
 }
 
 body.light-mode {
@@ -20,6 +22,8 @@ body.light-mode {
   --card-shadow: 0px 10px 30px rgba(0, 0, 0, 0.12);
   --card-border-color: rgba(147, 51, 234, 0.4);
   --card-glow: 0 0 30px rgba(147, 51, 234, 0.12);
+  --grid-line: rgba(0, 0, 0, 0.04);
+  --card-vignette: rgba(0, 0, 0, 0.07);
 }
 
 * {
