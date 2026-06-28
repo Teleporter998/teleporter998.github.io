@@ -10,6 +10,7 @@
   --card-glow: 0 0 35px rgba(168, 85, 247, 0.15);
   --grid-line: rgba(255, 255, 255, 0.05);
   --card-vignette: rgba(0, 0, 0, 0.45);
+  --cut-line: rgba(255, 255, 255, 0.14);
 }
 
 body.light-mode {
@@ -24,6 +25,7 @@ body.light-mode {
   --card-glow: 0 0 30px rgba(147, 51, 234, 0.12);
   --grid-line: rgba(0, 0, 0, 0.04);
   --card-vignette: rgba(0, 0, 0, 0.07);
+  --cut-line: rgba(0, 0, 0, 0.12);
 }
 
 * {
@@ -110,7 +112,7 @@ body {
   transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
-/* 🔲 Faint grid texture — fades toward corners, with a couple of asymmetric breaks */
+/* 🔲 Faint grid texture — fades toward corners, with breaks and a cut line */
 .profile-card::before {
   content: '';
   position: absolute;
@@ -118,6 +120,10 @@ body {
   z-index: -1;
   pointer-events: none;
   background-image:
+    /* thin horizontal cut line, partial width */
+    linear-gradient(var(--cut-line), var(--cut-line)),
+    /* slightly more noticeable break */
+    linear-gradient(var(--card-bg), var(--card-bg)),
     /* break in a vertical line */
     linear-gradient(var(--card-bg), var(--card-bg)),
     /* break in a horizontal line */
@@ -130,6 +136,8 @@ body {
     linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size:
+    65% 1px,
+    64px 32px,
     3px 48px,
     48px 3px,
     80px 56px,
@@ -137,13 +145,15 @@ body {
     32px 32px,
     32px 32px;
   background-position:
+    top 132px left 0,
+    bottom 96px right 224px,
     top 88px left 64px,
     top 160px right 56px,
     top -8px right -8px,
     bottom -8px left -8px,
     0 0,
     0 0;
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat;
   -webkit-mask-image: radial-gradient(ellipse at center, black 50%, transparent 95%);
   mask-image: radial-gradient(ellipse at center, black 50%, transparent 95%);
 }
