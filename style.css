@@ -74,36 +74,48 @@ body {
   font-size: 1.1rem;
 }
 
-/* 1. Update the grid to force more columns */
+/* 1. Reset grid to a flex layout that allows precise control */
 .project-grid {
-  /* Forces 4 columns on large screens; adjust '4' to '5' for even more */
-  column-count: 4; 
-  column-gap: 20px;
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  /* Negative margin pulls the outer edges in to compensate for internal padding */
+  margin: -2px; 
+  width: calc(100% + 4px);
 }
 
-/* 2. Update the card to allow real sizing */
+/* 2. Each card gets a strict 2px padding on all sides (Total 4px gap) */
 .project-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 0;
   overflow: hidden;
-  margin-bottom: 20px;
-  break-inside: avoid; /* Ensures cards don't split across columns */
+  
+  /* Calculate width to fit 4 columns: (100% / 4) - 4px total gap */
+  width: calc(25% - 4px);
+  margin: 2px; /* 2px margin on each side = 4px gap between items */
+  
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  break-inside: avoid;
 }
 
-/* 3. The image now keeps its original ratio, just scaled down */
+/* 3. Responsive adjustments for the strict 4px gap */
+@media (max-width: 1024px) { 
+  .project-card { width: calc(33.33% - 4px); } 
+}
+@media (max-width: 768px) { 
+  .project-card { width: calc(50% - 4px); } 
+}
+@media (max-width: 480px) { 
+  .project-card { width: calc(100% - 4px); } 
+}
+
+/* The image remains at its original aspect ratio */
 .project-img {
   width: 100%;
-  height: auto; /* This maintains the original aspect ratio */
+  height: auto;
   display: block;
   transition: transform 0.5s ease;
 }
-
-/* Make it responsive for smaller screens */
-@media (max-width: 1024px) { .project-grid { column-count: 3; } }
-@media (max-width: 768px) { .project-grid { column-count: 2; } }
 
 .project-card:hover .project-img {
   transform: scale(1.1);
