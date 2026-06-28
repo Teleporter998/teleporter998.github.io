@@ -74,36 +74,31 @@ body {
   font-size: 1.1rem;
 }
 
-/* 1. The Container: Use gap for the 4px spacing */
+/* 1. Masonry Grid: Uses CSS columns to stack items naturally */
 .project-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px; /* Perfectly 4px everywhere */
-  justify-content: center;
+  column-count: 4; /* Adjust this number to change how many columns appear */
+  column-gap: 4px; /* Strict 4px spacing between columns */
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* 2. The Card: Let content dictate the size */
+/* 2. The Card: Ensure they break correctly between columns */
 .project-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 0;
   overflow: hidden;
-  
-  /* Flex-basis: auto allows each card to be as wide as the image inside */
-  flex: 0 0 auto; 
-  
-  /* No margin needed here anymore because the 'gap' handles it */
+  margin-bottom: 4px; /* Strict 4px spacing between rows */
+  break-inside: avoid; /* This is the magic line that prevents images from splitting */
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* 3. The Image: Restrict max-width to allow density */
+/* 3. The Image: Respects the original ratio */
 .project-img {
   display: block;
-  width: auto;
-  height: auto;
-  /* Adjust this percentage to control how many fit per row */
-  max-width: 300px; 
+  width: 100%;
+  height: auto; /* This forces the image to scale width-wise while maintaining its unique height */
   transition: transform 0.5s ease;
 }
 
@@ -407,6 +402,10 @@ body {
 .nav-btn:hover { color: var(--accent); }
 .prev-btn { left: 20px; }
 .next-btn { right: 20px; }
+
+@media (max-width: 1024px) { .project-grid { column-count: 3; } }
+@media (max-width: 768px) { .project-grid { column-count: 2; } }
+@media (max-width: 480px) { .project-grid { column-count: 1; } }
 
 /* Mobile */
 @media (max-width: 480px) {
