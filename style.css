@@ -74,11 +74,12 @@ body {
   font-size: 1.1rem;
 }
 
+/* Responsive Grid with fixed column count */
 .project-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; /* Reduced from 32px to squeeze in a bit more room */
-  justify-content: center;
+  display: grid;
+  /* This creates 4 equal columns. Change '4' to '5' if you want even more. */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
   width: 100%;
 }
 
@@ -88,46 +89,24 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 0;
   overflow: hidden;
-  
-  /* Remove flex: 1 1 250px; 
-     Instead, set a fixed width. This ensures the design size is locked. 
-     Adjust '300px' to whatever size you currently want them to be. */
-  width: 300px; 
-  
-  margin-bottom: 20px;
+  /* Forces the card to maintain a specific aspect ratio */
+  aspect-ratio: 16 / 9; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-.project-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--card-border-color);
-  box-shadow: var(--card-shadow), var(--card-glow);
-  cursor: pointer;
-}
-
-/* The Image Itself */
+/* Ensure the image fills the card without distorting the original ratio */
 .project-img {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  object-fit: cover; /* This preserves the ratio while filling the container */
   transition: transform 0.5s ease;
 }
 
-/* Project Cards */
-.project-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 0;
-  overflow: hidden;
-  
-  /* The '250px' is the key: 
-     Lower this number (e.g., 200px) to fit even more cards in a row. 
-     Raise it (e.g., 350px) to fit fewer, larger cards.
-  */
-  flex: 1 1 250px; 
-  
-  /* Removed max-width to allow more flexibility for cramming items into a row */
-  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+.project-card:hover .project-img {
+  transform: scale(1.1);
 }
 
 /* Tags */
