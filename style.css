@@ -74,31 +74,36 @@ body {
   font-size: 1.1rem;
 }
 
-/* 1. Masonry Grid: Uses CSS columns to stack items naturally */
+/* 1. The Grid Container */
 .project-grid {
-  column-count: 4; /* Adjust this number to change how many columns appear */
-  column-gap: 4px; /* Strict 4px spacing between columns */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 250px; /* Base height for standard items */
+  grid-auto-flow: dense; /* The "magic" keyword that fills gaps */
+  gap: 16px; 
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* 2. The Card: Ensure they break correctly between columns */
+/* 2. The Card */
 .project-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: 0;
   overflow: hidden;
-  margin-bottom: 4px; /* Strict 4px spacing between rows */
-  break-inside: avoid; /* This is the magic line that prevents images from splitting */
-  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  transition: transform 0.4s ease;
 }
 
-/* 3. The Image: Respects the original ratio */
+/* 3. Handle different sizes (The Masonry Effect) */
+/* Apply these classes to specific HTML cards if they are bigger/taller */
+.project-card.tall { grid-row: span 2; }
+.project-card.wide { grid-column: span 2; }
+
 .project-img {
-  display: block;
   width: 100%;
-  height: auto; /* This forces the image to scale width-wise while maintaining its unique height */
+  height: 100%;
+  object-fit: cover; /* This makes sure the image fills the card without distorting */
   transition: transform 0.5s ease;
 }
 
