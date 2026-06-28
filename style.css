@@ -72,10 +72,12 @@ body {
   font-size: 1.1rem;
 }
 
-/* Modern Masonry-style Grid */
+/* Optimized Row-based Layout */
 .project-grid {
-  column-width: 300px; /* Adjust this to change how many columns you want */
-  column-gap: 32px;
+  display: flex;
+  flex-wrap: wrap;       /* Allows items to wrap to the next row */
+  gap: 32px;             /* Space between items */
+  justify-content: center; /* Keeps everything centered */
   width: 100%;
 }
 
@@ -85,8 +87,9 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 0;
   overflow: hidden;
-  margin-bottom: 32px; /* Adds space between items as they stack */
-  break-inside: avoid; /* Prevents cards from breaking across columns */
+  /* Adjust this width to make cards bigger or smaller horizontally */
+  flex: 1 1 350px; 
+  max-width: 500px; /* Prevents cards from getting too stretched on large screens */
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
