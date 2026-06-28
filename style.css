@@ -108,8 +108,21 @@ body {
   transition: transform 0.5s ease;
 }
 
-.project-card:hover .project-img {
-  transform: scale(1.05);
+/* Project Cards */
+.project-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  overflow: hidden;
+  
+  /* The '250px' is the key: 
+     Lower this number (e.g., 200px) to fit even more cards in a row. 
+     Raise it (e.g., 350px) to fit fewer, larger cards.
+  */
+  flex: 1 1 250px; 
+  
+  /* Removed max-width to allow more flexibility for cramming items into a row */
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 /* Tags */
