@@ -72,23 +72,21 @@ body {
   font-size: 1.1rem;
 }
 
-/* Grid Layout */
+/* Modern Masonry-style Grid */
 .project-grid {
-  display: grid;
-  /* Reduced from 320px to 240px to make the images smaller overall */
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 32px;
-  /* Prevents cards from stretching vertically if they are different heights */
-  align-items: start; 
+  column-width: 300px; /* Adjust this to change how many columns you want */
+  column-gap: 32px;
+  width: 100%;
 }
 
 /* Project Cards */
 .project-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  /* Set to 0 for sharp, 90-degree corners */
-  border-radius: 0; 
+  border-radius: 0;
   overflow: hidden;
+  margin-bottom: 32px; /* Adds space between items as they stack */
+  break-inside: avoid; /* Prevents cards from breaking across columns */
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -102,17 +100,13 @@ body {
 /* The Image Itself */
 .project-img {
   width: 100%;
-  /* Height auto lets the image use its real aspect ratio */
-  height: auto; 
-  /* Display block removes a tiny invisible gap that browsers put under images */
-  display: block; 
-  /* We removed the filter transition since we aren't changing colors anymore */
+  height: auto;
+  display: block;
   transition: transform 0.5s ease;
 }
 
-/* Hover effects */
 .project-card:hover .project-img {
-  transform: scale(1.05); /* Keeps the smooth zoom effect! */
+  transform: scale(1.05);
 }
 
 /* Tags */
