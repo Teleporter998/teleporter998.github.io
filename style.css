@@ -222,6 +222,8 @@ body {
   animation: fadeInUp 0.8s ease-out 0.6s forwards;
 }
 .btn {
+  position: relative;
+  overflow: hidden;
   display: inline-block;
   padding: 14px 28px;
   border-radius: 10px;
@@ -229,6 +231,24 @@ body {
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  opacity: 0;
+  pointer-events: none;
+}
+.btn:hover::after {
+  animation: btnGlitch 1.8s steps(16, end) infinite;
+}
+@keyframes btnGlitch {
+  0%, 88%, 100% { opacity: 0; }
+  89% { opacity: 0.12; }
+  89.6% { opacity: 0; }
+  91% { opacity: 0.08; }
+  91.5% { opacity: 0; }
 }
 .btn:active {
   transform: scale(0.96) !important;
@@ -242,7 +262,7 @@ body {
   background-color: var(--accent);
   color: #000000;
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.25);
+  box-shadow: 0px 12px 28px rgba(168, 85, 247, 0.35);
 }
 .btn-secondary {
   background-color: var(--card-bg);
@@ -254,7 +274,7 @@ body {
   color: var(--accent);
   background-color: rgba(168, 85, 247, 0.05);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0px 10px 25px rgba(168, 85, 247, 0.1);
+  box-shadow: 0px 12px 28px rgba(168, 85, 247, 0.16);
 }
 
 /* 🌙☀️ Theme toggle button */
