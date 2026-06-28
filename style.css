@@ -163,31 +163,39 @@ body {
   opacity: 1;
 }
 
-/* ✨ Small glitch flicker that follows the cursor, only on hover */
+/* ✨ Advanced Digital Tear tracking the cursor */
 .profile-card::after {
   content: '';
   position: absolute;
-  inset: 0;
   z-index: -1;
   pointer-events: none;
   opacity: 0;
-  background-image: radial-gradient(circle, var(--glitch-color) 0%, transparent 70%);
-  background-size: 110px 110px;
-  background-repeat: no-repeat;
-  background-position: calc(var(--mx) - 55px) calc(var(--my) - 55px);
-}
-.profile-card:hover::after {
-  animation: glitchFlicker 3.2s steps(20, end) infinite;
+  width: 120px;
+  height: 120px;
+  /* Centers the distortion box on the mouse coordinates */
+  top: calc(var(--my) - 60px);
+  left: calc(var(--mx) - 60px);
+  background: 
+    linear-gradient(45deg, transparent 40%, var(--glitch-color) 45%, var(--accent) 50%, transparent 55%),
+    radial-gradient(circle, var(--glitch-color) 0%, transparent 60%);
+  background-size: 200% 200%, 100% 100%;
+  mix-blend-mode: screen; 
+  transition: opacity 0.2s ease;
 }
 
-@keyframes glitchFlicker {
-  0%, 95%, 100% { opacity: 0; }
-  96% { opacity: 0.5; }
-  96.5% { opacity: 0; }
-  97.2% { opacity: 0.35; }
-  97.6% { opacity: 0; }
-  98.4% { opacity: 0.45; }
-  99% { opacity: 0; }
+.profile-card:hover::after {
+  opacity: 1;
+  /* Triggers a blocky, erratic clip-path animation */
+  animation: digitalTear 0.3s steps(3, end) infinite;
+}
+
+@keyframes digitalTear {
+  0% { clip-path: inset(0 0 0 0); transform: translateX(0); opacity: 0.8; }
+  20% { clip-path: inset(20% -20px 60% 0); transform: translateX(-10px); opacity: 1; }
+  40% { clip-path: inset(60% -20px 20% 0); transform: translateX(10px); opacity: 0.6; }
+  60% { clip-path: inset(0 0 0 0); transform: translateX(0); opacity: 0; }
+  80% { clip-path: inset(10% -20px 80% 0); transform: translateX(5px); opacity: 0.9; }
+  100% { clip-path: inset(0 0 0 0); transform: translateX(0); opacity: 0.3; }
 }
 
 /* Typography */
@@ -240,16 +248,55 @@ body {
   opacity: 0;
   pointer-events: none;
 }
+/* ✨ The New Slicing Glitch Effect */
+.btn::before,
+.btn::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.btn:hover::before {
+  opacity: 1;
+  color: var(--card-bg);
+  background: var(--accent);
+  /* Shifts slightly left and slices */
+  animation: slice-left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
 .btn:hover::after {
-  animation: btnGlitch 1.8s steps(16, end) infinite;
+  opacity: 1;
+  color: var(--text-main);
+  background: transparent;
+  text-shadow: -2px 0 var(--accent), 2px 0 cyan;
+  /* Shifts slightly right and slices at different intervals */
+  animation: slice-right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite alternate;
 }
-@keyframes btnGlitch {
-  0%, 88%, 100% { opacity: 0; }
-  89% { opacity: 0.12; }
-  89.6% { opacity: 0; }
-  91% { opacity: 0.08; }
-  91.5% { opacity: 0; }
+
+@keyframes slice-left {
+  0% { clip-path: inset(10% 0 70% 0); transform: translate(-4px, 1px); }
+  20% { clip-path: inset(80% 0 5% 0); transform: translate(4px, -1px); }
+  40% { clip-path: inset(30% 0 50% 0); transform: translate(-4px, 2px); }
+  60% { clip-path: inset(70% 0 10% 0); transform: translate(4px, -2px); }
+  80% { clip-path: inset(40% 0 40% 0); transform: translate(-2px, 1px); }
+  100% { clip-path: inset(20% 0 60% 0); transform: translate(3px, -1px); }
 }
+
+@keyframes slice-right {
+  0% { clip-path: inset(20% 0 60% 0); transform: translate(3px, -1px); }
+  20% { clip-path: inset(40% 0 40% 0); transform: translate(-3px, 1px); }
+  40% { clip-path: inset(70% 0 10% 0); transform: translate(4px, -2px); }
+  60% { clip-path: inset(30% 0 50% 0); transform: translate(-4px, 2px); }
+  80% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -1px); }
+  100% { clip-path: inset(10% 0 70% 0); transform: translate(-2px, 1px); }
+}
+
 .btn:active {
   transform: scale(0.96) !important;
 }
