@@ -106,14 +106,13 @@ body {
   height: auto; 
   /* Display block removes a tiny invisible gap that browsers put under images */
   display: block; 
-  transition: transform 0.5s ease, filter 0.5s ease;
-  filter: grayscale(40%) contrast(1.1); /* Starts slightly desaturated */
+  /* We removed the filter transition since we aren't changing colors anymore */
+  transition: transform 0.5s ease;
 }
 
 /* Hover effects */
 .project-card:hover .project-img {
-  transform: scale(1.05); /* Smooth zoom */
-  filter: grayscale(0%) contrast(1.1); /* Color pops back in */
+  transform: scale(1.05); /* Keeps the smooth zoom effect! */
 }
 
 /* Tags */
