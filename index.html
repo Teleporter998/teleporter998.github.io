@@ -17,13 +17,10 @@
   <video autoplay muted loop playsinline id="bg-video">
     <source src="assets/GlitchBackground.mp4" type="video/mp4">
   </video>
-
   <!-- Overlay for readability -->
   <div class="overlay"></div>
-
   <!-- Cinematic vignette -->
   <div class="vignette"></div>
-
   <main class="container">
     <div class="profile-card">
       <h1 class="name">Hello, I'm <span>Teleporter998</span></h1>
@@ -34,7 +31,6 @@
       </div>
     </div>
   </main>
-
   <!-- Dark / Light mode toggle -->
   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light and dark mode" title="Toggle light/dark mode">
     <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -52,21 +48,29 @@
       <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
     </svg>
   </button>
-
   <script>
     (function () {
       const toggleBtn = document.getElementById('theme-toggle');
       const body = document.body;
       const stored = localStorage.getItem('theme');
-
       if (stored === 'light') {
         body.classList.add('light-mode');
       }
-
       toggleBtn.addEventListener('click', function () {
         body.classList.toggle('light-mode');
         const isLight = body.classList.contains('light-mode');
         localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+    })();
+
+    // Grid reacts to cursor: feeds pointer position to the hover glitch spot in style.css
+    (function () {
+      const card = document.querySelector('.profile-card');
+      if (!card) return;
+      card.addEventListener('pointermove', function (e) {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
       });
     })();
   </script>
