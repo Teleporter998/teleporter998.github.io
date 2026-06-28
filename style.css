@@ -46,9 +46,11 @@ body {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 1100px;
+  /* Increased from 1100px to 1400px to allow more items per row */
+  max-width: 1400px; 
   margin: 0 auto;
-  padding: 80px 24px 120px 24px;
+  /* Reduced left/right padding from 24px to 12px to reclaim horizontal space */
+  padding: 80px 12px 120px 12px;
 }
 
 .section-header {
@@ -72,12 +74,11 @@ body {
   font-size: 1.1rem;
 }
 
-/* Optimized Row-based Layout */
 .project-grid {
   display: flex;
-  flex-wrap: wrap;       /* Allows items to wrap to the next row */
-  gap: 32px;             /* Space between items */
-  justify-content: center; /* Keeps everything centered */
+  flex-wrap: wrap;
+  gap: 20px; /* Reduced from 32px to squeeze in a bit more room */
+  justify-content: center;
   width: 100%;
 }
 
@@ -87,9 +88,13 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 0;
   overflow: hidden;
-  /* Adjust this width to make cards bigger or smaller horizontally */
-  flex: 1 1 350px; 
-  max-width: 500px; /* Prevents cards from getting too stretched on large screens */
+  
+  /* Remove flex: 1 1 250px; 
+     Instead, set a fixed width. This ensures the design size is locked. 
+     Adjust '300px' to whatever size you currently want them to be. */
+  width: 300px; 
+  
+  margin-bottom: 20px;
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
