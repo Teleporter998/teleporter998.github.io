@@ -75,17 +75,20 @@ body {
 /* Grid Layout */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  /* Reduced from 320px to 240px to make the images smaller overall */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 32px;
+  /* Prevents cards from stretching vertically if they are different heights */
+  align-items: start; 
 }
 
 /* Project Cards */
 .project-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
+  /* Set to 0 for sharp, 90-degree corners */
+  border-radius: 0; 
   overflow: hidden;
-  aspect-ratio: 16 / 9; /* Creates a perfect rectangular frame */
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -99,8 +102,10 @@ body {
 /* The Image Itself */
 .project-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  /* Height auto lets the image use its real aspect ratio */
+  height: auto; 
+  /* Display block removes a tiny invisible gap that browsers put under images */
+  display: block; 
   transition: transform 0.5s ease, filter 0.5s ease;
   filter: grayscale(40%) contrast(1.1); /* Starts slightly desaturated */
 }
