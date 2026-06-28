@@ -13,26 +13,74 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Video Background -->
   <video autoplay muted loop playsinline id="bg-video">
     <source src="assets/GlitchBackground.mp4" type="video/mp4">
   </video>
-  <!-- Overlay for readability -->
+  
   <div class="overlay"></div>
-  <!-- Cinematic vignette -->
+  
   <div class="vignette"></div>
-  <main class="container">
-    <div class="profile-card">
-      <h1 class="name">Hello, I'm <span>Teleporter998</span></h1>
-      <p class="subtitle">Game Developer &amp; Music Producer</p>
-      <div class="buttons">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+
+  <section id="hero">
+    <main class="container">
+      <div class="profile-card">
+        <h1 class="name">Hello, I'm <span>Teleporter998</span></h1>
+        <p class="subtitle">Game Developer &amp; Music Producer</p>
+        <div class="buttons">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-secondary">Contact Me</a>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <section id="projects" class="portfolio-section">
+    <div class="section-header">
+      <h2>UI & <span>Graphics</span></h2>
+      <p>A collection of my interface designs and visual assets.</p>
+    </div>
+    
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=600&auto=format&fit=crop" alt="Cyberpunk UI" class="project-img">
+        <div class="project-content">
+          <h3>Neon Inventory System</h3>
+          <p>A futuristic inventory UI concept designed for a sci-fi RPG.</p>
+          <div class="tags">
+            <span class="tag">Figma</span>
+            <span class="tag">Photoshop</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop" alt="Retro Synth Cover" class="project-img">
+        <div class="project-content">
+          <h3>Synthwave Album Art</h3>
+          <p>Cover art and promotional graphics for my latest EP release.</p>
+          <div class="tags">
+            <span class="tag">Illustrator</span>
+            <span class="tag">Blender</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=600&auto=format&fit=crop" alt="HUD Design" class="project-img">
+        <div class="project-content">
+          <h3>Tactical HUD</h3>
+          <p>Heads-up display overlay for an upcoming fast-paced shooter.</p>
+          <div class="tags">
+            <span class="tag">UI/UX</span>
+            <span class="tag">After Effects</span>
+          </div>
+        </div>
       </div>
     </div>
-  </main>
+  </section>
+
   <script>
-    // Grid reacts to cursor: feeds pointer position to the hover glitch spot in style.css
+    // Grid reacts to cursor for the hero card
     (function () {
       const card = document.querySelector('.profile-card');
       if (!card) return;
@@ -42,6 +90,16 @@
         card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
       });
     })();
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
   </script>
 </body>
 </html>
