@@ -74,36 +74,36 @@ body {
   font-size: 1.1rem;
 }
 
-/* Responsive Grid with fixed column count */
+/* 1. Update the grid to force more columns */
 .project-grid {
-  display: grid;
-  /* This creates 4 equal columns. Change '4' to '5' if you want even more. */
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  /* Forces 4 columns on large screens; adjust '4' to '5' for even more */
+  column-count: 4; 
+  column-gap: 20px;
   width: 100%;
 }
 
-/* Project Cards */
+/* 2. Update the card to allow real sizing */
 .project-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 0;
   overflow: hidden;
-  /* Forces the card to maintain a specific aspect ratio */
-  aspect-ratio: 16 / 9; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 20px;
+  break-inside: avoid; /* Ensures cards don't split across columns */
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Ensure the image fills the card without distorting the original ratio */
+/* 3. The image now keeps its original ratio, just scaled down */
 .project-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* This preserves the ratio while filling the container */
+  height: auto; /* This maintains the original aspect ratio */
+  display: block;
   transition: transform 0.5s ease;
 }
+
+/* Make it responsive for smaller screens */
+@media (max-width: 1024px) { .project-grid { column-count: 3; } }
+@media (max-width: 768px) { .project-grid { column-count: 2; } }
 
 .project-card:hover .project-img {
   transform: scale(1.1);
