@@ -117,5 +117,45 @@
       });
     });
   </script>
+
+  <script>
+const grid = document.querySelector('.project-grid');
+const items = Array.from(document.querySelectorAll('.project-card'));
+
+function createMasonry() {
+  grid.innerHTML = '';
+
+  const columnCount = window.innerWidth > 1024 ? 4 :
+                      window.innerWidth > 768 ? 3 :
+                      window.innerWidth > 480 ? 2 : 1;
+
+  const columns = [];
+
+  // Create columns
+  for (let i = 0; i < columnCount; i++) {
+    const col = document.createElement('div');
+    col.classList.add('project-column');
+    grid.appendChild(col);
+    columns.push(col);
+  }
+
+  // Track column heights
+  const heights = new Array(columnCount).fill(0);
+
+  items.forEach(item => {
+    const shortest = heights.indexOf(Math.min(...heights));
+    columns[shortest].appendChild(item);
+
+    heights[shortest] += item.offsetHeight;
+  });
+}
+
+// Run after images load
+window.addEventListener('load', createMasonry);
+window.addEventListener('resize', () => {
+  clearTimeout(window.resizeTimeout);
+  window.resizeTimeout = setTimeout(createMasonry, 200);
+});
+</script>
 </body>
 </html>
