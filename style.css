@@ -71,12 +71,41 @@ body {
   width: 100%;
   overflow: hidden;
   border-radius: 0px;
+  position: relative;
   
   /* NEW: Hidden initial state for animation */
   opacity: 0;
   transform: translateY(40px);
   /* Using a custom cubic-bezier for a premium, snappy-yet-smooth easing */
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The loading skeleton overlay */
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #111;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+/* The pulse animation */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.6; }
+}
+
+.project-card.is-loading::after {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Hide the overlay when the image is loaded */
+.project-card.loaded::after {
+  opacity: 0;
 }
 
 .project-card.loaded {
