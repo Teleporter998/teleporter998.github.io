@@ -75,14 +75,17 @@ body {
 }
 
 .project-grid {
-  display: grid;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
 
-  /* Auto-fit as many columns as possible */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
-  gap: 6px; /* spacing between items */
-
-  width: 100%;
+/* Each column */
+.project-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 /* 2. The Card: Keep them tight and prevent them from being cut in half */
