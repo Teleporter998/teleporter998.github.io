@@ -72,6 +72,7 @@ body {
   overflow: hidden;
   border-radius: 0px;
   position: relative;
+  min-height: 200px; /* Adjust this value to match your average image height */
   
   /* NEW: Hidden initial state for animation */
   opacity: 0;
