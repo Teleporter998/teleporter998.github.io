@@ -4,144 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teleporter998</title>
-  <link rel="icon" href="assets/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <video autoplay muted loop playsinline id="bg-video">
-    <source src="assets/GlitchBackground.mp4" type="video/mp4">
-  </video>
-  
-  <div class="overlay"></div>
-  <div class="vignette"></div>
 
-  <section id="hero">
-    <main class="container">
-      <div class="profile-card">
-        <h1 class="name">Hello, I'm <span>Teleporter998</span></h1>
-        <p class="subtitle">Game Developer &amp; Music Producer</p>
-        <div class="buttons">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="#contact" class="btn btn-secondary">Contact Me</a>
-        </div>
-      </div>
-    </main>
-  </section>
-
-  <section id="projects" class="portfolio-section">
-    <div class="section-header">
-      <h2>UI & <span>Graphics</span></h2>
-      <p>A collection of my interface designs and visual assets.</p>
-    </div>
-    
-    <div class="project-grid">
-      <div class="project-card"><img src="assets/CriticizeDesign.png" alt="HUD Design" class="project-img"></div>
-      <div class="project-card"><img src="assets/ExpertionDesign.png" alt="HUD Design" class="project-img"></div>
-      <div class="project-card"><img src="assets/FrozenInsideDesign.png" alt="HUD Design" class="project-img"></div>
-      <div class="project-card"><img src="assets/HydrogenDesign.png" alt="HUD Design" class="project-img"></div>
-      <div class="project-card"><img src="assets/ToxicityDesign.png" alt="HUD Design" class="project-img"></div>
-    </div>
-  </section>
-
-  <div id="lightbox" class="lightbox">
-    <span class="close-btn">&times;</span>
-    <button class="nav-btn prev-btn">&#10094;</button>
-    <img src="" alt="Full size" class="lightbox-content">
-    <button class="nav-btn next-btn">&#10095;</button>
+<section id="projects" class="portfolio-section">
+  <div class="section-header">
+    <h2>UI & <span>Graphics</span></h2>
+    <p>A collection of my interface designs and visual assets.</p>
   </div>
 
-  <script>
-    // Hero interaction
-    (function () {
-      const card = document.querySelector('.profile-card');
-      if (!card) return;
-      card.addEventListener('pointermove', function (e) {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
-      });
-    })();
+  <div class="project-grid">
+    <div class="project-card"><img src="assets/CriticizeDesign.png" class="project-img" loading="lazy"></div>
+    <div class="project-card"><img src="assets/ExpertionDesign.png" class="project-img" loading="lazy"></div>
+    <div class="project-card"><img src="assets/FrozenInsideDesign.png" class="project-img" loading="lazy"></div>
+    <div class="project-card"><img src="assets/HydrogenDesign.png" class="project-img" loading="lazy"></div>
+    <div class="project-card"><img src="assets/ToxicityDesign.png" class="project-img" loading="lazy"></div>
+  </div>
+</section>
 
-    // Lightbox Logic
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('.lightbox-content');
-    const images = Array.from(document.querySelectorAll('.project-img'));
-    let currentIndex = 0;
-
-    function openLightbox(index) {
-      currentIndex = index;
-      lightboxImg.src = images[currentIndex].src;
-      lightbox.style.display = 'flex';
-    }
-
-    images.forEach((img, index) => {
-      img.parentElement.addEventListener('click', () => openLightbox(index));
-    });
-
-    function closeLightbox() { lightbox.style.display = 'none'; }
-    
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox || e.target.classList.contains('close-btn')) closeLightbox();
-    });
-
-    document.querySelector('.next-btn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      currentIndex = (currentIndex + 1) % images.length;
-      lightboxImg.src = images[currentIndex].src;
-    });
-
-    document.querySelector('.prev-btn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      lightboxImg.src = images[currentIndex].src;
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (lightbox.style.display === 'flex') {
-        if (e.key === 'ArrowRight') document.querySelector('.next-btn').click();
-        if (e.key === 'ArrowLeft') document.querySelector('.prev-btn').click();
-        if (e.key === 'Escape') closeLightbox();
-      }
-    });
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
-
-  <script>
+<script>
 const grid = document.querySelector('.project-grid');
 const items = Array.from(document.querySelectorAll('.project-card'));
 
 function createMasonry() {
   grid.innerHTML = '';
 
-  const columnCount = window.innerWidth > 1024 ? 4 :
-                      window.innerWidth > 768 ? 3 :
-                      window.innerWidth > 480 ? 2 : 1;
+  const columnCount =
+    window.innerWidth > 1024 ? 4 :
+    window.innerWidth > 768 ? 3 :
+    window.innerWidth > 480 ? 2 : 1;
 
   const columns = [];
+  const heights = new Array(columnCount).fill(0);
 
   // Create columns
   for (let i = 0; i < columnCount; i++) {
     const col = document.createElement('div');
-    col.classList.add('project-column');
+    col.className = 'project-column';
     grid.appendChild(col);
     columns.push(col);
   }
 
-  // Track column heights
-  const heights = new Array(columnCount).fill(0);
-
+  // Distribute items
   items.forEach(item => {
     const shortest = heights.indexOf(Math.min(...heights));
     columns[shortest].appendChild(item);
@@ -150,12 +57,15 @@ function createMasonry() {
   });
 }
 
-// Run after images load
+// Run after everything loads
 window.addEventListener('load', createMasonry);
+
+// Recalculate on resize
 window.addEventListener('resize', () => {
   clearTimeout(window.resizeTimeout);
   window.resizeTimeout = setTimeout(createMasonry, 200);
 });
 </script>
+
 </body>
 </html>
