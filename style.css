@@ -74,13 +74,15 @@ body {
   font-size: 1.1rem;
 }
 
-/* 1. Masonry Container: Flow items into columns automatically */
 .project-grid {
-  column-count: 4;     /* Automatically balances 4 columns */
-  column-gap: 4px;     /* Strict 4px gap between columns */
+  display: grid;
+
+  /* Auto-fit as many columns as possible */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+  gap: 6px; /* spacing between items */
+
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
 /* 2. The Card: Keep them tight and prevent them from being cut in half */
@@ -90,15 +92,14 @@ body {
   margin-bottom: 4px;  /* Strict 4px gap between vertical items */
   break-inside: avoid; /* Prevents cards from splitting between columns */
   overflow: hidden;
+  border-radius: 12px;
   transition: transform 0.4s ease;
 }
 
-/* 3. The Image: Natural sizing */
 .project-img {
-  display: block;
   width: 100%;
-  height: auto; /* This ensures the aspect ratio is preserved */
-  transition: transform 0.5s ease;
+  height: auto; /* keeps original ratio */
+  display: block;
 }
 
 .project-card:hover .project-img {
