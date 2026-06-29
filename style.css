@@ -21,6 +21,10 @@
   min-height: 100svh; /* better on mobile browsers */
 }
 
+#projects {
+  margin-top: 40px;
+}
+
 * {
   margin: 0;
   padding: 0;
