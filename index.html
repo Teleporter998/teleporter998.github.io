@@ -154,6 +154,32 @@ refreshImages().forEach(blockContextMenu);
 // Lightbox image (same <img> element reused for every slide)
 blockContextMenu(lightboxImg);
 
+  /* =========================
+   SCROLL FADE-IN ANIMATION
+========================= */
+// Set up the Intersection Observer
+const fadeOptions = {
+  root: null,
+  rootMargin: '0px 0px -50px 0px', // Triggers slightly before the card hits the bottom of the screen
+  threshold: 0.1
+};
+
+const fadeObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // Add the 'loaded' class to trigger the CSS animation
+      entry.target.classList.add('loaded');
+      // Stop observing once it has loaded to keep performance high
+      observer.unobserve(entry.target); 
+    }
+  });
+}, fadeOptions);
+
+// Attach the observer to every project card
+document.querySelectorAll('.project-card').forEach(card => {
+  fadeObserver.observe(card);
+});
+
 /* =========================
    SMOOTH SCROLL
 ========================= */
