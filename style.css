@@ -29,8 +29,8 @@ body {
 /* Section */
 .portfolio-section {
   max-width: 1400px;
-  margin: auto;
-  padding: 80px 16px;
+  margin: 0 auto;
+  padding: 120px 16px 80px; /* 🔥 more top spacing */
 }
 
 /* Header */
@@ -142,7 +142,7 @@ body {
   position: relative;
   z-index: 1;
   width: 100%;
-  padding: 24px;
+  padding: 24px 16px; /* less vertical push */
   display: flex;
   justify-content: center;
 }
