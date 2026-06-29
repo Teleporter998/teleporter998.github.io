@@ -47,13 +47,13 @@
     </div>
 
     <div class="project-grid">
-      <div class="project-card"><img src="assets/CriticizeDesign.png" class="project-img" loading="lazy" draggable="false"></div>
-      <div class="project-card"><img src="assets/ExpertionDesign.png" class="project-img" loading="lazy" draggable="false"></div>
-      <div class="project-card"><img src="assets/FrozenInsideDesign.png" class="project-img" loading="lazy" draggable="false"></div>
-      <div class="project-card"><img src="assets/HydrogenDesign.png" class="project-img" loading="lazy" draggable="false"></div>
-      <div class="project-card"><img src="assets/ToxicityDesign.png" class="project-img" loading="lazy" draggable="false"></div>
-      <div class="project-card"><img src="assets/ValidDate.png" class="project-img" loading="lazy" draggable="false"></div>
-      <div class="project-card"><img src="assets/Tiers.png" class="project-img" loading="lazy" draggable="false"></div>
+      <div class="project-card"><img src="assets/CriticizeDesign.png" class="project-img" draggable="false"></div>
+      <div class="project-card"><img src="assets/ExpertionDesign.png" class="project-img" draggable="false"></div>
+      <div class="project-card"><img src="assets/FrozenInsideDesign.png" class="project-img" draggable="false"></div>
+      <div class="project-card"><img src="assets/HydrogenDesign.png" class="project-img" draggable="false"></div>
+      <div class="project-card"><img src="assets/ToxicityDesign.png" class="project-img" draggable="false"></div>
+      <div class="project-card"><img src="assets/ValidDate.png" class="project-img" draggable="false"></div>
+      <div class="project-card"><img src="assets/Tiers.png" class="project-img" draggable="false"></div>
     </div>
   </section>
 
@@ -79,52 +79,6 @@
     card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
   });
 })();
-
-/* =========================
-   MASONRY ENGINE (FIXED)
-========================= */
-const grid = document.querySelector('.project-grid');
-let items = [];
-
-function initItems() {
-  items = Array.from(document.querySelectorAll('.project-card'));
-}
-
-function createMasonry() {
-  if (!grid) return;
-
-  // Save items BEFORE clearing
-  if (items.length === 0) initItems();
-
-  grid.innerHTML = '';
-
-  const columnCount =
-    window.innerWidth > 1024 ? 4 :
-    window.innerWidth > 768 ? 3 :
-    window.innerWidth > 480 ? 2 : 1;
-
-  const columns = [];
-  const heights = new Array(columnCount).fill(0);
-
-  for (let i = 0; i < columnCount; i++) {
-    const col = document.createElement('div');
-    col.className = 'project-column';
-    grid.appendChild(col);
-    columns.push(col);
-  }
-
-  items.forEach(item => {
-    const shortest = heights.indexOf(Math.min(...heights));
-    columns[shortest].appendChild(item);
-    heights[shortest] += item.offsetHeight;
-  });
-}
-
-/* Wait for images so heights are correct */
-window.addEventListener('load', () => {
-  initItems();
-  createMasonry();
-});
 
 /* =========================
    LIGHTBOX (FIXED)
