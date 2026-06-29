@@ -138,13 +138,15 @@ body {
   z-index: -1;
 }
 
-/* 🎥 Cinematic corner vignette */
+/* 🎥 Cinematic corner vignette (bottom edge faded out, see mask below) */
 .vignette {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.75) 100%);
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 25%);
+  mask-image: linear-gradient(to top, transparent 0%, black 25%);
 }
 
 /* Entrance Animation */
