@@ -63,9 +63,7 @@ body {
   width: 100%;
 }
 
-/* CARDS */
 .project-card {
-  /* Prevents cards from splitting awkwardly across two columns */
   break-inside: avoid;
   page-break-inside: avoid;
   margin-bottom: 12px;
@@ -73,6 +71,17 @@ body {
   width: 100%;
   overflow: hidden;
   border-radius: 0px;
+  
+  /* NEW: Hidden initial state for animation */
+  opacity: 0;
+  transform: translateY(40px);
+  /* Using a custom cubic-bezier for a premium, snappy-yet-smooth easing */
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-card.loaded {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Responsive adjustments */
