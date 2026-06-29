@@ -154,30 +154,40 @@ refreshImages().forEach(blockContextMenu);
 // Lightbox image (same <img> element reused for every slide)
 blockContextMenu(lightboxImg);
 
-  /* =========================
-   SCROLL FADE-IN ANIMATION
+/* =========================
+   SCROLL FADE-IN & LOADER
 ========================= */
-// Set up the Intersection Observer
-const fadeOptions = {
-  root: null,
-  rootMargin: '0px 0px -50px 0px', // Triggers slightly before the card hits the bottom of the screen
-  threshold: 0.1
-};
+const projectCards = document.querySelectorAll('.project-card');
 
-const fadeObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      // Add the 'loaded' class to trigger the CSS animation
-      entry.target.classList.add('loaded');
-      // Stop observing once it has loaded to keep performance high
-      observer.unobserve(entry.target); 
-    }
-  });
-}, fadeOptions);
+projectCards.forEach(card => {
+  const img = card.querySelector('.project-img');
+  
+  // Set initial loading state
+  card.classList.add('is-loading');
 
-// Attach the observer to every project card
-document.querySelectorAll('.project-card').forEach(card => {
-  fadeObserver.observe(card);
+  // Logic to handle when image is ready
+  const onImageLoad = () => {
+    card.classList.remove('is-loading');
+    card.classList.add('loaded');
+  };
+
+  if (img.complete) {
+    onImageLoad();
+  } else {
+    img.addEventListener('load', onImageLoad);
+  }
+
+  // Fade-in Observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in-final'); // Optional: Add a specific final transition
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  observer.observe(card);
 });
 
 /* =========================
