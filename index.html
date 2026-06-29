@@ -47,11 +47,11 @@
     </div>
 
     <div class="project-grid">
-      <div class="project-card"><img src="assets/CriticizeDesign.png" class="project-img" loading="lazy"></div>
-      <div class="project-card"><img src="assets/ExpertionDesign.png" class="project-img" loading="lazy"></div>
-      <div class="project-card"><img src="assets/FrozenInsideDesign.png" class="project-img" loading="lazy"></div>
-      <div class="project-card"><img src="assets/HydrogenDesign.png" class="project-img" loading="lazy"></div>
-      <div class="project-card"><img src="assets/ToxicityDesign.png" class="project-img" loading="lazy"></div>
+      <div class="project-card"><img src="assets/CriticizeDesign.png" class="project-img" loading="lazy" draggable="false"></div>
+      <div class="project-card"><img src="assets/ExpertionDesign.png" class="project-img" loading="lazy" draggable="false"></div>
+      <div class="project-card"><img src="assets/FrozenInsideDesign.png" class="project-img" loading="lazy" draggable="false"></div>
+      <div class="project-card"><img src="assets/HydrogenDesign.png" class="project-img" loading="lazy" draggable="false"></div>
+      <div class="project-card"><img src="assets/ToxicityDesign.png" class="project-img" loading="lazy" draggable="false"></div>
     </div>
   </section>
 
@@ -59,7 +59,7 @@
   <div id="lightbox" class="lightbox">
     <span class="close-btn">&times;</span>
     <button class="nav-btn prev-btn">&#10094;</button>
-    <img src="" class="lightbox-content">
+    <img src="" class="lightbox-content" draggable="false">
     <button class="nav-btn next-btn">&#10095;</button>
   </div>
 
@@ -188,6 +188,21 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') lightbox.style.display = 'none';
   }
 });
+
+/* =========================
+   DISABLE RIGHT-CLICK ON GALLERY + LIGHTBOX IMAGES
+   (deterrent only — not a hard guarantee against saving)
+========================= */
+function blockContextMenu(el) {
+  el.addEventListener('contextmenu', (e) => e.preventDefault());
+}
+
+// Gallery thumbnails (bound once; moving them between columns
+// during createMasonry() doesn't remove their listeners)
+refreshImages().forEach(blockContextMenu);
+
+// Lightbox image (same <img> element reused for every slide)
+blockContextMenu(lightboxImg);
 
 /* =========================
    SMOOTH SCROLL
