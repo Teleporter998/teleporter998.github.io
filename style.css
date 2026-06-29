@@ -13,6 +13,14 @@
   --glitch-color: rgba(168, 85, 247, 0.4);
 }
 
+#hero {
+  min-height: 100vh; /* full screen */
+  display: flex;
+  align-items: center;   /* vertical center */
+  justify-content: center;
+  min-height: 100svh; /* better on mobile browsers */
+}
+
 * {
   margin: 0;
   padding: 0;
