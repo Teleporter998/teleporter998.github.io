@@ -268,6 +268,21 @@ body {
   transition: opacity 0.4s ease;
 }
 
+/* Music Section */
+.music-container {
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+/* Optional: Invert the SoundCloud widget to better match a dark theme */
+.music-container iframe {
+  filter: invert(0.9) hue-rotate(180deg) brightness(1.2);
+}
+
 /* Grid is slightly more visible while hovering the card */
 .profile-card:hover::before {
   opacity: 1;
