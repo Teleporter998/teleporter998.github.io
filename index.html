@@ -18,14 +18,12 @@
 
 <body>
 
-  <!-- 🎬 Background -->
   <video autoplay muted loop playsinline id="bg-video">
     <source src="assets/GlitchBackground.mp4" type="video/mp4">
   </video>
   <div class="overlay"></div>
   <div class="vignette"></div>
 
-  <!-- 🚀 HERO -->
   <section id="hero">
     <main class="container">
       <div class="profile-card">
@@ -33,6 +31,7 @@
         <p class="subtitle">Game Developer &amp; Music Producer</p>
         <div class="buttons">
          <a href="#projects" class="btn btn-primary">Projects</a>
+         <a href="#tools" class="btn btn-secondary">Tools</a>
          <a href="#music" class="btn btn-secondary">Music</a>
         <a href="#contact" class="btn btn-secondary">Contact</a>
       </div>
@@ -40,7 +39,6 @@
     </main>
   </section>
 
-  <!-- 🎨 PROJECTS -->
   <section id="projects" class="portfolio-section">
     <div class="section-header">
       <h2>UI & <span>Graphics</span></h2>
@@ -58,7 +56,41 @@
     </div>
   </section>
 
-<section id="music" class="portfolio-section">
+  <section id="tools" class="portfolio-section">
+    <div class="section-header">
+      <h2>My <span>Tools</span></h2>
+      <p>Software and technologies I use to create.</p>
+    </div>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <img src="assets/roblox.svg" alt="Roblox Studio" draggable="false">
+        <span>Roblox Studio</span>
+      </div>
+      <div class="tool-card">
+        <img src="assets/luau.svg" alt="Luau" draggable="false">
+        <span>Luau</span>
+      </div>
+      <div class="tool-card">
+        <img src="assets/javascript.svg" alt="JavaScript" draggable="false">
+        <span>JavaScript</span>
+      </div>
+      <div class="tool-card">
+        <img src="assets/nodejs.svg" alt="Node.js" draggable="false">
+        <span>Node.js</span>
+      </div>
+      <div class="tool-card">
+        <img src="assets/figma.svg" alt="Figma" draggable="false">
+        <span>Figma</span>
+      </div>
+      <div class="tool-card">
+        <img src="assets/daw.svg" alt="DAW" draggable="false">
+        <span>FL Studio / Ableton</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="music" class="portfolio-section">
   <div class="section-header">
     <h2>My <span>Music</span></h2>
     <p>Tracks and beats I've produced.</p>
@@ -75,8 +107,7 @@
     </iframe>
   </div>
 </section>
-  
-  <!-- 🔍 LIGHTBOX -->
+
   <div id="lightbox" class="lightbox">
     <span class="close-btn">&times;</span>
     <button class="nav-btn prev-btn">&#10094;</button>
@@ -160,17 +191,12 @@ document.addEventListener('keydown', (e) => {
 
 /* =========================
    DISABLE RIGHT-CLICK ON GALLERY + LIGHTBOX IMAGES
-   (deterrent only — not a hard guarantee against saving)
 ========================= */
 function blockContextMenu(el) {
   el.addEventListener('contextmenu', (e) => e.preventDefault());
 }
 
-// Gallery thumbnails (bound once; moving them between columns
-// during createMasonry() doesn't remove their listeners)
 refreshImages().forEach(blockContextMenu);
-
-// Lightbox image (same <img> element reused for every slide)
 blockContextMenu(lightboxImg);
 
 /* =========================
@@ -181,10 +207,8 @@ const projectCards = document.querySelectorAll('.project-card');
 projectCards.forEach(card => {
   const img = card.querySelector('.project-img');
   
-  // Set initial loading state
   card.classList.add('is-loading');
 
-  // Logic to handle when image is ready
   const onImageLoad = () => {
     card.classList.remove('is-loading');
     card.classList.add('loaded');
@@ -196,11 +220,10 @@ projectCards.forEach(card => {
     img.addEventListener('load', onImageLoad);
   }
 
-  // Fade-in Observer
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in-final'); // Optional: Add a specific final transition
+        entry.target.classList.add('fade-in-final');
         observer.unobserve(entry.target);
       }
     });
