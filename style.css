@@ -14,11 +14,11 @@
 }
 
 #hero {
-  min-height: 100vh; /* full screen */
+  min-height: 100vh;
   display: flex;
-  align-items: center;   /* vertical center */
+  align-items: center;
   justify-content: center;
-  min-height: 100svh; /* better on mobile browsers */
+  min-height: 100svh;
 }
 
 #projects {
@@ -42,7 +42,7 @@ body {
 .portfolio-section {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 120px 16px 80px; /* 🔥 more top spacing */
+  padding: 120px 16px 80px;
 }
 
 /* Header */
@@ -57,7 +57,6 @@ body {
 
 /* GRID CONTAINER */
 .project-grid {
-  /* This automatically creates the columns */
   column-count: 4;
   column-gap: 12px;
   width: 100%;
@@ -72,16 +71,13 @@ body {
   overflow: hidden;
   border-radius: 0px;
   position: relative;
-  min-height: 200px; /* Adjust this value to match your average image height */
+  min-height: 200px;
   
-  /* NEW: Hidden initial state for animation */
   opacity: 0;
   transform: translateY(40px);
-  /* Using a custom cubic-bezier for a premium, snappy-yet-smooth easing */
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* The loading skeleton overlay */
 .project-card::after {
   content: '';
   position: absolute;
@@ -93,7 +89,6 @@ body {
   pointer-events: none;
 }
 
-/* The pulse animation */
 @keyframes pulse {
   0% { opacity: 0.6; }
   50% { opacity: 0.3; }
@@ -104,7 +99,6 @@ body {
   animation: pulse 1.5s ease-in-out infinite;
 }
 
-/* Hide the overlay when the image is loaded */
 .project-card.loaded::after {
   opacity: 0;
 }
@@ -114,20 +108,18 @@ body {
   transform: translateY(0);
 }
 
-/* Responsive adjustments */
 @media (max-width: 1024px) { .project-grid { column-count: 3; } }
 @media (max-width: 768px) { .project-grid { column-count: 2; } }
 @media (max-width: 480px) { .project-grid { column-count: 1; } }
 
-/* IMAGES */
 .project-img {
   width: 100%;
   height: auto;
   display: block;
-  cursor: pointer; /* shows a hand on hover since these open the lightbox */
+  cursor: pointer;
   -webkit-user-drag: none;
   user-select: none;
-  -webkit-touch-callout: none; /* blocks the iOS long-press "Save Image" menu */
+  -webkit-touch-callout: none;
   transition: transform 0.4s ease;
 }
 
@@ -135,26 +127,54 @@ body {
   transform: scale(1.05);
 }
 
-/* Tags */
-.tags {
+/* Tools Section */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tool-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px 16px;
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.tag {
-  font-size: 0.75rem;
+.tool-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(168, 85, 247, 0.6);
+  box-shadow: 0px 8px 24px rgba(168, 85, 247, 0.15);
+}
+
+.tool-card img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(0.8);
+}
+
+.tool-card:hover img {
+  transform: scale(1.1);
+  filter: brightness(1) drop-shadow(0 0 10px rgba(168, 85, 247, 0.4));
+}
+
+.tool-card span {
+  font-size: 0.9rem;
   font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 8px;
-  background-color: rgba(168, 85, 247, 0.1);
-  color: var(--accent);
-  border: 1px solid rgba(168, 85, 247, 0.25);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--text-main);
+  text-align: center;
 }
 
-/* 🎬 Video Background */
+/* Video Background */
 #bg-video {
   position: fixed;
   top: 0;
@@ -162,11 +182,10 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -3; /* Lowest layer */
+  z-index: -3;
   filter: brightness(1.2);
 }
 
-/* 🌑 Overlay */
 .overlay {
   position: fixed;
   top: 0;
@@ -174,32 +193,29 @@ body {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
-  z-index: -2; /* Above video, below vignette */
+  z-index: -2;
 }
 
-/* 🎥 Cinematic corner vignette */
 .vignette {
   position: fixed;
   inset: 0;
-  z-index: -1; /* Above overlay, below all page content */
+  z-index: -1;
   pointer-events: none;
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.75) 100%);
   -webkit-mask-image: linear-gradient(to top, transparent 0%, black 25%);
   mask-image: linear-gradient(to top, transparent 0%, black 25%);
 }
 
-/* Entrance Animation */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Layout */
 .container {
   position: relative;
   z-index: 1;
   width: 100%;
-  padding: 24px 16px; /* less vertical push */
+  padding: 24px 16px;
   display: flex;
   justify-content: center;
 }
@@ -224,7 +240,6 @@ body {
   transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
-/* 🔲 Faint grid texture — fades toward corners, with breaks and a cut line */
 .profile-card::before {
   content: '';
   position: absolute;
@@ -232,17 +247,11 @@ body {
   z-index: -1;
   pointer-events: none;
   background-image:
-    /* slightly more noticeable break */
     linear-gradient(var(--card-bg), var(--card-bg)),
-    /* break in a vertical line */
     linear-gradient(var(--card-bg), var(--card-bg)),
-    /* break in a horizontal line */
     linear-gradient(var(--card-bg), var(--card-bg)),
-    /* erased chunk near top-right corner */
     linear-gradient(var(--card-bg), var(--card-bg)),
-    /* erased chunk near bottom-left corner */
     linear-gradient(var(--card-bg), var(--card-bg)),
-    /* the grid itself */
     linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size:
@@ -268,7 +277,6 @@ body {
   transition: opacity 0.4s ease;
 }
 
-/* Music Section */
 .music-container {
   max-width: 800px;
   margin: 0 auto;
@@ -278,12 +286,14 @@ body {
   box-shadow: var(--card-shadow);
 }
 
-/* Grid is slightly more visible while hovering the card */
+.music-container iframe {
+  display: block;
+}
+
 .profile-card:hover::before {
   opacity: 1;
 }
 
-/* ✨ Small glitch flicker that follows the cursor, only on hover */
 .profile-card::after {
   content: '';
   position: absolute;
@@ -310,7 +320,6 @@ body {
   99% { opacity: 0; }
 }
 
-/* Typography */
 .name {
   font-size: 2.5rem;
   font-weight: 700;
@@ -333,9 +342,9 @@ body {
   transition: color 0.5s ease;
 }
 
-/* Buttons */
 .buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   justify-content: center;
   opacity: 0;
@@ -397,7 +406,6 @@ body {
   box-shadow: 0px 12px 28px rgba(168, 85, 247, 0.16);
 }
 
-/* Lightbox Styles */
 .lightbox {
   display: none;
   position: fixed;
@@ -447,7 +455,6 @@ body {
 .prev-btn { left: 20px; }
 .next-btn { right: 20px; }
 
-/* Mobile */
 @media (max-width: 480px) {
   .profile-card { padding: 40px 24px; }
   .name { font-size: 2rem; }
