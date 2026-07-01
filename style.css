@@ -458,6 +458,77 @@ body {
 .prev-btn { left: 20px; }
 .next-btn { right: 20px; }
 
+/* =========================
+   FEATURED PROJECTS
+========================= */
+.featured-project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.featured-project-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 32px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0px 12px 30px rgba(168, 85, 247, 0.15);
+}
+
+.project-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-year {
+  background: rgba(168, 85, 247, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.project-type {
+  color: var(--text-muted);
+}
+
+.project-title {
+  font-size: 2rem;
+  color: var(--text-main);
+  margin-bottom: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.project-description {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+/* Slightly tweak the button sizing inside the project card */
+.project-btn {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+}
+
 @media (max-width: 480px) {
   .profile-card { padding: 40px 24px; }
   .name { font-size: 2rem; }
