@@ -534,4 +534,8 @@ body {
   .name { font-size: 2rem; }
   .buttons { flex-direction: column; }
   .btn { width: 100%; }
+  
+  /* Added mobile tweaks for the featured project card */
+  .featured-project-card { padding: 24px 16px; }
+  .project-title { font-size: 1.6rem; }
 }
