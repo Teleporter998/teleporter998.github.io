@@ -13,6 +13,31 @@
   --glitch-color: rgba(168, 85, 247, 0.4);
 }
 
+/* =========================
+   PRELOADER
+========================= */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background-color: #000000;
+  z-index: 99999;
+  transition: opacity 0.5s ease;
+}
+
+/* =========================
+   GENERAL SCROLL REVEAL
+========================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 #hero {
   min-height: 100vh;
   display: flex;
@@ -99,11 +124,13 @@ body {
   animation: pulse 1.5s ease-in-out infinite;
 }
 
+/* Hide the loading pulse once media is loaded */
 .project-card.loaded::after {
   opacity: 0;
 }
 
-.project-card.loaded {
+/* Fade the card in once scrolled into view */
+.project-card.fade-in-final {
   opacity: 1;
   transform: translateY(0);
 }
@@ -124,7 +151,7 @@ body {
 }
 
 .project-video {
-  cursor: default; /* Remove pointer since it won't open in lightbox */
+  cursor: default;
 }
 
 .project-card:hover .project-img,
@@ -240,8 +267,12 @@ body {
   border-radius: 20px;
   box-shadow: var(--card-shadow), var(--card-glow);
   opacity: 0;
-  animation: fadeInUp 0.8s ease-out forwards;
   transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* FIRE THE HERO ANIMATIONS ONLY ONCE THE PRELOADER DISAPPEARS */
+body.page-loaded .profile-card {
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .profile-card::before {
@@ -330,20 +361,26 @@ body {
   letter-spacing: -0.03em;
   margin-bottom: 8px;
   opacity: 0;
+}
+body.page-loaded .name {
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
+
 .name span {
   color: var(--accent);
   transition: color 0.5s ease;
 }
+
 .subtitle {
   font-size: 1.1rem;
   font-weight: 500;
   color: var(--text-muted);
   margin-bottom: 40px;
   opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.4s forwards;
   transition: color 0.5s ease;
+}
+body.page-loaded .subtitle {
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
 }
 
 .buttons {
@@ -352,6 +389,8 @@ body {
   gap: 12px; 
   justify-content: center;
   opacity: 0;
+}
+body.page-loaded .buttons {
   animation: fadeInUp 0.8s ease-out 0.6s forwards;
 }
 
