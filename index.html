@@ -32,6 +32,7 @@
         <div class="buttons">
          <a href="#projects" class="btn btn-primary">Projects</a>
          <a href="#graphics" class="btn btn-primary">UI &amp; Design</a>
+         <a href="#vfx" class="btn btn-primary">VFX</a>
          <a href="#music" class="btn btn-primary">Music</a>
          <a href="#tools" class="btn btn-primary">Tools</a>
         </div>
@@ -84,6 +85,23 @@
       <div class="project-card"><img src="assets/ToxicityDesign.png" class="project-img" draggable="false"></div>
       <div class="project-card"><img src="assets/ValidDate.png" class="project-img" draggable="false"></div>
       <div class="project-card"><img src="assets/Tiers.png" class="project-img" draggable="false"></div>
+    </div>
+  </section>
+
+  <section id="vfx" class="portfolio-section">
+    <div class="section-header">
+      <h2>Visual <span>Effects</span></h2>
+      <p>A collection of my looped VFX animations.</p>
+    </div>
+
+    <div class="project-grid">
+      <div class="project-card"><video src="assets/vfx1.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx2.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx3.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx4.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx5.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx6.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx7.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
     </div>
   </section>
 
@@ -252,6 +270,7 @@ function blockContextMenu(el) {
 }
 
 refreshImages().forEach(blockContextMenu);
+document.querySelectorAll('.project-video').forEach(blockContextMenu);
 blockContextMenu(lightboxImg);
 
 /* =========================
@@ -260,19 +279,31 @@ blockContextMenu(lightboxImg);
 const projectCards = document.querySelectorAll('.project-card');
 
 projectCards.forEach(card => {
-  const img = card.querySelector('.project-img');
+  const media = card.querySelector('.project-img, .project-video');
   
   card.classList.add('is-loading');
 
-  const onImageLoad = () => {
+  const onMediaLoad = () => {
     card.classList.remove('is-loading');
     card.classList.add('loaded');
   };
 
-  if (img.complete) {
-    onImageLoad();
+  if (media) {
+    if (media.tagName === 'IMG') {
+      if (media.complete) {
+        onMediaLoad();
+      } else {
+        media.addEventListener('load', onMediaLoad);
+      }
+    } else if (media.tagName === 'VIDEO') {
+      if (media.readyState >= 3) { // readyState 3 means HAVE_FUTURE_DATA
+        onMediaLoad();
+      } else {
+        media.addEventListener('canplay', onMediaLoad);
+      }
+    }
   } else {
-    img.addEventListener('load', onImageLoad);
+    onMediaLoad();
   }
 
   const observer = new IntersectionObserver((entries) => {
