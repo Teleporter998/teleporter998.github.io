@@ -112,7 +112,7 @@ body {
 @media (max-width: 768px) { .project-grid { column-count: 2; } }
 @media (max-width: 480px) { .project-grid { column-count: 1; } }
 
-.project-img {
+.project-img, .project-video {
   width: 100%;
   height: auto;
   display: block;
@@ -123,7 +123,12 @@ body {
   transition: transform 0.4s ease;
 }
 
-.project-card:hover .project-img {
+.project-video {
+  cursor: default; /* Remove pointer since it won't open in lightbox */
+}
+
+.project-card:hover .project-img,
+.project-card:hover .project-video {
   transform: scale(1.05);
 }
 
@@ -159,12 +164,10 @@ body {
   height: 48px;
   object-fit: contain;
   transition: transform 0.3s ease, filter 0.3s ease;
-  /* Removed the brightness filter so they show in original quality */
 }
 
 .tool-card:hover img {
   transform: scale(1.1);
-  /* Kept the cool purple glow, but removed the brightness change */
   filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.4));
 }
 
@@ -227,7 +230,7 @@ body {
   --mx: 50%;
   --my: 50%;
   text-align: center;
-  max-width: 640px; /* Increased from 560px to fit 4 buttons */
+  max-width: 640px; 
   width: 100%;
   padding: 48px 40px;
   background-color: var(--card-bg);
@@ -346,7 +349,7 @@ body {
 .buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px; /* Reduced from 16px for a tighter fit */
+  gap: 12px; 
   justify-content: center;
   opacity: 0;
   animation: fadeInUp 0.8s ease-out 0.6s forwards;
@@ -356,7 +359,7 @@ body {
   position: relative;
   overflow: hidden;
   display: inline-block;
-  padding: 14px 22px; /* Reduced horizontal padding from 28px */
+  padding: 14px 22px;
   border-radius: 10px;
   font-size: 0.95rem;
   font-weight: 600;
@@ -523,7 +526,6 @@ body {
   margin-bottom: 24px;
 }
 
-/* Slightly tweak the button sizing inside the project card */
 .project-btn {
   padding: 10px 20px;
   font-size: 0.9rem;
@@ -537,14 +539,13 @@ body {
 }
 
 .project-title-wrap .project-title {
-  margin-bottom: 0; /* Overrides the old spacing so it groups cleanly */
+  margin-bottom: 0; 
 }
 
 .project-title-wrap .project-meta {
   margin-bottom: 6px; 
 }
 
-/* Styles the icon to match your existing tool-card aesthetic */
 .project-icon {
   width: 72px;
   height: 72px;
@@ -561,7 +562,6 @@ body {
   .buttons { flex-direction: column; }
   .btn { width: 100%; }
   
-  /* Added mobile tweaks for the featured project card */
   .featured-project-card { padding: 24px 16px; }
   .project-title { font-size: 1.6rem; }
 }
