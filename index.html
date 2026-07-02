@@ -17,6 +17,7 @@
 </head>
 
 <body>
+  <div id="preloader"></div>
 
   <video autoplay muted loop playsinline id="bg-video">
     <source src="assets/GlitchBackground.mp4" type="video/mp4">
@@ -41,12 +42,12 @@
   </section>
 
   <section id="projects" class="portfolio-section">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2>Featured <span>Projects</span></h2>
       <p>Software, tools, and systems I've developed.</p>
     </div>
 
-    <div class="featured-project-list">
+    <div class="featured-project-list reveal">
       <div class="featured-project-card">
         
         <div class="project-header">
@@ -72,7 +73,7 @@
   </section>
 
   <section id="graphics" class="portfolio-section">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2>UI & <span>Graphics</span></h2>
       <p>A collection of my interface designs and visual assets.</p>
     </div>
@@ -89,9 +90,9 @@
   </section>
 
   <section id="vfx" class="portfolio-section">
-    <div class="section-header">
-      <h2><span>VFX</span></h2>
-      <p>A collection of my VFX.</p>
+    <div class="section-header reveal">
+      <h2>Visual <span>Effects</span></h2>
+      <p>A collection of my looped VFX animations.</p>
     </div>
 
     <div class="project-grid">
@@ -106,12 +107,12 @@
   </section>
 
   <section id="music" class="portfolio-section">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2>My <span>Music</span></h2>
       <p>Tracks and beats I've produced.</p>
     </div>
   
-    <div class="music-container">
+    <div class="music-container reveal">
       <iframe 
         width="100%" 
         height="450" 
@@ -124,57 +125,57 @@
   </section>
 
   <section id="tools" class="portfolio-section">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2>My <span>Tools</span></h2>
       <p>Software and technologies I use to create.</p>
     </div>
 
     <div class="tools-grid">
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/roblox-studio.png" alt="Roblox Studio" draggable="false">
         <span>Roblox Studio</span>
       </div>
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/affinity-icon.png" alt="Affinity" draggable="false">
         <span>Affinity</span>
       </div>
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/blender-icon.png" alt="Blender" draggable="false">
         <span>Blender</span>
       </div>
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/discord-icon.png" alt="Discord" draggable="false">
         <span>Discord</span>
       </div>
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/figma-icon.png" alt="Figma" draggable="false">
         <span>Figma</span>
       </div>
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/fl-studio.png" alt="FL Studio (Trial)" draggable="false">
         <span>FL Studio (Trial)</span>
       </div>
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/github-icon.png" alt="GitHub" draggable="false">
         <span>GitHub</span>
       </div>
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/vsc-icon.png" alt="Visual Studio Code" draggable="false">
         <span>Visual Studio Code</span>
       </div>
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/trello-icon.png" alt="Trello" draggable="false">
         <span>Trello</span>
       </div>
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/filmora-icon.png" alt="Wondershare Filmora" draggable="false">
         <span>Wondershare Filmora</span>
       </div>
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/aseprite-icon.png" alt="Aseprite" draggable="false">
         <span>Aseprite</span>
       </div>
-      <div class="tool-card">
+      <div class="tool-card reveal">
         <img src="assets/sharex-icon.png" alt="ShareX" draggable="false">
         <span>ShareX</span>
       </div>
@@ -189,6 +190,24 @@
   </div>
 
 <script>
+/* =========================
+   PRELOADER
+========================= */
+window.addEventListener('load', () => {
+  const preloader = document.getElementById('preloader');
+  
+  // Start fade out
+  preloader.style.opacity = '0';
+  
+  // Add class to body to trigger hero animations
+  document.body.classList.add('page-loaded');
+
+  // Remove preloader from DOM after transition
+  setTimeout(() => {
+    preloader.style.display = 'none';
+  }, 500);
+});
+
 /* =========================
    HERO INTERACTION
 ========================= */
@@ -274,9 +293,19 @@ document.querySelectorAll('.project-video').forEach(blockContextMenu);
 blockContextMenu(lightboxImg);
 
 /* =========================
-   SCROLL FADE-IN & LOADER
+   SCROLL FADE-IN (GENERAL REVEAL & GALLERY CARDS)
 ========================= */
+// 1. Setup observer for Gallery/VFX Cards
 const projectCards = document.querySelectorAll('.project-card');
+
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('fade-in-final');
+      cardObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
 
 projectCards.forEach(card => {
   const media = card.querySelector('.project-img, .project-video');
@@ -285,7 +314,8 @@ projectCards.forEach(card => {
 
   const onMediaLoad = () => {
     card.classList.remove('is-loading');
-    card.classList.add('loaded');
+    card.classList.add('loaded'); // Hides the pulse
+    cardObserver.observe(card);   // Wait to trigger fade-in until scrolled into view
   };
 
   if (media) {
@@ -296,7 +326,7 @@ projectCards.forEach(card => {
         media.addEventListener('load', onMediaLoad);
       }
     } else if (media.tagName === 'VIDEO') {
-      if (media.readyState >= 3) { // readyState 3 means HAVE_FUTURE_DATA
+      if (media.readyState >= 3) { 
         onMediaLoad();
       } else {
         media.addEventListener('canplay', onMediaLoad);
@@ -305,18 +335,22 @@ projectCards.forEach(card => {
   } else {
     onMediaLoad();
   }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in-final');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  
-  observer.observe(card);
 });
+
+// 2. Setup observer for General Reveal Elements (Headers, Tools, Music)
+const revealElements = document.querySelectorAll('.reveal');
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
 
 /* =========================
    SMOOTH SCROLL
