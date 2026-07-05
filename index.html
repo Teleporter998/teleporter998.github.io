@@ -347,6 +347,19 @@ const cardObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
+
+// observing elements
+document.querySelectorAll('.reveal, .project-card').forEach(el => {
+  cardObserver.observe(el);
+});
+
+
+if (!('IntersectionObserver' in window)) {
+  document.querySelectorAll('.reveal, .project-card').forEach(el => {
+    el.classList.add('fade-in-final');
+  });
+}
+
 projectCards.forEach(card => {
   const media = card.querySelector('.project-img, .project-video');
 
