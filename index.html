@@ -349,13 +349,13 @@ const cardObserver = new IntersectionObserver((entries) => {
 
 
 // observing elements
-document.querySelectorAll('.reveal, .project-card').forEach(el => {
+document.querySelectorAll('.animate').forEach(el => {
   cardObserver.observe(el);
 });
 
 
 if (!('IntersectionObserver' in window)) {
-  document.querySelectorAll('.reveal, .project-card').forEach(el => {
+  document.querySelectorAll('.animate').forEach(el => {
     el.classList.add('fade-in-final', 'active');
   });
 }
@@ -392,11 +392,15 @@ projectCards.forEach(card => {
   }
 });
 
-  window.addEventListener('load', () => {
+window.addEventListener('load', () => {
   const preloader = document.getElementById('preloader');
   if (preloader) {
+    preloader.style.transition = 'opacity 0.5s ease';
     preloader.style.opacity = '0';
-    setTimeout(() => preloader.style.display = 'none', 500);
+
+    setTimeout(() => {
+      preloader.remove(); // cleaner than display:none
+    }, 500);
   }
 });
 
