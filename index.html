@@ -196,7 +196,7 @@
   </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 /* =========================
    PRELOADER
 ========================= */
@@ -356,9 +356,11 @@ document.querySelectorAll('.reveal, .project-card').forEach(el => {
 
 if (!('IntersectionObserver' in window)) {
   document.querySelectorAll('.reveal, .project-card').forEach(el => {
-    el.classList.add('fade-in-final');
+    el.classList.add('fade-in-final', 'active');
   });
 }
+
+const projectCards = document.querySelectorAll('.project-card');
 
 projectCards.forEach(card => {
   const media = card.querySelector('.project-img, .project-video');
@@ -387,6 +389,14 @@ projectCards.forEach(card => {
     }
   } else {
     onMediaLoad();
+  }
+});
+
+  window.addEventListener('load', () => {
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    preloader.style.opacity = '0';
+    setTimeout(() => preloader.style.display = 'none', 500);
   }
 });
 
@@ -422,6 +432,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
  });
+  });
 </script>
 
 </body>
