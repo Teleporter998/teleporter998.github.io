@@ -196,11 +196,13 @@
   </div>
 
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
 /* =========================
    PRELOADER
 ========================= */
 window.addEventListener('load', () => {
   const preloader = document.getElementById('preloader');
+  if (!preloader) return;
 
   preloader.style.opacity = '0';
   document.body.classList.add('page-loaded');
@@ -274,11 +276,16 @@ function closeLightbox() {
 }
 
 document.addEventListener('click', (e) => {
-  const imgs = refreshImages();
-  imgs.forEach((img, index) => {
-    if (e.target === img) openLightbox(index);
-  });
+  // open lightbox
+  const img = e.target.closest('.project-img');
+  if (img) {
+    const imgs = refreshImages();
+    const index = imgs.indexOf(img);
+    if (index !== -1) openLightbox(index);
+    return;
+  }
 
+  // close lightbox
   if (e.target === lightbox || e.target.classList.contains('close-btn')) {
     closeLightbox();
   }
@@ -391,12 +398,17 @@ revealElements.forEach(el => revealObserver.observe(el));
 ========================= */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
-    const target = document.querySelector(this.getAttribute('href'));
+    const id = this.getAttribute('href');
+    if (!id || id === '#') return;
+
+    const target = document.querySelector(id);
     if (!target) return;
+
     e.preventDefault();
     target.scrollIntoView({ behavior: 'smooth' });
   });
 });
+ });
 </script>
 
 </body>
