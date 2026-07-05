@@ -72,13 +72,15 @@ body {
 ========================= */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Adds a slight skew and scale for a 'settling' effect */
+  transform: translateY(40px) scale(0.96) skewY(2deg);
+  /* Custom easing curve for a snappy start and buttery smooth finish */
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1) skewY(0);
 }
 
 #hero {
@@ -176,6 +178,9 @@ body {
 @media (max-width: 768px) { .project-grid { column-count: 2; } }
 @media (max-width: 480px) { .project-grid { column-count: 1; } }
 
+/* =========================
+   PROJECT MEDIA HOVER
+========================= */
 .project-img, .project-video {
   width: 100%;
   height: auto;
@@ -184,7 +189,23 @@ body {
   -webkit-user-drag: none;
   user-select: none;
   -webkit-touch-callout: none;
-  transition: transform 0.4s ease;
+  /* Add filter to the transition list */
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+.project-card:hover .project-img,
+.project-card:hover .project-video {
+  transform: scale(1.05);
+  /* Triggers a fast hardware-accelerated color glitch on hover */
+  animation: mediaGlitch 0.35s ease-out forwards;
+}
+
+/* Shifts the hue, blasts the contrast, then settles normally */
+@keyframes mediaGlitch {
+  0% { filter: hue-rotate(0deg) contrast(1) saturate(1); }
+  30% { filter: hue-rotate(90deg) contrast(1.5) saturate(2); }
+  60% { filter: hue-rotate(-45deg) contrast(1.2) saturate(0.5); }
+  100% { filter: hue-rotate(0deg) contrast(1.05) saturate(1.1); }
 }
 
 .project-video {
@@ -448,6 +469,9 @@ body.page-loaded .name {
   transition: color 0.5s ease;
 }
 
+/* =========================
+   HERO GLITCH TEXT
+========================= */
 .glitch {
   position: relative;
   display: inline-block;
@@ -460,24 +484,33 @@ body.page-loaded .name {
   inset: 0;
   opacity: 0;
   pointer-events: none;
+  background: var(--card-bg); /* Prevents overlapping bleed */
 }
 
+/* Red Channel Offset */
 .glitch::before {
   color: #ff2ec4;
+  left: -2px;
+  animation: glitchSlice 4s infinite linear alternate-reverse;
 }
 
+/* Cyan Channel Offset */
 .glitch::after {
   color: #4dfcff;
+  left: 2px;
+  animation: glitchSlice 5s infinite linear alternate-reverse;
 }
 
-@keyframes nameGlitch {
-  0%, 94%, 100% { opacity: 0; transform: translate(0, 0); }
-  95% { opacity: 0.75; transform: translate(-2px, 1px); }
-  95.6% { opacity: 0; }
-  96.6% { opacity: 0.55; transform: translate(2px, -1px); }
-  97.1% { opacity: 0; }
-  98.1% { opacity: 0.45; transform: translate(-1px, 0); }
-  98.5% { opacity: 0; }
+/* Uses clip-path to slice the text horizontally. 
+   Bursts of movement with long resting periods. */
+@keyframes glitchSlice {
+  0%, 4%, 100% { clip-path: inset(100% 0 0 0); opacity: 0; transform: translate(0); }
+  0.5% { clip-path: inset(20% 0 80% 0); opacity: 1; transform: translate(-4px, 2px); }
+  1.0% { clip-path: inset(60% 0 10% 0); opacity: 1; transform: translate(4px, -2px); }
+  1.5% { clip-path: inset(40% 0 50% 0); opacity: 1; transform: translate(-2px, 4px); }
+  2.0% { clip-path: inset(80% 0 5% 0); opacity: 1; transform: translate(2px, -4px); }
+  2.5% { clip-path: inset(10% 0 70% 0); opacity: 1; transform: translate(-4px, -2px); }
+  3.0% { clip-path: inset(30% 0 50% 0); opacity: 1; transform: translate(4px, 2px); }
 }
 
 .glitch::before { animation: nameGlitch 5.2s steps(1, end) infinite; }
@@ -506,6 +539,9 @@ body.page-loaded .buttons {
   animation: fadeInUp 0.8s ease-out 0.6s forwards;
 }
 
+/* =========================
+   BUTTONS
+========================= */
 .btn {
   position: relative;
   overflow: hidden;
@@ -515,26 +551,61 @@ body.page-loaded .buttons {
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.btn::after {
+/* The light sweep effect */
+.btn::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: var(--accent);
-  opacity: 0;
-  pointer-events: none;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+  transform: skewX(-20deg);
+  z-index: 1;
 }
-.btn:hover::after {
-  animation: btnGlitch 1.8s steps(16, end) infinite;
+
+.btn:hover::before {
+  left: 200%;
 }
-@keyframes btnGlitch {
-  0%, 88%, 100% { opacity: 0; }
-  89% { opacity: 0.12; }
-  89.6% { opacity: 0; }
-  91% { opacity: 0.08; }
-  91.5% { opacity: 0; }
+
+.btn:active {
+  transform: scale(0.94) !important;
+}
+
+.btn-primary {
+  background-color: var(--card-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent);
+  color: #000000;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0px 12px 28px rgba(168, 85, 247, 0.35);
+  animation: btnTextGlitch 0.3s ease forwards;
+}
+
+.btn-secondary {
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: rgba(168, 85, 247, 0.05);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0px 12px 28px rgba(168, 85, 247, 0.16);
+  animation: btnTextGlitch 0.3s ease forwards;
+}
+
+@keyframes btnTextGlitch {
+  0% { text-shadow: none; }
+  50% { text-shadow: -2px 0 #ff2ec4, 2px 0 #4dfcff; }
+  100% { text-shadow: none; }
 }
 .btn:active {
   transform: scale(0.96) !important;
