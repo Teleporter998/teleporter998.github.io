@@ -336,7 +336,6 @@ blockContextMenu(lightboxImg);
 /* =========================
    SCROLL FADE-IN (GALLERY / VFX CARDS)
 ========================= */
-const projectCards = document.querySelectorAll('.project-card');
 
 const cardObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -435,8 +434,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     target.scrollIntoView({ behavior: 'smooth' });
   });
 });
- });
-  });
+});
 </script>
 
 </body>
