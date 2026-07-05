@@ -120,9 +120,27 @@ body {
 
 /* GRID CONTAINER */
 .project-grid {
-  column-count: 4;
-  column-gap: 12px;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .project-card {
@@ -131,7 +149,7 @@ body {
   margin-bottom: 12px;
   display: inline-block;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 0px;
   position: relative;
   min-height: 200px;
@@ -780,6 +798,13 @@ body.page-loaded .buttons {
   background: rgba(168, 85, 247, 0.05);
   border: 1px solid rgba(168, 85, 247, 0.2);
   padding: 8px;
+}
+
+.project-img,
+.project-video,
+.profile-card,
+.tool-card {
+  will-change: transform, opacity;
 }
 
 @media (max-width: 480px) {
