@@ -212,11 +212,6 @@ body {
   cursor: default;
 }
 
-.project-card:hover .project-img,
-.project-card:hover .project-video {
-  transform: scale(1.05);
-}
-
 /* Tools Section */
 .tools-grid {
   display: grid;
