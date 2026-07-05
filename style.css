@@ -465,25 +465,6 @@ body.page-loaded .profile-card {
   opacity: 0;
 }
 
-.your-class {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* Fallback */
-@supports not (backdrop-filter: blur(10px)) {
-  .your-class {
-    background: rgba(20, 20, 20, 0.85);
-  }
-}
-
-.no-js .reveal,
-.no-js .project-card {
-  opacity: 1;
-  transform: none;
-}
-
 /* Signature moment: the hero name wipes in on load, then flickers a
    faint RGB channel-split at rest — a quiet, ongoing echo of the
    glitch video behind it, rather than a one-off intro effect. */
