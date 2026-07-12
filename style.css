@@ -119,26 +119,20 @@ body {
 }
 
 /* GRID CONTAINER */
-.project-grid {
+.grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
 }
 
-@media (max-width: 1024px) {
-  .project-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .project-grid {
+@media (max-width: 900px) {
+  .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 480px) {
-  .project-grid {
+@media (max-width: 500px) {
+  .grid {
     grid-template-columns: 1fr;
   }
 }
