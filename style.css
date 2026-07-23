@@ -120,29 +120,13 @@ body {
 
 /* GRID CONTAINER */
 .project-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  align-items: start;
+  column-count: 4;
+  column-gap: 12px;
 }
 
-@media (max-width: 1024px) {
-  .project-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .project-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
-}
+@media (max-width: 1024px) { .project-grid { column-count: 3; } }
+@media (max-width: 768px)  { .project-grid { column-count: 2; } }
+@media (max-width: 480px)  { .project-grid { column-count: 1; } }
 
 .project-card {
   break-inside: avoid;
@@ -192,10 +176,6 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
-
-@media (max-width: 1024px) { .project-grid { column-count: 3; } }
-@media (max-width: 768px) { .project-grid { column-count: 2; } }
-@media (max-width: 480px) { .project-grid { column-count: 1; } }
 
 /* =========================
    PROJECT MEDIA HOVER
