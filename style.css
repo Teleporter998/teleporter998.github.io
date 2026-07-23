@@ -123,6 +123,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
+  align-items: start;
 }
 
 @media (max-width: 1024px) {
