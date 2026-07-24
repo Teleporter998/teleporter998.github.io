@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,7 +7,7 @@
   <meta name="description" content="Teleporter998 — game developer and music producer. UI design, VFX, music, building and game design.">
   <meta name="theme-color" content="#050505">
   <meta name="color-scheme" content="dark">
-  <title>Teleporter998 — Portfolio</title>
+  <title>Teleporter998</title>
 
   <link rel="icon" href="assets/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
@@ -20,404 +21,457 @@
 </head>
 
 <body>
-  <!-- Preloader -->
-  <div id="preloader" role="status" aria-live="polite" aria-label="Loading page content">
+  <div id="preloader" role="status" aria-live="polite" aria-label="Loading">
     <span class="preloader-mark">TP998</span>
   </div>
 
-  <!-- Ambient Dark Background Elements -->
-  <div class="ambient-glow" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
+  <video autoplay muted loop playsinline id="bg-video" aria-hidden="true">
+    <source src="assets/GlitchBackground.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+  <div class="vignette"></div>
 
-  <!-- Hero Section -->
   <section id="hero">
     <main class="container">
       <div class="profile-card">
         <h1 class="name">Hello, I'm <span class="glitch" data-text="Teleporter998">Teleporter998</span></h1>
         <p class="subtitle">Game Developer &amp; Music Producer</p>
-        <nav class="buttons" aria-label="Quick Navigation">
-          <a href="#projects" class="btn btn-primary">Projects</a>
-          <a href="#graphics" class="btn btn-secondary">UI &amp; Graphics</a>
-          <a href="#vfx" class="btn btn-secondary">VFX</a>
-          <a href="#music" class="btn btn-secondary">Music</a>
-          <a href="#tools" class="btn btn-secondary">Tools</a>
-        </nav>
+        <div class="buttons">
+         <a href="#projects" class="btn btn-primary">Projects</a>
+         <a href="#graphics" class="btn btn-primary">UI &amp; Graphics</a>
+         <a href="#vfx" class="btn btn-primary">VFX</a>
+         <a href="#music" class="btn btn-primary">Music</a>
+         <a href="#tools" class="btn btn-primary">Tools</a>
+        </div>
       </div>
     </main>
   </section>
 
-  <!-- Featured Projects -->
   <section id="projects" class="portfolio-section">
     <div class="section-header reveal">
       <h2>Featured <span>Projects</span></h2>
       <p>Software, tools, and systems I've developed.</p>
     </div>
 
-    <div class="featured-project-list reveal">
-      <div class="featured-project-card">
-        <div class="project-header">
-          <img src="assets/fireporter-icon.png" alt="Fireporter plugin icon" class="project-icon" draggable="false" loading="lazy">
-          <div class="project-title-wrap">
-            <div class="project-meta">
-              <span class="project-year">2025</span>
-              <span class="project-type">Plugin</span>
-            </div>
-            <h3 class="project-title">Fireporter</h3>
-          </div>
-        </div>
-        <p class="project-description">
-          A high-efficiency workflow plugin designed for seamless UI component exporting from Figma directly into Roblox Studio.
-        </p>
-        <a href="https://www.figma.com/community/plugin/1525922126871670955" class="btn btn-primary project-btn" target="_blank" rel="noopener">Explore Plugin</a>
-      </div>
+<div class="featured-project-list reveal">
+  <div class="featured-project-card">
 
-      <div class="featured-project-card">
-        <div class="project-header">
-          <img src="assets/TeleportedMemoriesIcon.png" alt="Teleported Memories Discord Icon" class="project-icon" draggable="false" loading="lazy">
-          <div class="project-title-wrap">
-            <div class="project-meta">
-              <span class="project-year">2025</span>
-              <span class="project-type">Community</span>
-            </div>
-            <h3 class="project-title">Teleported Memories</h3>
-          </div>
+    <div class="project-header">
+      <img src="assets/fireporter-icon.png" alt="Fireporter plugin icon" class="project-icon" draggable="false">
+
+      <div class="project-title-wrap">
+        <div class="project-meta">
+          <span class="project-year">2025</span>
+          <span class="project-type">Plugin</span>
         </div>
-        <p class="project-description">
-          A gaming and development community hub focused on game design, Lua scripting, asset creation, and industry news.
-        </p>
-        <a href="https://discord.gg/9ba2KJKp8g" class="btn btn-primary project-btn" target="_blank" rel="noopener">Join Community</a>
+        <h3 class="project-title">Fireporter</h3>
       </div>
     </div>
+
+    <p class="project-description">
+      A plugin for fast exporting from Figma and importing into Roblox Studio.
+    </p>
+
+    <a href="https://www.figma.com/community/plugin/1525922126871670955" class="btn btn-primary project-btn" target="_blank" rel="noopener">See More</a>
+
+  </div>
+
+  <div class="featured-project-card">
+
+    <div class="project-header">
+      <img src="assets/TeleportedMemoriesIcon.png" alt="Teleported Memories icon" class="project-icon" draggable="false">
+
+      <div class="project-title-wrap">
+        <div class="project-meta">
+          <span class="project-year">2025</span>
+          <span class="project-type">Discord Server</span>
+        </div>
+        <h3 class="project-title">Teleported Memories</h3>
+      </div>
+    </div>
+
+    <p class="project-description">
+      Teleported Memories is a Discord server about game development, games, and gaming news. You can also chat and talk with other server members. I am the server owner.
+    </p>
+
+    <a href="https://discord.gg/9ba2KJKp8g" class="btn btn-primary project-btn" target="_blank" rel="noopener">Join</a>
+
+  </div>
+</div>
+
   </section>
 
-  <!-- UI & Graphics -->
   <section id="graphics" class="portfolio-section">
     <div class="section-header reveal">
-      <h2>UI &amp; <span>Graphics</span></h2>
-      <p>Interface designs, layout systems, and visual concepts.</p>
+      <h2>UI & <span>Graphics</span></h2>
+      <p>A collection of my interface designs and visual assets.</p>
     </div>
 
-    <div class="project-grid">
-      <div class="project-card"><img src="assets/CriticizeDesign.png" class="project-img" alt="Criticize UI Design Concept" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/ExpertionDesign.png" class="project-img" alt="Expertion Interface Design" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/FrozenInsideDesign.png" class="project-img" alt="Frozen Inside Game UI Design" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/HydrogenDesign.png" class="project-img" alt="Hydrogen Interface Layout" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/ToxicityDesign.png" class="project-img" alt="Toxicity Game HUD Design" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/ValidDate.png" class="project-img" alt="Valid Date UI Component" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/Tiers.png" class="project-img" alt="Tiers System UI Layout" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/Figma_8YjzjW8CSk.png" class="project-img" alt="Figma UI Concept Showcase 1" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/Figma_avGOQkvNdY.png" class="project-img" alt="Figma UI Concept Showcase 2" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/Figma_E3ttXJebI0.png" class="project-img" alt="Figma UI Concept Showcase 3" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/Figma_eDGqH7QEKP.png" class="project-img" alt="Figma UI Concept Showcase 4" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/Figma_eevTKaP3V7.png" class="project-img" alt="Figma UI Concept Showcase 5" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/Figma_IubuBMj0Po.png" class="project-img" alt="Figma UI Concept Showcase 6" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/Figma_MBi1ENxNkN.png" class="project-img" alt="Figma UI Concept Showcase 7" loading="lazy" decoding="async" draggable="false"></div>
-      <div class="project-card"><img src="assets/Figma_YECGpaPhgO.png" class="project-img" alt="Figma UI Concept Showcase 8" loading="lazy" decoding="async" draggable="false"></div>
-    </div>
+<div class="project-grid">
+  <div class="project-card"><img src="assets/CriticizeDesign.png" class="project-img" alt="Criticize interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/ExpertionDesign.png" class="project-img" alt="Expertion interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/FrozenInsideDesign.png" class="project-img" alt="Frozen Inside interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/HydrogenDesign.png" class="project-img" alt="Hydrogen interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/ToxicityDesign.png" class="project-img" alt="Toxicity interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/ValidDate.png" class="project-img" alt="Valid Date interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/Tiers.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/Figma_8YjzjW8CSk.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/Figma_avGOQkvNdY.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/Figma_E3ttXJebI0.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/Figma_eDGqH7QEKP.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/Figma_eevTKaP3V7.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/Figma_IubuBMj0Po.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/Figma_MBi1ENxNkN.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+  <div class="project-card"><img src="assets/Figma_YECGpaPhgO.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+</div>
+
   </section>
 
-  <!-- VFX -->
   <section id="vfx" class="portfolio-section">
     <div class="section-header reveal">
       <h2>Visual <span>Effects</span></h2>
-      <p>Real-time animations and particle system loops.</p>
+      <p>A collection of my looped VFX animations.</p>
     </div>
 
-    <div class="project-grid">
-      <div class="project-card"><video src="assets/vfx1.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx2.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx3.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx4.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx5.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx6.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx7.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-    </div>
+<div class="project-grid">
+  <div class="project-card"><video src="assets/vfx1.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx2.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx3.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx4.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx5.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx6.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx7.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+</div>
+
   </section>
 
-  <!-- Music -->
   <section id="music" class="portfolio-section">
     <div class="section-header reveal">
       <h2>My <span>Music</span></h2>
-      <p>Original tracks, sound design, and game audio productions.</p>
+      <p>Tracks and beats I've produced.</p>
     </div>
 
-    <div class="music-container reveal">
-      <iframe
-        width="100%"
-        height="450"
-        scrolling="no"
-        frameborder="no"
-        allow="autoplay"
-        title="Teleporter998 SoundCloud Player"
-        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/teleporter998&color=%23a855f7&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
-      </iframe>
-    </div>
+<div class="music-container reveal">
+  <iframe
+    width="100%"
+    height="450"
+    scrolling="no"
+    frameborder="no"
+    allow="autoplay"
+    title="Teleporter998 on SoundCloud"
+    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/teleporter998">
+  </iframe>
+</div>
+
   </section>
 
-  <!-- Tools Section -->
   <section id="tools" class="portfolio-section">
     <div class="section-header reveal">
       <h2>My <span>Tools</span></h2>
-      <p>Software and technologies powering my workflow.</p>
+      <p>Software and technologies I use to create.</p>
     </div>
 
-    <div class="tools-grid">
-      <div class="tool-card reveal">
-        <img src="assets/roblox-studio.png" alt="Roblox Studio Icon" loading="lazy" decoding="async" draggable="false">
-        <span>Roblox Studio</span>
-      </div>
-      <div class="tool-card reveal">
-        <img src="assets/affinity-icon.png" alt="Affinity Designer Icon" loading="lazy" decoding="async" draggable="false">
-        <span>Affinity</span>
-      </div>
-      <div class="tool-card reveal">
-        <img src="assets/blender-icon.png" alt="Blender 3D Icon" loading="lazy" decoding="async" draggable="false">
-        <span>Blender</span>
-      </div>
-      <div class="tool-card reveal">
-        <img src="assets/discord-icon.png" alt="Discord Icon" loading="lazy" decoding="async" draggable="false">
-        <span>Discord</span>
-      </div>
-      <div class="tool-card reveal">
-        <img src="assets/figma-icon.png" alt="Figma Icon" loading="lazy" decoding="async" draggable="false">
-        <span>Figma</span>
-      </div>
-      <div class="tool-card reveal">
-        <img src="assets/fl-studio.png" alt="FL Studio Icon" loading="lazy" decoding="async" draggable="false">
-        <span>FL Studio</span>
-      </div>
-      <div class="tool-card reveal">
-        <img src="assets/github-icon.png" alt="GitHub Icon" loading="lazy" decoding="async" draggable="false">
-        <span>GitHub</span>
-      </div>
-      <div class="tool-card reveal">
-        <img src="assets/vsc-icon.png" alt="Visual Studio Code Icon" loading="lazy" decoding="async" draggable="false">
-        <span>VS Code</span>
-      </div>
-      <div class="tool-card reveal">
-        <img src="assets/trello-icon.png" alt="Trello Icon" loading="lazy" decoding="async" draggable="false">
-        <span>Trello</span>
-      </div>
-      <div class="tool-card reveal">
-        <img src="assets/filmora-icon.png" alt="Filmora Video Editor Icon" loading="lazy" decoding="async" draggable="false">
-        <span>Filmora</span>
-      </div>
-      <div class="tool-card reveal">
-        <img src="assets/aseprite-icon.png" alt="Aseprite Icon" loading="lazy" decoding="async" draggable="false">
-        <span>Aseprite</span>
-      </div>
-      <div class="tool-card reveal">
-        <img src="assets/sharex-icon.png" alt="ShareX Icon" loading="lazy" decoding="async" draggable="false">
-        <span>ShareX</span>
-      </div>
-    </div>
+<div class="tools-grid">
+  <div class="tool-card reveal">
+    <img src="assets/roblox-studio.png" alt="Roblox Studio" loading="lazy" decoding="async" draggable="false">
+    <span>Roblox Studio</span>
+  </div>
+  <div class="tool-card reveal">
+    <img src="assets/affinity-icon.png" alt="Affinity" loading="lazy" decoding="async" draggable="false">
+    <span>Affinity</span>
+  </div>
+  <div class="tool-card reveal">
+    <img src="assets/blender-icon.png" alt="Blender" loading="lazy" decoding="async" draggable="false">
+    <span>Blender</span>
+  </div>
+  <div class="tool-card reveal">
+    <img src="assets/discord-icon.png" alt="Discord" loading="lazy" decoding="async" draggable="false">
+    <span>Discord</span>
+  </div>
+  <div class="tool-card reveal">
+    <img src="assets/figma-icon.png" alt="Figma" loading="lazy" decoding="async" draggable="false">
+    <span>Figma</span>
+  </div>
+  <div class="tool-card reveal">
+    <img src="assets/fl-studio.png" alt="FL Studio (Trial)" loading="lazy" decoding="async" draggable="false">
+    <span>FL Studio (Trial)</span>
+  </div>
+  <div class="tool-card reveal">
+    <img src="assets/github-icon.png" alt="GitHub" loading="lazy" decoding="async" draggable="false">
+    <span>GitHub</span>
+  </div>
+  <div class="tool-card reveal">
+    <img src="assets/vsc-icon.png" alt="Visual Studio Code" loading="lazy" decoding="async" draggable="false">
+    <span>Visual Studio Code</span>
+  </div>
+  <div class="tool-card reveal">
+    <img src="assets/trello-icon.png" alt="Trello" loading="lazy" decoding="async" draggable="false">
+    <span>Trello</span>
+  </div>
+  <div class="tool-card reveal">
+    <img src="assets/filmora-icon.png" alt="Wondershare Filmora" loading="lazy" decoding="async" draggable="false">
+    <span>Wondershare Filmora</span>
+  </div>
+  <div class="tool-card reveal">
+    <img src="assets/aseprite-icon.png" alt="Aseprite" loading="lazy" decoding="async" draggable="false">
+    <span>Aseprite</span>
+  </div>
+  <div class="tool-card reveal">
+    <img src="assets/sharex-icon.png" alt="ShareX" loading="lazy" decoding="async" draggable="false">
+    <span>ShareX</span>
+  </div>
+</div>
+
   </section>
 
-  <!-- Lightbox Modal -->
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image preview slider">
-    <button class="close-btn" aria-label="Close image modal">&times;</button>
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <span class="close-btn" role="button" tabindex="0" aria-label="Close preview">&times;</span>
     <button class="nav-btn prev-btn" aria-label="Previous image">&#10094;</button>
-    <img src="" class="lightbox-content" alt="Enlarged view" draggable="false">
+    <img src="" class="lightbox-content" alt="" draggable="false">
     <button class="nav-btn next-btn" aria-label="Next image">&#10095;</button>
   </div>
 
-  <!-- Main JavaScript Logic -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      /* =========================================
-         1. PRELOADER & PAGE INITIALIZATION
-      ========================================= */
-      const preloader = document.getElementById('preloader');
-      
-      const dismissPreloader = () => {
-        if (!preloader || preloader.classList.contains('dismissed')) return;
-        preloader.classList.add('dismissed');
-        preloader.style.opacity = '0';
-        document.body.classList.add('page-loaded');
-        setTimeout(() => { preloader.remove(); }, 500);
-      };
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+/* =========================
+   PRELOADER
+========================= */
+window.addEventListener('load', () => {
+  const preloader = document.getElementById('preloader');
+  if (!preloader) return;
 
-      if (document.readyState === 'complete') {
-        dismissPreloader();
+  preloader.style.opacity = '0';
+  document.body.classList.add('page-loaded');
+
+  setTimeout(() => {
+    preloader.style.display = 'none';
+  }, 500);
+});
+
+/* =========================
+   CURSOR SPOTLIGHT
+   Reused across the hero card and the static content
+   cards so hover feedback reads as one visual language.
+========================= */
+function bindSpotlight(el) {
+  el.addEventListener('pointermove', (e) => {
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+    el.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+  });
+}
+
+document
+  .querySelectorAll('.profile-card, .featured-project-card, .tool-card')
+  .forEach(bindSpotlight);
+
+/* =========================
+   SCROLL REVEAL STAGGER
+   Sets --i per item so grouped elements (grid cards,
+   tool cards) cascade in rather than popping together.
+========================= */
+document.querySelectorAll('.project-grid').forEach(grid => {
+  grid.querySelectorAll('.project-card').forEach((card, i) => {
+    card.style.setProperty('--i', i);
+  });
+});
+
+document.querySelectorAll('.tools-grid').forEach(grid => {
+  grid.querySelectorAll('.tool-card').forEach((card, i) => {
+    card.style.setProperty('--i', i);
+  });
+});
+
+/* =========================
+   LIGHTBOX
+========================= */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.querySelector('.lightbox-content');
+
+function refreshImages() {
+  return Array.from(document.querySelectorAll('.project-img'));
+}
+
+let currentIndex = 0;
+
+function setLightboxImage(index) {
+  const imgs = refreshImages();
+  if (!imgs.length) return;
+  currentIndex = index;
+  lightboxImg.src = imgs[currentIndex].src;
+  lightboxImg.alt = imgs[currentIndex].alt || '';
+}
+
+function openLightbox(index) {
+  setLightboxImage(index);
+  lightbox.classList.add('active');
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+}
+
+document.addEventListener('click', (e) => {
+  // open lightbox
+  const img = e.target.closest('.project-img');
+  if (img) {
+    const imgs = refreshImages();
+    const index = imgs.indexOf(img);
+    if (index !== -1) openLightbox(index);
+    return;
+  }
+
+  // close lightbox
+  if (e.target === lightbox || e.target.classList.contains('close-btn')) {
+    closeLightbox();
+  }
+});
+
+document.querySelector('.close-btn').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    closeLightbox();
+  }
+});
+
+document.querySelector('.next-btn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  const imgs = refreshImages();
+  if (!imgs.length) return;
+  setLightboxImage((currentIndex + 1) % imgs.length);
+});
+
+document.querySelector('.prev-btn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  const imgs = refreshImages();
+  if (!imgs.length) return;
+  setLightboxImage((currentIndex - 1 + imgs.length) % imgs.length);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('active')) return;
+  const imgs = refreshImages();
+  if (!imgs.length) return;
+
+  if (e.key === 'ArrowRight') setLightboxImage((currentIndex + 1) % imgs.length);
+  if (e.key === 'ArrowLeft') setLightboxImage((currentIndex - 1 + imgs.length) % imgs.length);
+  if (e.key === 'Escape') closeLightbox();
+});
+
+/* =========================
+   DISABLE RIGHT-CLICK ON GALLERY + LIGHTBOX IMAGES
+========================= */
+function blockContextMenu(el) {
+  el.addEventListener('contextmenu', (e) => e.preventDefault());
+}
+
+refreshImages().forEach(blockContextMenu);
+document.querySelectorAll('.project-video').forEach(blockContextMenu);
+blockContextMenu(lightboxImg);
+
+/* =========================
+   SCROLL FADE-IN (GALLERY / VFX CARDS)
+========================= */
+
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('fade-in-final');
+      cardObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+
+// observing elements
+document.querySelectorAll('.animate').forEach(el => {
+  cardObserver.observe(el);
+});
+
+
+if (!('IntersectionObserver' in window)) {
+  document.querySelectorAll('.animate').forEach(el => {
+    el.classList.add('fade-in-final', 'active');
+  });
+}
+
+const projectCards = document.querySelectorAll('.project-card');
+
+projectCards.forEach(card => {
+  const media = card.querySelector('.project-img, .project-video');
+
+  card.classList.add('is-loading');
+
+  const onMediaLoad = () => {
+    card.classList.remove('is-loading');
+    card.classList.add('loaded');
+    cardObserver.observe(card);
+  };
+
+  if (media) {
+    if (media.tagName === 'IMG') {
+      if (media.complete) {
+        onMediaLoad();
       } else {
-        window.addEventListener('load', dismissPreloader);
-        // Fallback safety timeout (max 2 seconds wait)
-        setTimeout(dismissPreloader, 2000);
+        media.addEventListener('load', onMediaLoad);
       }
-
-      /* =========================================
-         2. INTERACTIVE CURSOR SPOTLIGHT
-      ========================================= */
-      function bindSpotlight(el) {
-        el.addEventListener('pointermove', (e) => {
-          const rect = el.getBoundingClientRect();
-          el.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
-          el.style.setProperty('--my', (e.clientY - rect.top) + 'px');
-        });
+    } else if (media.tagName === 'VIDEO') {
+      if (media.readyState >= 3) {
+        onMediaLoad();
+      } else {
+        media.addEventListener('canplay', onMediaLoad);
       }
+    }
+  } else {
+    onMediaLoad();
+  }
+});
 
-      document
-        .querySelectorAll('.profile-card, .featured-project-card, .tool-card')
-        .forEach(bindSpotlight);
+window.addEventListener('load', () => {
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    preloader.style.transition = 'opacity 0.5s ease';
+    preloader.style.opacity = '0';
 
-      /* =========================================
-         3. GRID STAGGER INDEXING
-      ========================================= */
-      document.querySelectorAll('.project-grid').forEach(grid => {
-        grid.querySelectorAll('.project-card').forEach((card, i) => {
-          card.style.setProperty('--i', i);
-        });
-      });
+    setTimeout(() => {
+      preloader.remove(); // cleaner than display:none
+    }, 500);
+  }
+});
 
-      document.querySelectorAll('.tools-grid').forEach(grid => {
-        grid.querySelectorAll('.tool-card').forEach((card, i) => {
-          card.style.setProperty('--i', i % 6);
-        });
-      });
+/* =========================
+   SCROLL FADE-IN (GENERAL REVEAL: HEADERS, TOOLS, MUSIC)
+========================= */
+const revealElements = document.querySelectorAll('.reveal');
 
-      /* =========================================
-         4. LIGHTBOX & TOUCH/KEYBOARD CONTROLS
-      ========================================= */
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.querySelector('.lightbox-content');
-      const closeBtn = document.querySelector('.close-btn');
-      const prevBtn = document.querySelector('.prev-btn');
-      const nextBtn = document.querySelector('.next-btn');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
-      function getImages() {
-        return Array.from(document.querySelectorAll('.project-img'));
-      }
+revealElements.forEach(el => revealObserver.observe(el));
 
-      let currentIndex = 0;
+/* =========================
+   SMOOTH SCROLL
+========================= */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const id = this.getAttribute('href');
+    if (!id || id === '#') return;
 
-      function setLightboxImage(index) {
-        const imgs = getImages();
-        if (!imgs.length) return;
-        currentIndex = (index + imgs.length) % imgs.length;
-        lightboxImg.src = imgs[currentIndex].src;
-        lightboxImg.alt = imgs[currentIndex].alt || 'Portfolio preview';
-      }
+    const target = document.querySelector(id);
+    if (!target) return;
 
-      function openLightbox(index) {
-        setLightboxImage(index);
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+});
+</script>
 
-      function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      document.addEventListener('click', (e) => {
-        const img = e.target.closest('.project-img');
-        if (img) {
-          const index = getImages().indexOf(img);
-          if (index !== -1) openLightbox(index);
-          return;
-        }
-
-        if (e.target === lightbox || e.target === closeBtn) {
-          closeLightbox();
-        }
-      });
-
-      nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        setLightboxImage(currentIndex + 1);
-      });
-
-      prevBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        setLightboxImage(currentIndex - 1);
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
-        if (e.key === 'ArrowRight') setLightboxImage(currentIndex + 1);
-        if (e.key === 'ArrowLeft') setLightboxImage(currentIndex - 1);
-        if (e.key === 'Escape') closeLightbox();
-      });
-
-      // Swipe support for mobile screens
-      let touchStartX = 0;
-      lightbox.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
-
-      lightbox.addEventListener('touchend', (e) => {
-        const touchEndX = e.changedTouches[0].screenX;
-        if (touchStartX - touchEndX > 50) setLightboxImage(currentIndex + 1); // Swipe left
-        if (touchEndX - touchStartX > 50) setLightboxImage(currentIndex - 1); // Swipe right
-      }, { passive: true });
-
-      /* =========================================
-         5. MEDIA CONTEXT MENU PROTECTION
-      ========================================= */
-      const disableMenu = (el) => el.addEventListener('contextmenu', (e) => e.preventDefault());
-      document.querySelectorAll('.project-img, .project-video, .lightbox-content').forEach(disableMenu);
-
-      /* =========================================
-         6. INTERSECTION OBSERVERS (REVEALS)
-      ========================================= */
-      const cardObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-final');
-            cardObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-
-      document.querySelectorAll('.project-card').forEach(card => {
-        const media = card.querySelector('.project-img, .project-video');
-        card.classList.add('is-loading');
-
-        const onLoaded = () => {
-          card.classList.remove('is-loading');
-          card.classList.add('loaded');
-          cardObserver.observe(card);
-        };
-
-        if (media) {
-          if (media.tagName === 'IMG') {
-            if (media.complete) onLoaded();
-            else media.addEventListener('load', onLoaded);
-          } else if (media.tagName === 'VIDEO') {
-            if (media.readyState >= 3) onLoaded();
-            else media.addEventListener('canplay', onLoaded);
-          }
-        } else {
-          onLoaded();
-        }
-      });
-
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-      /* =========================================
-         7. SMOOTH ANCHOR SCROLLING
-      ========================================= */
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          const id = this.getAttribute('href');
-          if (!id || id === '#') return;
-          const target = document.querySelector(id);
-          if (!target) return;
-
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
-        });
-      });
-    });
-  </script>
 </body>
 </html>
