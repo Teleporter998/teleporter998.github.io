@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -25,23 +24,43 @@
     <span class="preloader-mark">TP998</span>
   </div>
 
-  <video autoplay muted loop playsinline id="bg-video" aria-hidden="true">
-    <source src="assets/GlitchBackground.mp4" type="video/mp4">
-  </video>
-  <div class="overlay"></div>
+  <div class="bg-field" aria-hidden="true">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-grain"></div>
+  </div>
   <div class="vignette"></div>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">TP998</a>
+
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#graphics">UI &amp; Graphics</a>
+        <a href="#vfx">VFX</a>
+        <a href="#music">Music</a>
+        <a href="#tools">Tools</a>
+      </div>
+    </div>
+  </nav>
 
   <section id="hero">
     <main class="container">
       <div class="profile-card">
+        <span class="eyebrow">Game Dev &amp; Music Producer</span>
         <h1 class="name">Hello, I'm <span class="glitch" data-text="Teleporter998">Teleporter998</span></h1>
-        <p class="subtitle">Game Developer &amp; Music Producer</p>
+        <p class="subtitle">I design interfaces, build VFX, and produce music for games.</p>
         <div class="buttons">
          <a href="#projects" class="btn btn-primary">Projects</a>
-         <a href="#graphics" class="btn btn-primary">UI &amp; Graphics</a>
-         <a href="#vfx" class="btn btn-primary">VFX</a>
-         <a href="#music" class="btn btn-primary">Music</a>
-         <a href="#tools" class="btn btn-primary">Tools</a>
+         <a href="#graphics" class="btn btn-secondary">UI &amp; Graphics</a>
+         <a href="#vfx" class="btn btn-secondary">VFX</a>
+         <a href="#music" class="btn btn-secondary">Music</a>
+         <a href="#tools" class="btn btn-secondary">Tools</a>
         </div>
       </div>
     </main>
@@ -49,6 +68,7 @@
 
   <section id="projects" class="portfolio-section">
     <div class="section-header reveal">
+      <span class="eyebrow">Selected Work</span>
       <h2>Featured <span>Projects</span></h2>
       <p>Software, tools, and systems I've developed.</p>
     </div>
@@ -57,7 +77,7 @@
   <div class="featured-project-card">
 
     <div class="project-header">
-      <img src="assets/fireporter-icon.png" alt="Fireporter plugin icon" class="project-icon" draggable="false">
+      <img src="assets/fireporter-icon.png" alt="Fireporter plugin icon" class="project-icon" loading="lazy" decoding="async" draggable="false">
 
       <div class="project-title-wrap">
         <div class="project-meta">
@@ -79,7 +99,7 @@
   <div class="featured-project-card">
 
     <div class="project-header">
-      <img src="assets/TeleportedMemoriesIcon.png" alt="Teleported Memories icon" class="project-icon" draggable="false">
+      <img src="assets/TeleportedMemoriesIcon.png" alt="Teleported Memories icon" class="project-icon" loading="lazy" decoding="async" draggable="false">
 
       <div class="project-title-wrap">
         <div class="project-meta">
@@ -103,6 +123,7 @@
 
   <section id="graphics" class="portfolio-section">
     <div class="section-header reveal">
+      <span class="eyebrow">Interface Design</span>
       <h2>UI & <span>Graphics</span></h2>
       <p>A collection of my interface designs and visual assets.</p>
     </div>
@@ -129,24 +150,26 @@
 
   <section id="vfx" class="portfolio-section">
     <div class="section-header reveal">
+      <span class="eyebrow">Motion Work</span>
       <h2>Visual <span>Effects</span></h2>
       <p>A collection of my looped VFX animations.</p>
     </div>
 
 <div class="project-grid">
-  <div class="project-card"><video src="assets/vfx1.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx2.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx3.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx4.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx5.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx6.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx7.mp4" class="project-video" autoplay muted loop playsinline draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx1.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx2.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx3.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx4.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx5.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx6.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+  <div class="project-card"><video src="assets/vfx7.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
 </div>
 
   </section>
 
   <section id="music" class="portfolio-section">
     <div class="section-header reveal">
+      <span class="eyebrow">Sound</span>
       <h2>My <span>Music</span></h2>
       <p>Tracks and beats I've produced.</p>
     </div>
@@ -157,6 +180,7 @@
     height="450"
     scrolling="no"
     frameborder="no"
+    loading="lazy"
     allow="autoplay"
     title="Teleporter998 on SoundCloud"
     src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/teleporter998">
@@ -167,6 +191,7 @@
 
   <section id="tools" class="portfolio-section">
     <div class="section-header reveal">
+      <span class="eyebrow">Toolkit</span>
       <h2>My <span>Tools</span></h2>
       <p>Software and technologies I use to create.</p>
     </div>
@@ -224,6 +249,10 @@
 
   </section>
 
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Teleporter998. Built and hosted on GitHub Pages.</p>
+  </footer>
+
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
     <span class="close-btn" role="button" tabindex="0" aria-label="Close preview">&times;</span>
     <button class="nav-btn prev-btn" aria-label="Previous image">&#10094;</button>
@@ -247,6 +276,56 @@ window.addEventListener('load', () => {
     preloader.style.display = 'none';
   }, 500);
 });
+
+/* =========================
+   FOOTER YEAR
+========================= */
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+/* =========================
+   NAVBAR: scroll state, active link, mobile menu
+========================= */
+const navbar = document.getElementById('navbar');
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
+
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 24);
+}, { passive: true });
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+const sections = document.querySelectorAll('section[id]');
+const navAnchors = document.querySelectorAll('.nav-links a');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const id = entry.target.getAttribute('id');
+    const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+    if (!link) return;
+    if (entry.isIntersecting) {
+      navAnchors.forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+sections.forEach(s => navObserver.observe(s));
 
 /* =========================
    CURSOR SPOTLIGHT
@@ -438,6 +517,26 @@ window.addEventListener('load', () => {
     }, 500);
   }
 });
+
+/* =========================
+   VFX VIDEO PERFORMANCE
+   Only decode/play videos that are actually on screen —
+   7 simultaneous autoplaying clips is heavy on mobile/battery.
+========================= */
+const vfxVideos = document.querySelectorAll('.project-video');
+
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const video = entry.target;
+    if (entry.isIntersecting) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  });
+}, { threshold: 0.25 });
+
+vfxVideos.forEach(video => videoObserver.observe(video));
 
 /* =========================
    SCROLL FADE-IN (GENERAL REVEAL: HEADERS, TOOLS, MUSIC)
