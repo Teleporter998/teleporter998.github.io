@@ -94,11 +94,18 @@ section[id] {
 
 /* =========================
    BACKGROUND
-   Video removed for performance/battery + accessibility — replaced
-   with a lightweight CSS-only gradient field that drifts slowly
-   (the "alive" feeling) plus a faint grid and grain for texture,
-   matching the profile-card's own grid motif at page scale.
 ========================= */
+.bg-field {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  background-image: url("assets/Background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .vignette {
