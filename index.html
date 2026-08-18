@@ -7,19 +7,18 @@
   <meta name="theme-color" content="#050505">
   <meta name="color-scheme" content="dark">
   <title>Teleporter998</title>
-
   <link rel="icon" href="assets/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <!-- Scroll progress -->
+  <div class="scroll-progress" aria-hidden="true"></div>
+
   <div id="preloader" role="status" aria-live="polite" aria-label="Loading">
     <span class="preloader-mark">TP998</span>
   </div>
@@ -27,14 +26,21 @@
   <div class="bg-field" aria-hidden="true"></div>
   <div class="vignette"></div>
 
+  <!-- Global cursor glow -->
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Floating particles -->
+  <div class="particles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
   <nav id="navbar">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">TP998</a>
-
       <button id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
-
       <div class="nav-links" id="nav-links">
         <a href="#projects">Projects</a>
         <a href="#graphics">UI &amp; Graphics</a>
@@ -66,53 +72,40 @@
       <h2>Featured <span>Projects</span></h2>
       <p>Software, tools, and systems I've developed.</p>
     </div>
-
-<div class="featured-project-list reveal">
-  <div class="featured-project-card">
-
-    <div class="project-header">
-      <img src="assets/fireporter-icon.png" alt="Fireporter plugin icon" class="project-icon" loading="lazy" decoding="async" draggable="false">
-
-      <div class="project-title-wrap">
-        <div class="project-meta">
-          <span class="project-year">2025</span>
-          <span class="project-type">Plugin</span>
+    <div class="featured-project-list reveal">
+      <div class="featured-project-card">
+        <div class="project-header">
+          <img src="assets/fireporter-icon.png" alt="Fireporter plugin icon" class="project-icon" loading="lazy" decoding="async" draggable="false">
+          <div class="project-title-wrap">
+            <div class="project-meta">
+              <span class="project-year">2025</span>
+              <span class="project-type">Plugin</span>
+            </div>
+            <h3 class="project-title">Fireporter</h3>
+          </div>
         </div>
-        <h3 class="project-title">Fireporter</h3>
+        <p class="project-description">
+          A plugin for fast exporting from Figma and importing into Roblox Studio.
+        </p>
+        <a href="https://www.figma.com/community/plugin/1525922126871670955" class="btn btn-primary project-btn" target="_blank" rel="noopener">See More</a>
+      </div>
+      <div class="featured-project-card">
+        <div class="project-header">
+          <img src="assets/TeleportedMemoriesIcon.png" alt="Teleported Memories icon" class="project-icon" loading="lazy" decoding="async" draggable="false">
+          <div class="project-title-wrap">
+            <div class="project-meta">
+              <span class="project-year">2024</span>
+              <span class="project-type">Discord Server</span>
+            </div>
+            <h3 class="project-title">Teleported Memories</h3>
+          </div>
+        </div>
+        <p class="project-description">
+          Teleported Memories is a Discord server about game development, games, and gaming news. You can also chat and talk with other server members. I am the server owner.
+        </p>
+        <a href="https://discord.gg/9ba2KJKp8g" class="btn btn-primary project-btn" target="_blank" rel="noopener">Join</a>
       </div>
     </div>
-
-    <p class="project-description">
-      A plugin for fast exporting from Figma and importing into Roblox Studio.
-    </p>
-
-    <a href="https://www.figma.com/community/plugin/1525922126871670955" class="btn btn-primary project-btn" target="_blank" rel="noopener">See More</a>
-
-  </div>
-
-  <div class="featured-project-card">
-
-    <div class="project-header">
-      <img src="assets/TeleportedMemoriesIcon.png" alt="Teleported Memories icon" class="project-icon" loading="lazy" decoding="async" draggable="false">
-
-      <div class="project-title-wrap">
-        <div class="project-meta">
-          <span class="project-year">2024</span>
-          <span class="project-type">Discord Server</span>
-        </div>
-        <h3 class="project-title">Teleported Memories</h3>
-      </div>
-    </div>
-
-    <p class="project-description">
-      Teleported Memories is a Discord server about game development, games, and gaming news. You can also chat and talk with other server members. I am the server owner.
-    </p>
-
-    <a href="https://discord.gg/9ba2KJKp8g" class="btn btn-primary project-btn" target="_blank" rel="noopener">Join</a>
-
-  </div>
-</div>
-
   </section>
 
   <section id="graphics" class="portfolio-section">
@@ -120,25 +113,23 @@
       <h2>UI & <span>Graphics</span></h2>
       <p>A collection of my interface designs and visual assets.</p>
     </div>
-
-<div class="project-grid">
-  <div class="project-card"><img src="assets/CriticizeDesign.png" class="project-img" alt="Criticize interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/ExpertionDesign.png" class="project-img" alt="Expertion interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/FrozenInsideDesign.png" class="project-img" alt="Frozen Inside interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/HydrogenDesign.png" class="project-img" alt="Hydrogen interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/ToxicityDesign.png" class="project-img" alt="Toxicity interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/ValidDate.png" class="project-img" alt="Valid Date interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/Tiers.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/Figma_8YjzjW8CSk.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/Figma_avGOQkvNdY.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/Figma_E3ttXJebI0.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/Figma_eDGqH7QEKP.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/Figma_eevTKaP3V7.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/Figma_IubuBMj0Po.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/Figma_MBi1ENxNkN.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
-  <div class="project-card"><img src="assets/Figma_YECGpaPhgO.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
-</div>
-
+    <div class="project-grid">
+      <div class="project-card"><img src="assets/CriticizeDesign.png" class="project-img" alt="Criticize interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/ExpertionDesign.png" class="project-img" alt="Expertion interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/FrozenInsideDesign.png" class="project-img" alt="Frozen Inside interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/HydrogenDesign.png" class="project-img" alt="Hydrogen interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/ToxicityDesign.png" class="project-img" alt="Toxicity interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/ValidDate.png" class="project-img" alt="Valid Date interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/Tiers.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/Figma_8YjzjW8CSk.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/Figma_avGOQkvNdY.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/Figma_E3ttXJebI0.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/Figma_eDGqH7QEKP.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/Figma_eevTKaP3V7.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/Figma_IubuBMj0Po.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/Figma_MBi1ENxNkN.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/Figma_YECGpaPhgO.png" class="project-img" alt="Tiers interface design" loading="lazy" decoding="async" draggable="false"></div>
+    </div>
   </section>
 
   <section id="vfx" class="portfolio-section">
@@ -146,17 +137,15 @@
       <h2>Visual <span>Effects</span></h2>
       <p>A collection of my VFX.</p>
     </div>
-
-<div class="project-grid">
-  <div class="project-card"><video src="assets/vfx1.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx2.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx3.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx4.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx5.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx6.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-  <div class="project-card"><video src="assets/vfx7.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-</div>
-
+    <div class="project-grid">
+      <div class="project-card"><video src="assets/vfx1.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx2.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx3.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx4.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx5.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx6.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+      <div class="project-card"><video src="assets/vfx7.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+    </div>
   </section>
 
   <section id="music" class="portfolio-section">
@@ -164,20 +153,18 @@
       <h2>My <span>Music</span></h2>
       <p>Tracks and beats I've produced.</p>
     </div>
-
-<div class="music-container reveal">
-<iframe
-  width="100%"
-  height="450"
-  scrolling="no"
-  frameborder="no"
-  loading="lazy"
-  allow="autoplay"
-  title="Teleporter998 on SoundCloud"
-  src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/teleporter998/sets/portfolio">
-</iframe>
-</div>
-
+    <div class="music-container reveal">
+      <iframe
+        width="100%"
+        height="450"
+        scrolling="no"
+        frameborder="no"
+        loading="lazy"
+        allow="autoplay"
+        title="Teleporter998 on SoundCloud"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/teleporter998/sets/portfolio">
+      </iframe>
+    </div>
   </section>
 
   <section id="tools" class="portfolio-section">
@@ -185,58 +172,56 @@
       <h2>My <span>Tools</span></h2>
       <p>Software and technologies I use to create.</p>
     </div>
-
-<div class="tools-grid">
-  <div class="tool-card reveal">
-    <img src="assets/roblox-studio.png" alt="Roblox Studio" loading="lazy" decoding="async" draggable="false">
-    <span>Roblox Studio</span>
-  </div>
-  <div class="tool-card reveal">
-    <img src="assets/affinity-icon.png" alt="Affinity" loading="lazy" decoding="async" draggable="false">
-    <span>Affinity</span>
-  </div>
-  <div class="tool-card reveal">
-    <img src="assets/blender-icon.png" alt="Blender" loading="lazy" decoding="async" draggable="false">
-    <span>Blender</span>
-  </div>
-  <div class="tool-card reveal">
-    <img src="assets/discord-icon.png" alt="Discord" loading="lazy" decoding="async" draggable="false">
-    <span>Discord</span>
-  </div>
-  <div class="tool-card reveal">
-    <img src="assets/figma-icon.png" alt="Figma" loading="lazy" decoding="async" draggable="false">
-    <span>Figma</span>
-  </div>
-  <div class="tool-card reveal">
-    <img src="assets/fl-studio.png" alt="FL Studio (Trial)" loading="lazy" decoding="async" draggable="false">
-    <span>FL Studio (Trial)</span>
-  </div>
-  <div class="tool-card reveal">
-    <img src="assets/github-icon.png" alt="GitHub" loading="lazy" decoding="async" draggable="false">
-    <span>GitHub</span>
-  </div>
-  <div class="tool-card reveal">
-    <img src="assets/vsc-icon.png" alt="Visual Studio Code" loading="lazy" decoding="async" draggable="false">
-    <span>Visual Studio Code</span>
-  </div>
-  <div class="tool-card reveal">
-    <img src="assets/trello-icon.png" alt="Trello" loading="lazy" decoding="async" draggable="false">
-    <span>Trello</span>
-  </div>
-  <div class="tool-card reveal">
-    <img src="assets/filmora-icon.png" alt="Wondershare Filmora" loading="lazy" decoding="async" draggable="false">
-    <span>Wondershare Filmora</span>
-  </div>
-  <div class="tool-card reveal">
-    <img src="assets/aseprite-icon.png" alt="Aseprite" loading="lazy" decoding="async" draggable="false">
-    <span>Aseprite</span>
-  </div>
-  <div class="tool-card reveal">
-    <img src="assets/sharex-icon.png" alt="ShareX" loading="lazy" decoding="async" draggable="false">
-    <span>ShareX</span>
-  </div>
-</div>
-
+    <div class="tools-grid">
+      <div class="tool-card reveal">
+        <img src="assets/roblox-studio.png" alt="Roblox Studio" loading="lazy" decoding="async" draggable="false">
+        <span>Roblox Studio</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="assets/affinity-icon.png" alt="Affinity" loading="lazy" decoding="async" draggable="false">
+        <span>Affinity</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="assets/blender-icon.png" alt="Blender" loading="lazy" decoding="async" draggable="false">
+        <span>Blender</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="assets/discord-icon.png" alt="Discord" loading="lazy" decoding="async" draggable="false">
+        <span>Discord</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="assets/figma-icon.png" alt="Figma" loading="lazy" decoding="async" draggable="false">
+        <span>Figma</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="assets/fl-studio.png" alt="FL Studio (Trial)" loading="lazy" decoding="async" draggable="false">
+        <span>FL Studio (Trial)</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="assets/github-icon.png" alt="GitHub" loading="lazy" decoding="async" draggable="false">
+        <span>GitHub</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="assets/vsc-icon.png" alt="Visual Studio Code" loading="lazy" decoding="async" draggable="false">
+        <span>Visual Studio Code</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="assets/trello-icon.png" alt="Trello" loading="lazy" decoding="async" draggable="false">
+        <span>Trello</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="assets/filmora-icon.png" alt="Wondershare Filmora" loading="lazy" decoding="async" draggable="false">
+        <span>Wondershare Filmora</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="assets/aseprite-icon.png" alt="Aseprite" loading="lazy" decoding="async" draggable="false">
+        <span>Aseprite</span>
+      </div>
+      <div class="tool-card reveal">
+        <img src="assets/sharex-icon.png" alt="ShareX" loading="lazy" decoding="async" draggable="false">
+        <span>ShareX</span>
+      </div>
+    </div>
   </section>
 
   <footer class="site-footer">
@@ -252,344 +237,356 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-/* =========================
-   PRELOADER
-========================= */
-window.addEventListener('load', () => {
-  const preloader = document.getElementById('preloader');
-  if (!preloader) return;
 
-  preloader.style.opacity = '0';
-  document.body.classList.add('page-loaded');
-
-  setTimeout(() => {
-    preloader.style.display = 'none';
-  }, 500);
-});
-
-/* =========================
-   FOOTER YEAR
-========================= */
-const yearEl = document.getElementById('year');
-if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-/* =========================
-   NAVBAR: scroll state, active link, mobile menu
-========================= */
-const navbar = document.getElementById('navbar');
-const navToggle = document.getElementById('nav-toggle');
-const navLinks = document.getElementById('nav-links');
-
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 24);
-}, { passive: true });
-
-if (navToggle && navLinks) {
-  navToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    navToggle.classList.toggle('open', isOpen);
-    navToggle.setAttribute('aria-expanded', String(isOpen));
+  /* =========================
+     PRELOADER
+  ========================= */
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (!preloader) return;
+    preloader.style.opacity = '0';
+    document.body.classList.add('page-loaded');
+    setTimeout(() => {
+      preloader.style.display = 'none';
+    }, 500);
   });
 
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      navToggle.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
+  /* =========================
+     FOOTER YEAR
+  ========================= */
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* =========================
+     SCROLL PROGRESS BAR
+  ========================= */
+  const progress = document.querySelector('.scroll-progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = h > 0 ? (window.scrollY / h) * 100 : 0;
+    if (progress) progress.style.width = scrolled + '%';
+  }, { passive: true });
+
+  /* =========================
+     NAVBAR
+  ========================= */
+  const navbar = document.getElementById('navbar');
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 24);
+  }, { passive: true });
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* =========================
+     BACKGROUND PARALLAX
+  ========================= */
+  const bg = document.querySelector('.bg-field');
+  window.addEventListener('pointermove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2;
+    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+    if (bg) {
+      bg.style.transform = `scale(1.04) translate(${x * -8}px, ${y * -8}px)`;
+    }
+  });
+
+  /* =========================
+     GLOBAL CURSOR GLOW
+  ========================= */
+  const glow = document.querySelector('.cursor-glow');
+  if (glow) {
+    window.addEventListener('pointermove', (e) => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+    }, { passive: true });
+  }
+
+  /* =========================
+     ACTIVE NAV LINK
+  ========================= */
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+  sections.forEach(s => navObserver.observe(s));
+
+  /* =========================
+     CURSOR SPOTLIGHT (cards)
+  ========================= */
+  function bindSpotlight(el) {
+    el.addEventListener('pointermove', (e) => {
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+    });
+  }
+  document
+    .querySelectorAll('.profile-card, .featured-project-card, .tool-card')
+    .forEach(bindSpotlight);
+
+  /* =========================
+     STAGGER INDEX
+  ========================= */
+  document.querySelectorAll('.project-grid').forEach(grid => {
+    grid.querySelectorAll('.project-card').forEach((card, i) => {
+      card.style.setProperty('--i', i);
     });
   });
-}
-
-  const bg = document.querySelector('.bg-field');
-
-window.addEventListener('pointermove', (e) => {
-  const x = (e.clientX / window.innerWidth - 0.5) * 2;
-  const y = (e.clientY / window.innerHeight - 0.5) * 2;
-
-  bg.style.transform =
-    `scale(1.04) translate(${x * -8}px, ${y * -8}px)`;
-});
-  
-const sections = document.querySelectorAll('section[id]');
-const navAnchors = document.querySelectorAll('.nav-links a');
-
-const navObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    const id = entry.target.getAttribute('id');
-    const link = document.querySelector(`.nav-links a[href="#${id}"]`);
-    if (!link) return;
-    if (entry.isIntersecting) {
-      navAnchors.forEach(a => a.classList.remove('active'));
-      link.classList.add('active');
-    }
+  document.querySelectorAll('.tools-grid').forEach(grid => {
+    grid.querySelectorAll('.tool-card').forEach((card, i) => {
+      card.style.setProperty('--i', i);
+    });
   });
-}, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
 
-sections.forEach(s => navObserver.observe(s));
+  /* =========================
+     LIGHTBOX
+  ========================= */
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.querySelector('.lightbox-content');
 
-/* =========================
-   CURSOR SPOTLIGHT
-   Reused across the hero card and the static content
-   cards so hover feedback reads as one visual language.
-========================= */
-function bindSpotlight(el) {
-  el.addEventListener('pointermove', (e) => {
-    const rect = el.getBoundingClientRect();
-    el.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
-    el.style.setProperty('--my', (e.clientY - rect.top) + 'px');
-  });
-}
+  function refreshImages() {
+    return Array.from(document.querySelectorAll('.project-img'));
+  }
+  let currentIndex = 0;
 
-document
-  .querySelectorAll('.profile-card, .featured-project-card, .tool-card')
-  .forEach(bindSpotlight);
-
-/* =========================
-   SCROLL REVEAL STAGGER
-   Sets --i per item so grouped elements (grid cards,
-   tool cards) cascade in rather than popping together.
-========================= */
-document.querySelectorAll('.project-grid').forEach(grid => {
-  grid.querySelectorAll('.project-card').forEach((card, i) => {
-    card.style.setProperty('--i', i);
-  });
-});
-
-document.querySelectorAll('.tools-grid').forEach(grid => {
-  grid.querySelectorAll('.tool-card').forEach((card, i) => {
-    card.style.setProperty('--i', i);
-  });
-});
-
-/* =========================
-   LIGHTBOX
-========================= */
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.querySelector('.lightbox-content');
-
-function refreshImages() {
-  return Array.from(document.querySelectorAll('.project-img'));
-}
-
-let currentIndex = 0;
-
-function setLightboxImage(index) {
-  const imgs = refreshImages();
-  if (!imgs.length) return;
-  currentIndex = index;
-  lightboxImg.src = imgs[currentIndex].src;
-  lightboxImg.alt = imgs[currentIndex].alt || '';
-}
-
-function openLightbox(index) {
-  setLightboxImage(index);
-  lightbox.classList.add('active');
-}
-
-function closeLightbox() {
-  lightbox.classList.remove('active');
-}
-
-document.addEventListener('click', (e) => {
-  // open lightbox
-  const img = e.target.closest('.project-img');
-  if (img) {
+  function setLightboxImage(index) {
     const imgs = refreshImages();
-    const index = imgs.indexOf(img);
-    if (index !== -1) openLightbox(index);
-    return;
+    if (!imgs.length) return;
+    currentIndex = index;
+    lightboxImg.src = imgs[currentIndex].src;
+    lightboxImg.alt = imgs[currentIndex].alt || '';
   }
 
-  // close lightbox
-  if (e.target === lightbox || e.target.classList.contains('close-btn')) {
-    closeLightbox();
+  function openLightbox(index) {
+    setLightboxImage(index);
+    lightbox.classList.add('active');
   }
-});
 
-document.querySelector('.close-btn').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    closeLightbox();
+  function closeLightbox() {
+    lightbox.classList.remove('active');
   }
-});
 
-document.querySelector('.next-btn').addEventListener('click', (e) => {
-  e.stopPropagation();
-  const imgs = refreshImages();
-  if (!imgs.length) return;
-  setLightboxImage((currentIndex + 1) % imgs.length);
-});
-
-document.querySelector('.prev-btn').addEventListener('click', (e) => {
-  e.stopPropagation();
-  const imgs = refreshImages();
-  if (!imgs.length) return;
-  setLightboxImage((currentIndex - 1 + imgs.length) % imgs.length);
-});
-
-document.addEventListener('keydown', (e) => {
-  if (!lightbox.classList.contains('active')) return;
-  const imgs = refreshImages();
-  if (!imgs.length) return;
-
-  if (e.key === 'ArrowRight') setLightboxImage((currentIndex + 1) % imgs.length);
-  if (e.key === 'ArrowLeft') setLightboxImage((currentIndex - 1 + imgs.length) % imgs.length);
-  if (e.key === 'Escape') closeLightbox();
-});
-
-/* =========================
-   DISABLE RIGHT-CLICK ON GALLERY + LIGHTBOX IMAGES
-========================= */
-function blockContextMenu(el) {
-  el.addEventListener('contextmenu', (e) => e.preventDefault());
-}
-
-refreshImages().forEach(blockContextMenu);
-document.querySelectorAll('.project-video').forEach(blockContextMenu);
-blockContextMenu(lightboxImg);
-
-/* =========================
-   SCROLL FADE-IN (GALLERY / VFX CARDS)
-========================= */
-
-const cardObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('fade-in-final');
-      cardObserver.unobserve(entry.target);
+  document.addEventListener('click', (e) => {
+    const img = e.target.closest('.project-img');
+    if (img) {
+      const imgs = refreshImages();
+      const index = imgs.indexOf(img);
+      if (index !== -1) openLightbox(index);
+      return;
+    }
+    if (e.target === lightbox || e.target.classList.contains('close-btn')) {
+      closeLightbox();
     }
   });
-}, { threshold: 0.1 });
 
+  document.querySelector('.close-btn').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      closeLightbox();
+    }
+  });
 
-// observing elements
-document.querySelectorAll('.animate').forEach(el => {
-  cardObserver.observe(el);
-});
+  document.querySelector('.next-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const imgs = refreshImages();
+    if (!imgs.length) return;
+    setLightboxImage((currentIndex + 1) % imgs.length);
+  });
 
+  document.querySelector('.prev-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const imgs = refreshImages();
+    if (!imgs.length) return;
+    setLightboxImage((currentIndex - 1 + imgs.length) % imgs.length);
+  });
 
-if (!('IntersectionObserver' in window)) {
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    const imgs = refreshImages();
+    if (!imgs.length) return;
+    if (e.key === 'ArrowRight') setLightboxImage((currentIndex + 1) % imgs.length);
+    if (e.key === 'ArrowLeft') setLightboxImage((currentIndex - 1 + imgs.length) % imgs.length);
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  /* =========================
+     BLOCK CONTEXT MENU
+  ========================= */
+  function blockContextMenu(el) {
+    el.addEventListener('contextmenu', (e) => e.preventDefault());
+  }
+  refreshImages().forEach(blockContextMenu);
+  document.querySelectorAll('.project-video').forEach(blockContextMenu);
+  blockContextMenu(lightboxImg);
+
+  /* =========================
+     CARD FADE-IN
+  ========================= */
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in-final');
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
   document.querySelectorAll('.animate').forEach(el => {
-    el.classList.add('fade-in-final', 'active');
+    cardObserver.observe(el);
   });
-}
 
-const projectCards = document.querySelectorAll('.project-card');
-
-projectCards.forEach(card => {
-  const media = card.querySelector('.project-img, .project-video');
-
-  card.classList.add('is-loading');
-
-  const onMediaLoad = () => {
-    card.classList.remove('is-loading');
-    card.classList.add('loaded');
-    cardObserver.observe(card);
-  };
-
-  if (media) {
-    if (media.tagName === 'IMG') {
-      if (media.complete) {
-        onMediaLoad();
-      } else {
-        media.addEventListener('load', onMediaLoad);
-      }
-    } else if (media.tagName === 'VIDEO') {
-      if (media.readyState >= 3) {
-        onMediaLoad();
-      } else {
-        media.addEventListener('canplay', onMediaLoad);
-      }
-    }
-  } else {
-    onMediaLoad();
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.animate').forEach(el => {
+      el.classList.add('fade-in-final', 'active');
+    });
   }
-});
 
-  const profile = document.querySelector('.profile-card');
-
-if (profile) {
-  profile.addEventListener('pointermove', (e) => {
-    const rect = profile.getBoundingClientRect();
-
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    profile.style.transform =
-      `perspective(900px) rotateX(${y * -5}deg) rotateY(${x * 5}deg)`;
-  });
-
-  profile.addEventListener('pointerleave', () => {
-    profile.style.transform =
-      'perspective(900px) rotateX(0deg) rotateY(0deg)';
-  });
-}
-
-window.addEventListener('load', () => {
-  const preloader = document.getElementById('preloader');
-  if (preloader) {
-    preloader.style.transition = 'opacity 0.5s ease';
-    preloader.style.opacity = '0';
-
-    setTimeout(() => {
-      preloader.remove(); // cleaner than display:none
-    }, 500);
-  }
-});
-
-/* =========================
-   VFX VIDEO PERFORMANCE
-   Only decode/play videos that are actually on screen —
-   7 simultaneous autoplaying clips is heavy on mobile/battery.
-========================= */
-const vfxVideos = document.querySelectorAll('.project-video');
-
-const videoObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    const video = entry.target;
-    if (entry.isIntersecting) {
-      video.play().catch(() => {});
+  const projectCards = document.querySelectorAll('.project-card');
+  projectCards.forEach(card => {
+    const media = card.querySelector('.project-img, .project-video');
+    card.classList.add('is-loading');
+    const onMediaLoad = () => {
+      card.classList.remove('is-loading');
+      card.classList.add('loaded');
+      cardObserver.observe(card);
+    };
+    if (media) {
+      if (media.tagName === 'IMG') {
+        if (media.complete) {
+          onMediaLoad();
+        } else {
+          media.addEventListener('load', onMediaLoad);
+        }
+      } else if (media.tagName === 'VIDEO') {
+        if (media.readyState >= 3) {
+          onMediaLoad();
+        } else {
+          media.addEventListener('canplay', onMediaLoad);
+        }
+      }
     } else {
-      video.pause();
+      onMediaLoad();
     }
   });
-}, { threshold: 0.25 });
 
-vfxVideos.forEach(video => videoObserver.observe(video));
+  /* =========================
+     PROFILE CARD 3D TILT
+  ========================= */
+  const profile = document.querySelector('.profile-card');
+  if (profile) {
+    profile.addEventListener('pointermove', (e) => {
+      const rect = profile.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      profile.style.transform =
+        `perspective(900px) rotateX(${y * -5}deg) rotateY(${x * 5}deg)`;
+    });
+    profile.addEventListener('pointerleave', () => {
+      profile.style.transform =
+        'perspective(900px) rotateX(0deg) rotateY(0deg)';
+    });
+  }
 
-/* =========================
-   SCROLL FADE-IN (GENERAL REVEAL: HEADERS, TOOLS, MUSIC)
-========================= */
-const revealElements = document.querySelectorAll('.reveal');
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-      revealObserver.unobserve(entry.target);
+  /* =========================
+     SECOND PRELOADER CLEANUP
+  ========================= */
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      preloader.style.transition = 'opacity 0.5s ease';
+      preloader.style.opacity = '0';
+      setTimeout(() => {
+        preloader.remove();
+      }, 500);
     }
   });
-}, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
-revealElements.forEach(el => revealObserver.observe(el));
+  /* =========================
+     VFX VIDEO PERFORMANCE
+  ========================= */
+  const vfxVideos = document.querySelectorAll('.project-video');
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.25 });
+  vfxVideos.forEach(video => videoObserver.observe(video));
 
-/* =========================
-   SMOOTH SCROLL
-========================= */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const id = this.getAttribute('href');
-    if (!id || id === '#') return;
+  /* =========================
+     GENERAL REVEAL
+  ========================= */
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+  revealElements.forEach(el => revealObserver.observe(el));
 
-    const target = document.querySelector(id);
-    if (!target) return;
-
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth' });
+  /* =========================
+     SMOOTH SCROLL
+  ========================= */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const id = this.getAttribute('href');
+      if (!id || id === '#') return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    });
   });
-});
+
+  /* =========================
+     MAGNETIC BUTTONS
+  ========================= */
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('pointermove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px) scale(1.04)`;
+    });
+    btn.addEventListener('pointerleave', () => {
+      btn.style.transform = '';
+    });
+  });
+
 });
 </script>
-
+</body>
+</html>
 </body>
 </html>
