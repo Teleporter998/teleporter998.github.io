@@ -13,11 +13,6 @@
   --card-vignette: rgba(0, 0, 0, 0.45);
   --glitch-color: rgba(168, 85, 247, 0.4);
   --nav-height: 72px;
-
-  /* Type system: a characterful display face used sparingly (headings,
-     the hero name), a clean body face for everything readable, and a
-     monospace utility face reserved for functional labels (badges,
-     tool names) — it reads like a dev/toolchain, which fits the subject. */
   --font-display: 'Syne', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -41,10 +36,24 @@ body {
   overflow-x: hidden;
 }
 
-/* Anchor targets sit under the fixed navbar — offset so a jump-to-section
-   click doesn't tuck the heading behind it. */
 section[id] {
   scroll-margin-top: var(--nav-height);
+}
+
+/* =========================
+   SCROLL PROGRESS
+========================= */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  z-index: 1000;
+  transition: width 0.08s linear;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.55);
+  pointer-events: none;
 }
 
 /* =========================
@@ -81,9 +90,7 @@ section[id] {
 ========================= */
 .reveal {
   opacity: 0;
-  /* Adds a slight skew and scale for a 'settling' effect */
   transform: translateY(40px) scale(0.96) skewY(2deg);
-  /* Custom easing curve for a snappy start and buttery smooth finish */
   transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -117,6 +124,68 @@ section[id] {
   z-index: -1;
   pointer-events: none;
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* =========================
+   CURSOR GLOW
+========================= */
+.cursor-glow {
+  position: fixed;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -2;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.14) 0%,
+    rgba(77, 252, 255, 0.06) 40%,
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  will-change: transform;
+}
+
+body:hover .cursor-glow {
+  opacity: 1;
+}
+
+/* =========================
+   FLOATING PARTICLES
+========================= */
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particles span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.35;
+  animation: floatParticle 18s linear infinite;
+}
+
+.particles span:nth-child(1) { left: 10%; top: 20%; animation-duration: 22s; animation-delay: 0s; }
+.particles span:nth-child(2) { left: 25%; top: 70%; animation-duration: 19s; animation-delay: -4s; background: var(--accent-2); }
+.particles span:nth-child(3) { left: 45%; top: 15%; animation-duration: 25s; animation-delay: -8s; }
+.particles span:nth-child(4) { left: 65%; top: 55%; animation-duration: 17s; animation-delay: -2s; background: var(--accent-2); }
+.particles span:nth-child(5) { left: 80%; top: 30%; animation-duration: 21s; animation-delay: -6s; }
+.particles span:nth-child(6) { left: 15%; top: 85%; animation-duration: 23s; animation-delay: -10s; }
+.particles span:nth-child(7) { left: 55%; top: 75%; animation-duration: 20s; animation-delay: -3s; background: var(--accent-2); }
+.particles span:nth-child(8) { left: 90%; top: 10%; animation-duration: 26s; animation-delay: -7s; }
+
+@keyframes floatParticle {
+  0%   { transform: translateY(0) scale(1); opacity: 0.3; }
+  50%  { transform: translateY(-80px) scale(1.4); opacity: 0.55; }
+  100% { transform: translateY(-160px) scale(1); opacity: 0; }
 }
 
 /* =========================
@@ -300,8 +369,8 @@ section[id] {
 }
 
 @media (max-width: 1024px) { .project-grid { column-count: 3; } }
-@media (max-width: 768px)  { .project-grid { column-count: 2; } }
-@media (max-width: 480px)  { .project-grid { column-count: 1; } }
+@media (max-width: 768px) { .project-grid { column-count: 2; } }
+@media (max-width: 480px) { .project-grid { column-count: 1; } }
 
 .project-card {
   break-inside: avoid;
@@ -313,7 +382,6 @@ section[id] {
   border-radius: 10px;
   position: relative;
   min-height: 120px;
-
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
@@ -342,12 +410,10 @@ section[id] {
   animation: pulse 1.5s ease-in-out infinite;
 }
 
-/* Hide the loading pulse once media is loaded */
 .project-card.loaded::after {
   opacity: 0;
 }
 
-/* Fade the card in once scrolled into view */
 .project-card.fade-in-final {
   opacity: 1;
   transform: translateY(0);
@@ -365,18 +431,15 @@ section[id] {
   -webkit-user-drag: none;
   user-select: none;
   -webkit-touch-callout: none;
-  /* Add filter to the transition list */
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
 }
 
 .project-card:hover .project-img,
 .project-card:hover .project-video {
   transform: scale(1.05);
-  /* Triggers a fast hardware-accelerated color glitch on hover */
   animation: mediaGlitch 0.35s ease-out forwards;
 }
 
-/* Shifts the hue, blasts the contrast, then settles normally */
 @keyframes mediaGlitch {
   0% { filter: hue-rotate(0deg) contrast(1) saturate(1); }
   30% { filter: hue-rotate(90deg) contrast(1.5) saturate(2); }
@@ -410,12 +473,6 @@ section[id] {
   gap: 16px;
   --mx: 50%;
   --my: 50%;
-
-  /* NOTE: this list intentionally includes opacity, matching .reveal's
-     transition — previously .tool-card's own "transition" shorthand
-     silently replaced .reveal's, so cards popped in instead of fading.
-     The delay list only staggers the entrance (opacity); hover motion
-     (transform/border/shadow) stays instant every time. */
   transition: opacity 0.8s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
               border-color 0.3s ease, box-shadow 0.3s ease;
   transition-delay: calc(var(--i, 0) * 0.07s), 0s, 0s, 0s;
@@ -433,7 +490,7 @@ section[id] {
 }
 
 .tool-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px) rotate(-1.5deg);
   border-color: rgba(168, 85, 247, 0.6);
   box-shadow: 0px 8px 24px rgba(168, 85, 247, 0.15);
 }
@@ -450,7 +507,7 @@ section[id] {
 }
 
 .tool-card:hover img {
-  transform: scale(1.1);
+  transform: scale(1.12);
   filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.4));
 }
 
@@ -492,18 +549,18 @@ section[id] {
   border: 1px solid var(--card-border-color);
   border-radius: 20px;
   transform-style: preserve-3d;
-  transition:
-    transform 0.15s ease-out,
-    background-color 0.5s ease,
-    border-color 0.5s ease,
-    box-shadow 0.5s ease;
   opacity: 0;
   transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
-/* FIRE THE HERO ANIMATIONS ONLY ONCE THE PRELOADER DISAPPEARS */
+/* Hero entrance + continuous breathing */
 body.page-loaded .profile-card {
-  animation: fadeInUp 0.8s ease-out forwards;
+  animation: fadeInUp 0.8s ease-out forwards, heroBreathe 7s ease-in-out infinite 1.2s;
+}
+
+@keyframes heroBreathe {
+  0%, 100% { box-shadow: 0 0 0 rgba(168, 85, 247, 0); }
+  50%      { box-shadow: 0 0 45px rgba(168, 85, 247, 0.22); }
 }
 
 .profile-card .eyebrow {
@@ -587,6 +644,7 @@ body.page-loaded .profile-card .eyebrow {
   background-repeat: no-repeat;
   background-position: calc(var(--mx) - 55px) calc(var(--my) - 55px);
 }
+
 .profile-card:hover::after {
   animation: glitchFlicker 3.2s steps(20, end) infinite;
 }
@@ -610,9 +668,6 @@ body.page-loaded .profile-card .eyebrow {
   opacity: 0;
 }
 
-/* Signature moment: the hero name wipes in on load, then flickers a
-   faint RGB channel-split at rest — a quiet, ongoing echo of the
-   glitch video behind it, rather than a one-off intro effect. */
 @keyframes revealWipe {
   from { clip-path: inset(0 100% 0 0); opacity: 0; }
   to { clip-path: inset(0 0% 0 0); opacity: 1; }
@@ -642,25 +697,21 @@ body.page-loaded .name {
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  background: var(--card-bg); /* Prevents overlapping bleed */
+  background: var(--card-bg);
 }
 
-/* Red Channel Offset */
 .glitch::before {
   color: #ff2ec4;
   left: -2px;
   animation: glitchSlice 4s infinite linear alternate-reverse;
 }
 
-/* Cyan Channel Offset */
 .glitch::after {
   color: #4dfcff;
   left: 2px;
   animation: glitchSlice 5s infinite linear alternate-reverse;
 }
 
-/* Uses clip-path to slice the text horizontally. 
-   Bursts of movement with long resting periods. */
 @keyframes glitchSlice {
   0%, 4%, 100% { clip-path: inset(100% 0 0 0); opacity: 0; transform: translate(0); }
   0.5% { clip-path: inset(20% 0 80% 0); opacity: 1; transform: translate(-4px, 2px); }
@@ -679,6 +730,7 @@ body.page-loaded .name {
   opacity: 0;
   transition: color 0.5s ease;
 }
+
 body.page-loaded .subtitle {
   animation: fadeInUp 0.8s ease-out 0.4s forwards;
 }
@@ -690,6 +742,7 @@ body.page-loaded .subtitle {
   justify-content: center;
   opacity: 0;
 }
+
 body.page-loaded .buttons {
   animation: fadeInUp 0.8s ease-out 0.6s forwards;
 }
@@ -706,10 +759,14 @@ body.page-loaded .buttons {
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s ease,
+              background-color 0.3s ease,
+              border-color 0.3s ease,
+              color 0.3s ease;
+  will-change: transform;
 }
 
-/* The light sweep effect */
 .btn::before {
   content: '';
   position: absolute;
@@ -742,7 +799,6 @@ body.page-loaded .buttons {
 .btn-primary:hover {
   background-color: var(--accent);
   color: #000000;
-  transform: translateY(-3px) scale(1.02);
   box-shadow: 0px 12px 28px rgba(168, 85, 247, 0.35);
   animation: btnTextGlitch 0.3s ease forwards;
 }
@@ -757,7 +813,6 @@ body.page-loaded .buttons {
   border-color: var(--accent);
   color: var(--accent);
   background-color: rgba(168, 85, 247, 0.05);
-  transform: translateY(-3px) scale(1.02);
   box-shadow: 0px 12px 28px rgba(168, 85, 247, 0.16);
   animation: btnTextGlitch 0.3s ease forwards;
 }
@@ -770,8 +825,6 @@ body.page-loaded .buttons {
 
 /* =========================
    LIGHTBOX
-   Toggled via .active so open/close can transition
-   smoothly instead of an abrupt display swap.
 ========================= */
 .lightbox {
   display: flex;
@@ -1022,22 +1075,17 @@ body.page-loaded .buttons {
 
 @media (max-width: 480px) {
   .nav-inner { padding: 0 16px; }
-
   .profile-card { padding: 40px 24px; }
   .buttons { flex-direction: column; }
   .btn { width: 100%; }
-
   .featured-project-card { padding: 24px 16px; }
-
   .project-header {
     gap: 14px;
   }
-
   .project-icon {
     width: 56px;
     height: 56px;
   }
-
   .portfolio-section {
     padding: 90px 16px 60px;
   }
@@ -1052,5 +1100,10 @@ body.page-loaded .buttons {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .cursor-glow,
+  .particles {
+    display: none !important;
   }
 }
