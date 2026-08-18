@@ -506,6 +506,25 @@ projectCards.forEach(card => {
   }
 });
 
+  const profile = document.querySelector('.profile-card');
+
+if (profile) {
+  profile.addEventListener('pointermove', (e) => {
+    const rect = profile.getBoundingClientRect();
+
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+    profile.style.transform =
+      `perspective(900px) rotateX(${y * -5}deg) rotateY(${x * 5}deg)`;
+  });
+
+  profile.addEventListener('pointerleave', () => {
+    profile.style.transform =
+      'perspective(900px) rotateX(0deg) rotateY(0deg)';
+  });
+}
+
 window.addEventListener('load', () => {
   const preloader = document.getElementById('preloader');
   if (preloader) {
