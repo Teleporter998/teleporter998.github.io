@@ -106,6 +106,9 @@ section[id] {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  transform: scale(1.04);
+  transition: transform 0.15s ease-out;
+  will-change: transform;
 }
 
 .vignette {
