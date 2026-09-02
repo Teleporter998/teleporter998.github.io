@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Teleporter998 — game developer and music producer. UI design, VFX, music, building and game design.">
-  <meta name="theme-color" content="#050505">
+  <meta name="theme-color" content="#0d0d10">
   <meta name="color-scheme" content="dark">
   <title>Teleporter998</title>
   <link rel="icon" href="assets/favicon.ico">
@@ -12,32 +12,19 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Scroll progress -->
   <div class="scroll-progress" aria-hidden="true"></div>
 
   <div id="preloader" role="status" aria-live="polite" aria-label="Loading">
     <span class="preloader-mark">TP998</span>
   </div>
 
-  <div class="bg-field" aria-hidden="true"></div>
-  <div class="vignette"></div>
-
-  <!-- Global cursor glow -->
-  <div class="cursor-glow" aria-hidden="true"></div>
-
-  <!-- Floating particles -->
-  <div class="particles" aria-hidden="true">
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-  </div>
-
   <nav id="navbar">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo">TP998</a>
+      <a href="#hero" class="nav-logo">Teleporter998</a>
       <button id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -54,14 +41,14 @@
   <section id="hero">
     <main class="container">
       <div class="profile-card">
-        <h1 class="name">Hello, I'm <span class="glitch" data-text="Teleporter998">Teleporter998</span></h1>
+        <h1 class="name">Hello, I'm <span>Teleporter998</span></h1>
         <p class="subtitle">Game Dev &amp; Music Producer</p>
         <div class="buttons">
-         <a href="#projects" class="btn btn-primary">Projects</a>
-         <a href="#graphics" class="btn btn-secondary">UI &amp; Graphics</a>
-         <a href="#vfx" class="btn btn-secondary">VFX</a>
-         <a href="#music" class="btn btn-secondary">Music</a>
-         <a href="#tools" class="btn btn-secondary">Tools</a>
+          <a href="#projects" class="btn btn-primary">Projects</a>
+          <a href="#graphics" class="btn btn-secondary">UI &amp; Graphics</a>
+          <a href="#vfx" class="btn btn-secondary">VFX</a>
+          <a href="#music" class="btn btn-secondary">Music</a>
+          <a href="#tools" class="btn btn-secondary">Tools</a>
         </div>
       </div>
     </main>
@@ -238,28 +225,20 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* =========================
-     PRELOADER
-  ========================= */
+  /* PRELOADER */
   window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     if (!preloader) return;
     preloader.style.opacity = '0';
     document.body.classList.add('page-loaded');
-    setTimeout(() => {
-      preloader.style.display = 'none';
-    }, 500);
+    setTimeout(() => preloader.remove(), 400);
   });
 
-  /* =========================
-     FOOTER YEAR
-  ========================= */
+  /* FOOTER YEAR */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* =========================
-     SCROLL PROGRESS BAR
-  ========================= */
+  /* SCROLL PROGRESS BAR */
   const progress = document.querySelector('.scroll-progress');
   window.addEventListener('scroll', () => {
     const h = document.documentElement.scrollHeight - window.innerHeight;
@@ -267,9 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (progress) progress.style.width = scrolled + '%';
   }, { passive: true });
 
-  /* =========================
-     NAVBAR
-  ========================= */
+  /* NAVBAR */
   const navbar = document.getElementById('navbar');
   const navToggle = document.getElementById('nav-toggle');
   const navLinks = document.getElementById('nav-links');
@@ -293,32 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* =========================
-     BACKGROUND PARALLAX
-  ========================= */
-  const bg = document.querySelector('.bg-field');
-  window.addEventListener('pointermove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 2;
-    const y = (e.clientY / window.innerHeight - 0.5) * 2;
-    if (bg) {
-      bg.style.transform = `scale(1.04) translate(${x * -8}px, ${y * -8}px)`;
-    }
-  });
-
-  /* =========================
-     GLOBAL CURSOR GLOW
-  ========================= */
-  const glow = document.querySelector('.cursor-glow');
-  if (glow) {
-    window.addEventListener('pointermove', (e) => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top  = e.clientY + 'px';
-    }, { passive: true });
-  }
-
-  /* =========================
-     ACTIVE NAV LINK
-  ========================= */
+  /* ACTIVE NAV LINK */
   const sections = document.querySelectorAll('section[id]');
   const navAnchors = document.querySelectorAll('.nav-links a');
   const navObserver = new IntersectionObserver((entries) => {
@@ -334,37 +286,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
   sections.forEach(s => navObserver.observe(s));
 
-  /* =========================
-     CURSOR SPOTLIGHT (cards)
-  ========================= */
-  function bindSpotlight(el) {
-    el.addEventListener('pointermove', (e) => {
-      const rect = el.getBoundingClientRect();
-      el.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
-      el.style.setProperty('--my', (e.clientY - rect.top) + 'px');
-    });
-  }
-  document
-    .querySelectorAll('.profile-card, .featured-project-card, .tool-card')
-    .forEach(bindSpotlight);
-
-  /* =========================
-     STAGGER INDEX
-  ========================= */
+  /* STAGGER INDEX */
   document.querySelectorAll('.project-grid').forEach(grid => {
-    grid.querySelectorAll('.project-card').forEach((card, i) => {
-      card.style.setProperty('--i', i);
-    });
+    grid.querySelectorAll('.project-card').forEach((card, i) => card.style.setProperty('--i', i));
   });
   document.querySelectorAll('.tools-grid').forEach(grid => {
-    grid.querySelectorAll('.tool-card').forEach((card, i) => {
-      card.style.setProperty('--i', i);
-    });
+    grid.querySelectorAll('.tool-card').forEach((card, i) => card.style.setProperty('--i', i));
   });
 
-  /* =========================
-     LIGHTBOX
-  ========================= */
+  /* LIGHTBOX */
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.querySelector('.lightbox-content');
 
@@ -433,19 +363,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeLightbox();
   });
 
-  /* =========================
-     BLOCK CONTEXT MENU
-  ========================= */
-  function blockContextMenu(el) {
-    el.addEventListener('contextmenu', (e) => e.preventDefault());
-  }
+  /* BLOCK CONTEXT MENU */
+  function blockContextMenu(el) { el.addEventListener('contextmenu', (e) => e.preventDefault()); }
   refreshImages().forEach(blockContextMenu);
   document.querySelectorAll('.project-video').forEach(blockContextMenu);
   blockContextMenu(lightboxImg);
 
-  /* =========================
-     CARD FADE-IN
-  ========================= */
+  /* CARD FADE-IN */
   const cardObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -454,16 +378,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.1 });
-
-  document.querySelectorAll('.animate').forEach(el => {
-    cardObserver.observe(el);
-  });
-
-  if (!('IntersectionObserver' in window)) {
-    document.querySelectorAll('.animate').forEach(el => {
-      el.classList.add('fade-in-final', 'active');
-    });
-  }
 
   const projectCards = document.querySelectorAll('.project-card');
   projectCards.forEach(card => {
@@ -476,74 +390,29 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     if (media) {
       if (media.tagName === 'IMG') {
-        if (media.complete) {
-          onMediaLoad();
-        } else {
-          media.addEventListener('load', onMediaLoad);
-        }
+        media.complete ? onMediaLoad() : media.addEventListener('load', onMediaLoad);
       } else if (media.tagName === 'VIDEO') {
-        if (media.readyState >= 3) {
-          onMediaLoad();
-        } else {
-          media.addEventListener('canplay', onMediaLoad);
-        }
+        media.readyState >= 3 ? onMediaLoad() : media.addEventListener('canplay', onMediaLoad);
       }
     } else {
       onMediaLoad();
     }
   });
 
-  /* =========================
-     PROFILE CARD 3D TILT
-  ========================= */
-  const profile = document.querySelector('.profile-card');
-  if (profile) {
-    profile.addEventListener('pointermove', (e) => {
-      const rect = profile.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      profile.style.transform =
-        `perspective(900px) rotateX(${y * -5}deg) rotateY(${x * 5}deg)`;
-    });
-    profile.addEventListener('pointerleave', () => {
-      profile.style.transform =
-        'perspective(900px) rotateX(0deg) rotateY(0deg)';
-    });
-  }
-
-  /* =========================
-     SECOND PRELOADER CLEANUP
-  ========================= */
-  window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-      preloader.style.transition = 'opacity 0.5s ease';
-      preloader.style.opacity = '0';
-      setTimeout(() => {
-        preloader.remove();
-      }, 500);
-    }
-  });
-
-  /* =========================
-     VFX VIDEO PERFORMANCE
-  ========================= */
+  /* VFX VIDEO PERFORMANCE */
   const vfxVideos = document.querySelectorAll('.project-video');
   const videoObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      const video = entry.target;
       if (entry.isIntersecting) {
-        video.play().catch(() => {});
+        entry.target.play().catch(() => {});
       } else {
-        video.pause();
+        entry.target.pause();
       }
     });
   }, { threshold: 0.25 });
   vfxVideos.forEach(video => videoObserver.observe(video));
 
-  /* =========================
-     GENERAL REVEAL
-  ========================= */
+  /* GENERAL REVEAL */
   const revealElements = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -555,9 +424,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
   revealElements.forEach(el => revealObserver.observe(el));
 
-  /* =========================
-     SMOOTH SCROLL
-  ========================= */
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal, .project-card, .tool-card').forEach(el => {
+      el.classList.add('active', 'fade-in-final');
+    });
+  }
+
+  /* SMOOTH SCROLL */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const id = this.getAttribute('href');
@@ -569,24 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* =========================
-     MAGNETIC BUTTONS
-  ========================= */
-  document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('pointermove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px) scale(1.04)`;
-    });
-    btn.addEventListener('pointerleave', () => {
-      btn.style.transform = '';
-    });
-  });
-
 });
 </script>
-</body>
-</html>
 </body>
 </html>
