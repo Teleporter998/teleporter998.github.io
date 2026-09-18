@@ -259,6 +259,85 @@ body.page-loaded .profile-card {
 .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
 /* =========================
+   ABOUT
+========================= */
+.about-section {
+  padding-top: 64px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.about-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.about-text p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 1rem;
+  max-width: 56ch;
+  margin-bottom: 14px;
+}
+
+.about-text p:last-child { margin-bottom: 0; }
+
+.about-text a {
+  color: var(--text-main);
+  text-decoration: underline;
+  text-decoration-color: var(--border-hi);
+  text-underline-offset: 3px;
+}
+
+.about-text a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+.about-facts {
+  list-style: none;
+  border-left: 1px solid var(--border-color);
+  padding-left: 28px;
+}
+
+.about-facts li {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.about-facts li:first-child { padding-top: 0; }
+.about-facts li:last-child { border-bottom: none; }
+
+.about-fact-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.about-fact-value {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* =========================
    SECTIONS
 ========================= */
 .portfolio-section {
@@ -578,6 +657,17 @@ body.page-loaded .profile-card {
   .featured-project-card { padding: 22px 16px; }
   .project-icon { width: 52px; height: 52px; }
   .portfolio-section { padding: 76px 16px 56px; }
+  .about-section { padding: 48px 16px; }
+}
+
+@media (max-width: 720px) {
+  .about-grid { grid-template-columns: 1fr; gap: 24px; }
+  .about-facts {
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    padding-left: 0;
+    padding-top: 20px;
+  }
 }
 
 /* =========================
