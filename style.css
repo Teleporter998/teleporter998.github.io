@@ -634,6 +634,33 @@ body.page-loaded .hero-fade {
 @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.25; } }
 .project-card.is-loading::after { animation: pulse 1.4s ease-in-out infinite; }
 .project-card.loaded::after { opacity: 0; }
+
+/* loading spinner: fades in only if a file takes longer than a moment,
+   so fast loads never flash it */
+.project-card::before,
+.lb-spinner {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 2px solid var(--border-hi);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.project-card.is-loading::before,
+.lightbox.is-loading .lb-spinner {
+  animation: spin 0.8s linear infinite, spinIn 0.2s ease 0.25s forwards;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spinIn { to { opacity: 1; } }
 .js .project-card.fade-in-final { opacity: 1; }
 
 .project-img {
