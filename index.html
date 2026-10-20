@@ -232,6 +232,7 @@
 
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
     <div class="lb-count" aria-live="polite"></div>
+    <div class="lb-spinner" aria-hidden="true"></div>
     <span class="close-btn" role="button" tabindex="0" aria-label="Close preview">&times;</span>
     <button class="nav-btn prev-btn" aria-label="Previous image">&#10094;</button>
     <img src="" class="lightbox-content" alt="" draggable="false">
@@ -381,24 +382,24 @@
     lbCount.textContent = (currentIndex + 1) + ' / ' + imgs.length;
     var token = ++swapToken;
 
-    if (instant) {
-      lbImg.classList.remove('is-switching');
-      lbImg.src = src;
-      lbImg.alt = alt;
-      return;
-    }
-
-    lbImg.classList.add('is-switching');
+    // preload first; show the spinner only if the file isn't already cached
     var loader = new Image();
     function done() {
       if (token !== swapToken) return;
       lbImg.src = src;
       lbImg.alt = alt;
-      lbImg.classList.remove('is-switching');
+      setLoading(false);
     }
     loader.onload = done;
     loader.onerror = done;
     loader.src = src;
+    if (loader.complete) done();
+    else setLoading(true);
+  }
+
+  function setLoading(on) {
+    lightbox.classList.toggle('is-loading', on);
+    lbImg.classList.toggle('is-switching', on);
   }
 
   function openLightbox(index) {
@@ -413,6 +414,8 @@
     if (!lightbox.classList.contains('active')) return;
     lightbox.classList.remove('active');
     document.body.classList.remove('lb-open');
+    swapToken++;
+    setLoading(false);
     if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
     // drop the source after the fade so an animated GIF stops running in the background
     setTimeout(function () {
@@ -542,7 +545,5 @@
   });
 })();
 </script>
-</body>
-</html>
 </body>
 </html>
