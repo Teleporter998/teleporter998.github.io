@@ -614,12 +614,7 @@ body.page-loaded .hero-fade {
   border: 1px solid var(--border-color);
   overflow: hidden;
   position: relative;
-  min-height: 100px;
-}
-
-.js .project-card {
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  min-height: 160px;
 }
 
 .project-card::after {
@@ -661,7 +656,6 @@ body.page-loaded .hero-fade {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes spinIn { to { opacity: 1; } }
-.js .project-card.fade-in-final { opacity: 1; }
 
 .project-img {
   width: 100%;
@@ -672,10 +666,19 @@ body.page-loaded .hero-fade {
   user-select: none;
 }
 
+/* the card itself is always visible (grey placeholder + spinner);
+   only the image fades in once it has loaded */
+.js .project-img {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.js .project-card.loaded .project-img { opacity: 1; }
+
 .project-img:focus-visible { outline-offset: -3px; }
 
 @media (hover: hover) and (pointer: fine) {
-  .project-img { transition: transform 0.5s var(--ease), filter 0.3s ease; }
+  .project-img { transition: opacity 0.5s ease, transform 0.5s var(--ease), filter 0.3s ease; }
   .project-card:hover .project-img { transform: scale(1.03); filter: brightness(1.06); }
 }
 
