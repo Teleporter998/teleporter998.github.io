@@ -161,13 +161,13 @@
       <p>A collection of my VFX.</p>
     </div>
     <div class="project-grid">
-      <div class="project-card"><video src="assets/vfx1.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx2.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx3.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx4.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx5.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx6.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
-      <div class="project-card"><video src="assets/vfx7.mp4" class="project-video" muted loop playsinline preload="metadata" draggable="false"></video></div>
+      <div class="project-card"><img src="assets/vfx1.gif" class="project-img" alt="VFX showcase 1" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/vfx2.gif" class="project-img" alt="VFX showcase 2" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/vfx3.gif" class="project-img" alt="VFX showcase 3" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/vfx4.gif" class="project-img" alt="VFX showcase 4" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/vfx5.gif" class="project-img" alt="VFX showcase 5" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/vfx6.gif" class="project-img" alt="VFX showcase 6" loading="lazy" decoding="async" draggable="false"></div>
+      <div class="project-card"><img src="assets/vfx7.gif" class="project-img" alt="VFX showcase 7" loading="lazy" decoding="async" draggable="false"></div>
     </div>
   </section>
 
@@ -402,7 +402,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /* BLOCK CONTEXT MENU */
   function blockContextMenu(el) { el.addEventListener('contextmenu', (e) => e.preventDefault()); }
   refreshImages().forEach(blockContextMenu);
-  document.querySelectorAll('.project-video').forEach(blockContextMenu);
   blockContextMenu(lightboxImg);
 
   /* CARD FADE-IN */
@@ -417,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const projectCards = document.querySelectorAll('.project-card');
   projectCards.forEach(card => {
-    const media = card.querySelector('.project-img, .project-video');
+    const media = card.querySelector('.project-img');
     card.classList.add('is-loading');
     const onMediaLoad = () => {
       card.classList.remove('is-loading');
@@ -425,28 +424,13 @@ document.addEventListener('DOMContentLoaded', () => {
       cardObserver.observe(card);
     };
     if (media) {
-      if (media.tagName === 'IMG') {
-        media.complete ? onMediaLoad() : media.addEventListener('load', onMediaLoad);
-      } else if (media.tagName === 'VIDEO') {
-        media.readyState >= 3 ? onMediaLoad() : media.addEventListener('canplay', onMediaLoad);
-      }
+      media.complete && media.naturalWidth > 0
+        ? onMediaLoad()
+        : media.addEventListener('load', onMediaLoad, { once: true });
     } else {
       onMediaLoad();
     }
   });
-
-  /* VFX VIDEO PERFORMANCE */
-  const vfxVideos = document.querySelectorAll('.project-video');
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.play().catch(() => {});
-      } else {
-        entry.target.pause();
-      }
-    });
-  }, { threshold: 0.25 });
-  vfxVideos.forEach(video => videoObserver.observe(video));
 
   /* GENERAL REVEAL */
   const revealElements = document.querySelectorAll('.reveal');
