@@ -488,15 +488,6 @@
 
   /* MEDIA CARDS: loading skeleton + fade-in once loaded and visible */
   var cards = document.querySelectorAll('.project-card');
-  var cardObserver = hasIO ? new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in-final');
-        cardObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 }) : null;
-
   cards.forEach(function (card) {
     var media = card.querySelector('.project-img');
     card.classList.add('is-loading');
@@ -504,8 +495,6 @@
     function onLoaded() {
       card.classList.remove('is-loading');
       card.classList.add('loaded');
-      if (cardObserver) cardObserver.observe(card);
-      else card.classList.add('fade-in-final');
     }
 
     if (!media) { onLoaded(); return; }
