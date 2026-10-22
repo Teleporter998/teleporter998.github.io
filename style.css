@@ -614,8 +614,11 @@ body.page-loaded .hero-fade {
   border: 1px solid var(--border-color);
   overflow: hidden;
   position: relative;
-  min-height: 160px;
+  min-height: 160px; /* only while loading, so the spinner has room */
 }
+
+/* once loaded the card wraps the image exactly, whatever its proportions */
+.project-card.loaded { min-height: 0; }
 
 .project-card::after {
   content: '';
